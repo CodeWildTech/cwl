@@ -80,11 +80,37 @@ const EVENTS_DATA = [
 export default function EventsSection() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+  });
 
   const filteredEvents =
     activeFilter === "All"
       ? EVENTS_DATA
       : EVENTS_DATA.filter((e) => e.category === activeFilter);
+
+  const handleReserveClick = (event) => {
+    setSelectedEvent(event);
+    setShowForm(true);
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission (you can integrate with your backend here)
+    console.log("Registration submitted:", formData, selectedEvent);
+    alert("Registration successful! We'll contact you soon.");
+    setShowForm(false);
+    setSelectedEvent(null);
+    setFormData({ name: "", email: "", phone: "", company: "" });
+  };
+
+  const handleFormChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   return (
     <section className="relative min-h-[85vh] text-white px-6 lg:px-14 py-16 overflow-hidden bg-black">
@@ -150,10 +176,23 @@ export default function EventsSection() {
       </div>
 
       <AnimatePresence>
-        {selectedEvent && (
+        {selectedEvent && !showForm && (
           <EventModal
             event={selectedEvent}
             onClose={() => setSelectedEvent(null)}
+            onReserveClick={handleReserveClick}
+          />
+        )}
+        {showForm && selectedEvent && (
+          <RegistrationForm
+            event={selectedEvent}
+            formData={formData}
+            onSubmit={handleFormSubmit}
+            onChange={handleFormChange}
+            onClose={() => {
+              setShowForm(false);
+              setSelectedEvent(null);
+            }}
           />
         )}
       </AnimatePresence>
@@ -246,8 +285,8 @@ function EventCard({ event, onClick, index }) {
   );
 }
 
-// Updated EventModal component with better design
-function EventModal({ event, onClose }) {
+// Updated EventModal component
+function EventModal({ event, onClose, onReserveClick }) {
   const isUpcoming = event.status === "Upcoming";
 
   return (
@@ -339,10 +378,11 @@ function EventModal({ event, onClose }) {
               <p className="text-xs font-semibold text-slate-500 italic">Professionals joined</p>
             </div>
 
-            {isUpcoming ? (
+            {event.status === "Upcoming" ? (
               <motion.button
                 whileHover={{ scale: 1.02, x: 5 }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() => onReserveClick(event)}
                 className="w-full sm:w-auto ml-auto px-8 py-4 rounded-2xl bg-slate-900 text-white text-sm font-bold uppercase tracking-widest shadow-xl shadow-slate-200"
               >
                 Reserve Seat
@@ -357,6 +397,117 @@ function EventModal({ event, onClose }) {
               </motion.button>
             )}
           </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// New RegistrationForm component
+function RegistrationForm({ event, formData, onSubmit, onChange, onClose }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-950/50 backdrop-blur-md"
+    >
+      <motion.div
+        initial={{ scale: 0.9, y: 30, opacity: 0 }}
+        animate={{ scale: 1, y: 0, opacity: 1 }}
+        exit={{ scale: 0.9, y: 30, opacity: 0 }}
+        className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden"
+      >
+        <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-r from-orange-500 to-amber-600" />
+        
+        <button
+          onClick={onClose}
+          className="absolute top-6 right-6 z-50 p-2 rounded-2xl bg-white/90 hover:bg-white shadow-lg transition-all"
+        >
+          <X size={20} className="text-slate-700" />
+        </button>
+
+        <div className="relative z-10 p-8 pb-12">
+          <div className="text-center mb-8">
+            <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-orange-100 flex items-center justify-center">
+              <CheckCircle2 size={32} className="text-orange-600" />
+            </div>
+            <h2 className="text-2xl font-black text-slate-900 mb-2">
+              Reserve Your Seat
+            </h2>
+            <p className="text-slate-600 text-sm">
+              #{event.number} {event.title} - {event.date}
+            </p>
+          </div>
+
+          <form onSubmit={onSubmit} className="space-y-5">
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+                Full Name *
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={onChange}
+                required
+                className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-orange-500 focus:outline-none transition-all bg-slate-50 text-slate-900 font-medium"
+                placeholder="Enter your full name"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+                Email Address *
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={onChange}
+                required
+                className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-orange-500 focus:outline-none transition-all bg-slate-50 text-slate-900 font-medium"
+                placeholder="your@email.com"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={onChange}
+                className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-orange-500 focus:outline-none transition-all bg-slate-50 text-slate-900 font-medium"
+                placeholder="+91 98765 43210"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+                Company (Optional)
+              </label>
+              <input
+                type="text"
+                name="company"
+                value={formData.company}
+                onChange={onChange}
+                className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-orange-500 focus:outline-none transition-all bg-slate-50 text-slate-900 font-medium"
+                placeholder="Your company name"
+              />
+            </div>
+
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              type="submit"
+              className="w-full py-4 px-6 bg-gradient-to-r from-orange-500 to-amber-600 text-white font-bold text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all uppercase tracking-wider"
+            >
+              Secure My Seat
+            </motion.button>
+          </form>
         </div>
       </motion.div>
     </motion.div>

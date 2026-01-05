@@ -111,7 +111,7 @@ const HeroSection = () => {
                     <div className="flex gap-1 mb-1">
                       {[...Array(5)].map((_, i) => <Star key={i} size={10} fill="#f97316" color="#f97316" />)}
                     </div>
-                    <p className="text-black text-[10px] lg:text-sm font-bold leading-tight">"Workflow changed!"</p>
+                    <p className="text-black text-[10px] lg:text-sm font-bold leading-tight">"We can help you!"</p>
                   </div>
                 </motion.div>
 
@@ -137,11 +137,11 @@ const HeroSection = () => {
                 >
                   <div className="flex items-center gap-2 lg:gap-3">
                     <div className="w-8 h-8 lg:w-12 lg:h-12 rounded-full bg-orange-500 overflow-hidden">
-                      <img src="https://i.pravatar.cc/150?u=zoey" alt="Avatar" />
+                      <img src="../src/assets/Logo/cwlogo.png" alt="Avatar" />
                     </div>
                     <div>
-                      <p className="text-white font-bold text-[10px] lg:text-sm">Zoey Lang</p>
-                      <p className="text-zinc-500 text-[8px] lg:text-xs">@zoeylang</p>
+                      <p className="text-white font-bold text-[10px] lg:text-sm">Code Wild LearningHub</p>
+                      <p className="text-zinc-500 text-[8px] lg:text-xs">@codewildlearninghub</p>
                     </div>
                   </div>
                 </motion.div>
