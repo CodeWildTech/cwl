@@ -257,16 +257,17 @@ export default function TestimonialsSection() {
 
   const companyLogos = [
     { name: "Cognizant", src: "/logos/cognizant.png" },
-    { name: "Fresh Works", src: "/logos/Freshworks.png" },
+    { name: "Fresh Works", src: "/logos/freshworks.png" },
     { name: "Hexaware", src: "/logos/Hexaware.png" },
-    { name: "Infosys", src: "/logos/infosys.png" },
-    { name: "NttData", src: "/logos/nttdata.png" },
+    { name: "Hcl", src: "/logos/hcl.png" },
+    { name: "mindtree", src: "/logos/mindtree.png" },
+    { name: "NttData", src: "/logos/nttdata (2).png" },
     { name: "Tcs", src: "/logos/Tata.png" },
-    { name: "Stripe", src: "/logos/stripe.svg" },
-    { name: "Elo", src: "/logos/elo.svg" },
-    { name: "Payoneer", src: "/logos/payoneer.svg" },
-    { name: "Skrill", src: "/logos/skrill.svg" },
-    { name: "Apple Pay", src: "/logos/apple-pay.svg" },
+    { name: "capgemini-logo", src: "/logos/capgemini-logo.png" },
+    
+    { name: "L & T", src: "/logos/lt.png" },
+    { name: "Myntra", src: "/logos/myntra.png" },
+    { name: "Zoho", src: "/logos/zoho.png" },
     { name: "Mastercard", src: "/logos/mastercard.svg" },
   ];
 
@@ -534,25 +535,29 @@ export default function TestimonialsSection() {
           </div>
         </div>
       </div>
-
-      {/* Logo marquee */}
-      <div className="relative z-10 mt-12 lg:mt-16">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="mb-3 flex items-center justify-center text-xs font-semibold tracking-[0.25em] uppercase text-white/40">Industrial partners</div>
-          <div className="relative">
-            <div className="pointer-events-none absolute left-0 top-0 h-full w-12 lg:w-16 bg-gradient-to-r from-[#060302] via-[#060302]/60 to-transparent z-10" />
-            <div className="pointer-events-none absolute right-0 top-0 h-full w-12 lg:w-16 bg-gradient-to-l from-[#060302] via-[#060302]/60 to-transparent z-10" />
-            <div className="logo-strip flex items-center gap-8 lg:gap-12">
-              {[...companyLogos, ...companyLogos].map((logo, idx) => (
-                <div key={logo.name + idx} className="group flex h-9 w-20 lg:h-11 lg:w-24 items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:bg-white/15 hover:border-orange-400/70 transition-all duration-300 flex-shrink-0">
-                  <img src={logo.src} alt={logo.name} className="max-h-6 lg:max-h-7 w-auto object-contain brightness-110 group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-300" />
+      
+{/* Logo marquee */}
+      <div className="relative z-10 mt-12 lg:mt-16 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="mb-6 flex items-center justify-center gap-3">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-orange-500/50" />
+            <div className="text-xs font-semibold tracking-[0.25em] uppercase text-orange-400/60">Trusted by Industry Leaders</div>
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-orange-500/50" />
+          </div>
+          <div className="relative py-8">
+            <div className="pointer-events-none absolute left-0 top-0 h-full w-24 lg:w-32  via-[#060302]/90 to-transparent z-10" />
+            <div className="pointer-events-none absolute right-0 top-0 h-full w-24 lg:w-32  via-[#060302]/90 to-transparent z-10" />
+            <div className="logo-strip flex items-center gap-6 lg:gap-10">
+              {[...companyLogos, ...companyLogos, ...companyLogos].map((logo, idx) => (
+                <div key={logo.name + idx} className="group relative flex h-16 w-28 lg:h-20 lg:w-36 items-center justify-center flex-shrink-0">
+                  <img src={logo.src} alt={logo.name} className="max-h-11 lg:max-h-20 w-auto object-contain   group-hover:saturate-100 group-hover:brightness-110 group-hover:scale-110 group-hover:drop-shadow-[0_0_12px_rgba(251,146,60,0.4)] transition-all duration-500" />
                 </div>
               ))}
             </div>
           </div>
         </div>
       </div>
-
+       
       <style jsx>{`
         @keyframes float {
           0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
