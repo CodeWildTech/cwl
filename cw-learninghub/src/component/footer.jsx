@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Instagram, Linkedin, Youtube, MapPin, Mail, Download } from "lucide-react";
+import { Instagram, Linkedin, Youtube, MapPin, Mail, Download, X } from "lucide-react";
 import developerImg from "../assets/footer/developer.png";
 
 export default function ContactPage() {
@@ -9,12 +9,14 @@ export default function ContactPage() {
     email: "",
     message: "",
   });
+  const [isFormModalOpen, setIsFormModalOpen] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
     alert("Thank you for contacting us!");
     setFormData({ name: "", phone: "", email: "", message: "" });
+    setIsFormModalOpen(false);
   };
 
   const handleChange = (e) => {
@@ -27,7 +29,7 @@ export default function ContactPage() {
       <section className="flex-1 relative bg-gradient-to-b from-[#1c0b00] via-[#120300] to-black">
         <div className="max-w-6xl mx-auto px-4 py-22 lg:px-0 min-h-[75vh] flex items-center">
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.1fr] gap-10 lg:gap-14 w-full">
-            {/* LEFT: PERSON + TEXT - NOW FIRST ON MOBILE */}
+            {/* LEFT: PERSON + TEXT - FIRST ON MOBILE & DESKTOP */}
             <div className="flex items-end lg:items-center gap-2">
               {/* Original Image */}
               <div className="relative">
@@ -59,9 +61,26 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* RIGHT: FORM CARD - NOW SECOND ON MOBILE */}
+            {/* RIGHT: MOBILE BUTTON / DESKTOP FORM */}
             <div className="flex justify-center lg:justify-end">
-              <div className="w-full max-w-md bg-black/45 backdrop-blur-md rounded-2xl p-6 sm:p-8 shadow-[0_35px_70px_rgba(0,0,0,0.85)] border border-white/10">
+              {/* MOBILE: Enhanced Professional Contact Button */}
+              <div className="block lg:hidden">
+                <button
+                  onClick={() => setIsFormModalOpen(true)}
+                  className="w-full max-w-md bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold text-lg py-5 px-8 rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_20px_40px_rgba(249,115,22,0.5)] shadow-[0_10px_25px_rgba(249,115,22,0.4)] border-2 border-orange-500/50 backdrop-blur-sm relative overflow-hidden group"
+                >
+                  <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                    Contact Us
+                  </span>
+                </button>
+              </div>
+
+              {/* DESKTOP: Original Form Card */}
+              <div className="hidden lg:block w-full max-w-md bg-black/45 backdrop-blur-md rounded-2xl p-6 sm:p-8 shadow-[0_35px_70px_rgba(0,0,0,0.85)] border border-white/10">
                 <form className="space-y-5" onSubmit={handleSubmit}>
                   <div className="space-y-1.5">
                     <label htmlFor="name" className="block text-xs  tracking-[0.15em] text-gray-300">
@@ -135,6 +154,103 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* MOBILE FORM MODAL */}
+      {isFormModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 lg:hidden">
+          <div className="w-full max-w-md max-h-[90vh] overflow-y-auto bg-black/90 backdrop-blur-md rounded-2xl p-6 sm:p-8 shadow-[0_35px_70px_rgba(0,0,0,0.85)] border border-white/10">
+            {/* Header with Close Button */}
+            <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+              <h3 className="text-xl font-bold text-white">Contact Us</h3>
+              <button
+                onClick={() => setIsFormModalOpen(false)}
+                className="p-2 hover:bg-white/10 rounded-xl transition-colors"
+              >
+                <X size={24} className="text-gray-300" />
+              </button>
+            </div>
+
+            {/* Form */}
+            <form className="space-y-5" onSubmit={handleSubmit}>
+              <div className="space-y-1.5">
+                <label htmlFor="name-modal" className="block text-xs tracking-[0.15em] text-gray-300">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name-modal"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-stone-200 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  required
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label htmlFor="phone-modal" className="block text-xs tracking-[0.15em] text-gray-300">
+                  Phone
+                </label>
+                <input
+                  type="tel"
+                  id="phone-modal"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-stone-200 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  required
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label htmlFor="email-modal" className="block text-xs tracking-[0.15em] text-gray-300">
+                  Mail
+                </label>
+                <input
+                  type="email"
+                  id="email-modal"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-stone-200 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  required
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label htmlFor="message-modal" className="block text-xs tracking-[0.15em] text-gray-300">
+                  Drop your message
+                </label>
+                <textarea
+                  id="message-modal"
+                  name="message"
+                  rows="4"
+                  value={formData.message}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-stone-200 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"
+                  required
+                />
+              </div>
+
+              <div className="flex gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setIsFormModalOpen(false)}
+                  className="flex-1 bg-gray-800 hover:bg-gray-700 text-white font-semibold py-3 rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-transform duration-200 hover:scale-[1.02] shadow-[0_15px_35px_rgba(249,115,22,0.65)]"
+                >
+                  Send Message
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* BOTTOM INFO STRIP */}
       <section className="bg-black border-t border-white/5">

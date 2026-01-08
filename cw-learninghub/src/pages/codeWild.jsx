@@ -127,12 +127,12 @@ const CodeWildLanding = () => {
       />
 
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-12 sm:mb-26 text-left px-2 animate-reveal">
-          <h2 className="text-sm sm:text-2xl font-light text-gray-500 tracking-wide">
+        {/* Header - FIXED TEXT CROPPING */}
+        <div className="mb-12 sm:mb-36 text-left px-2 animate-reveal overflow-visible">
+          <h2 className="text-sm sm:text-2xl font-light text-gray-500 tracking-wide leading-relaxed">
             Why We're the
           </h2>
-          <h1 className="text-4xl sm:text-6xl font-black bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-transparent">
+          <h1 className="text-[2.8rem] sm:text-[5rem] md:text-6xl font-black bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-transparent leading-[0.85] sm:leading-[0.88] tracking-[-0.02em] -mt-2 sm:-mt-4">
             Right Choice
           </h1>
         </div>
@@ -199,7 +199,7 @@ const CodeWildLanding = () => {
         {/* How Code Wild Work Section */}
         <div className="mb-12 sm:mb-16 text-left px-2 animate-reveal flex items-center gap-3 sm:gap-4">
           <div>
-            <h2 className="text-sm sm:text-2xl font-light text-orange-500 tracking-wide">
+            <h2 className="text-lg sm:text-3xl md:text-4xl font-semibold text-orange-500 tracking-wide">
               How
             </h2>
             <h1 className="text-4xl sm:text-6xl font-black text-white">
@@ -299,11 +299,19 @@ const CodeWildLanding = () => {
 
           {/* Footer Quote Card */}
           <div className="mt-8 relative max-w-2xl w-full mx-auto px-4">
-            <div className="absolute -top-4 left-8 z-20">
-              <svg width="30" height="30" viewBox="0 0 24 24" fill="white" className="md:w-12 md:h-12 drop-shadow-lg">
-                <path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11M3 21L3 18C3 16.8954 3.89543 16 5 16H8C8.55228 16 9 15.5523 9 15V9C9 8.44772 8.55228 8 8 8H4C3.44772 8 3 8.44772 3 9V11" stroke="none"/>
+            {/* Accurate Quote Icon based on your image */}
+            <div className="absolute -top-5 left-6 md:left-12 z-20">
+              <svg 
+                width="50" 
+                height="40" 
+                viewBox="0 0 75 45" 
+                fill="white" 
+                className="md:w-20 md:h-16"
+              >
+                <path d="M0 21.36C0 9.56 9.12 0 20.44 0C26.56 0 31.4 3.12 31.4 8.76C31.4 14.16 27.28 18.24 22.44 18.24C21.84 18.24 20.24 18.12 19.4 17.88C18.68 25.56 22.4 33.36 29.48 38.64L24.44 44.4C11.36 36.36 0 28.56 0 21.36ZM41.4 21.36C41.4 9.56 50.52 0 61.84 0C67.96 0 72.8 3.12 72.8 8.76C72.8 14.16 68.68 18.24 63.84 18.24C63.24 18.24 61.64 18.12 60.8 17.88C60.08 25.56 63.8 33.36 70.88 38.64L65.84 44.4C52.76 36.36 41.4 28.56 41.4 21.36Z" />
               </svg>
             </div>
+
             <div className="relative bg-[#ff4500] px-6 py-8 md:px-8 md:py-12 rounded-[1.5rem] md:rounded-[2rem] shadow-[0_20px_50px_rgba(255,69,0,0.3)] z-10">
               <h2 className="relative z-10 text-white text-lg md:text-4xl font-bold leading-tight text-center max-w-md mx-auto">
                 We can connect you directly with industry experts for mentorship.
@@ -313,8 +321,8 @@ const CodeWildLanding = () => {
 
           {/* Full-width bottom pattern */}
           <div className="w-screen overflow-hidden">
-            <div className="relative w-screen h-32 md:h-64">
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-10 md:h-16 bg-gradient-to-b from-black via-black/70 to-transparent" />
+            <div className="relative w-screen h-60 sm:h-72 md:h-64">
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-12 sm:h-14 md:h-16 bg-gradient-to-b from-black via-black/70 to-transparent" />
               <img
                 src="/pattern.png"
                 alt="Background pattern"
@@ -325,7 +333,7 @@ const CodeWildLanding = () => {
         </div>
       </div>
 
-      {/* NEW SIMPLE Message Box Design */}
+      {/* Message Box Design */}
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/80">
           <div className="bg-white rounded-3xl p-8 max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl border-4 border-red-200">

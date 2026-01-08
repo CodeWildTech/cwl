@@ -541,7 +541,7 @@ export default function TestimonialsSection() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="mb-6 flex items-center justify-center gap-3">
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-orange-500/50" />
-            <div className="text-xs font-semibold tracking-[0.25em] uppercase text-orange-400/60">Trusted by Industry Leaders</div>
+            <div className="text-xs font-semibold tracking-[0.25em] uppercase text-orange-400/60">Trusted Partners</div>
             <div className="h-px w-12 bg-gradient-to-l from-transparent to-orange-500/50" />
           </div>
           <div className="relative py-8">

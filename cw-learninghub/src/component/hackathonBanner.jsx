@@ -1,27 +1,27 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import heroImage from "../assets/hackathon.png"; 
+import heroImage from "../assets/hackathon.png";
 
 export default function HackathonPoster() {
   return (
-    <div className="relative w-full min-h-screen bg-[#0a0a0a] flex items-center justify-center overflow-hidden py-20 px-6">
+    <div className="relative w-full min-h-screen bg-[#0a0a0a] flex flex-col items-center justify-center overflow-hidden py-10 px-4 md:py-20 md:px-6">
       
       {/* BACKGROUND STRIP */}
-      <div 
+      <div
         className="absolute w-[150%] h-[260px] bg-[#FF5714] z-0"
         style={{ transform: "rotate(-4deg)" }}
       />
 
       {/* MAIN CONTENT */}
-      <div className="relative z-10 w-full max-w-7xl flex flex-col md:flex-row items-end md:items-center justify-between">
+      <div className="relative z-10 w-full max-w-7xl flex flex-col items-center md:flex-row md:items-center md:justify-between">
         
         {/* LEFT SECTION */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="flex-1 text-white space-y-6 mb-10 md:mb-0"
+          className="flex-1 text-white space-y-4 text-center md:text-left mb-6 md:mb-0"
         >
           <div>
             <h2 className="text-3xl font-black">CW</h2>
@@ -36,7 +36,7 @@ export default function HackathonPoster() {
         </motion.div>
 
         {/* CENTER IMAGE */}
-        <div className="flex-[4] flex justify-center relative">
+        <div className="flex-[4] flex justify-center relative mb-3 md:mb-0">
           <motion.img
             src={heroImage}
             alt="Hackathon"
@@ -44,53 +44,47 @@ export default function HackathonPoster() {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ type: "spring", stiffness: 60, damping: 20 }}
-            className="h-[550px] md:h-[750px] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.7)] -mt-64 relative z-40"
+            className="h-[350px] md:h-[750px] object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] -mt-20 md:-mt-64 relative z-40"
           />
         </div>
 
         {/* RIGHT SECTION */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="flex-1 text-white text-right"
+          className="flex-1 text-white text-center md:text-right"
         >
-          <div className="mb-8">
-            <div className="flex items-center justify-end gap-2">
-              <span className="text-6xl md:text-8xl font-black italic">2026</span>
-              <ArrowUpRight size={48} />
+          <div className="mb-6">
+            <div className="flex items-center justify-center md:justify-end gap-2">
+              <span className="text-7xl md:text-8xl font-black italic">2026</span>
+              <ArrowUpRight size={36} className="md:size-[48px]" />
             </div>
-            <p className="text-2xl md:text-3xl font-black -mt-2">
-              Coming Soon!
-            </p>
+            <p className="text-xl md:text-3xl font-black -mt-1">Coming Soon!</p>
           </div>
 
-          <button className="bg-white text-[#FF5714] px-10 py-3 rounded-lg font-bold uppercase shadow-xl hover:scale-105 transition">
+          <button className="bg-white text-[#FF5714] px-8 py-2 rounded-lg font-bold  shadow-xl hover:scale-105 transition">
             Know more
           </button>
         </motion.div>
       </div>
 
-   <div className="absolute inset-0 z-30 pointer-events-none max-w-6xl mx-auto hidden md:block">
-  <ScrollPerk text="Cash Prizes"              x="20%" y="22%" delay={0.2} flipped={false} />
-  <ScrollPerk text="Internship Opportunities" x="32%" y="19%" delay={0.4} flipped={false} />
-  <ScrollPerk text="Swags & Goodies"          x="52%" y="18%" delay={0.6} flipped={true} />
-  <ScrollPerk text="Certificates"             x="68%" y="17%" delay={0.8} flipped={true} />
-</div>
-
+      {/* SCROLL PERKS (Desktop Only) */}
+      <div className="absolute inset-0 z-30 pointer-events-none max-w-6xl mx-auto hidden md:block">
+        <ScrollPerk text="Cash Prizes"              x="20%" y="22%" delay={0.2} flipped={false} />
+        <ScrollPerk text="Internship Opportunities" x="32%" y="19%" delay={0.4} flipped={false} />
+        <ScrollPerk text="Swags & Goodies"          x="52%" y="18%" delay={0.6} flipped={true} />
+        <ScrollPerk text="Certificates"             x="68%" y="17%" delay={0.8} flipped={true} />
+      </div>
     </div>
   );
 }
 
 /* ===============================
-   SCROLL PERK WITH PERFECT DOTTED PATH
-================================ */
-/* ===============================
    SCROLL PERK WITH ANIMATED PATH
 ================================ */
 function ScrollPerk({ text, x, y, delay, flipped = false }) {
-  const path =
-    "M10 20 Q 40 80, 80 60 T 140 90"; // base wavy path
+  const path = "M10 20 Q 40 80, 80 60 T 140 90";
 
   return (
     <motion.div
@@ -129,13 +123,8 @@ function ScrollPerk({ text, x, y, delay, flipped = false }) {
           strokeLinecap="round"
           opacity="0.5"
         />
-
         <circle r="3" fill="#ffffff">
-          <animateMotion
-            dur="3s"
-            repeatCount="indefinite"
-            path={path}
-          />
+          <animateMotion dur="3s" repeatCount="indefinite" path={path} />
         </circle>
       </svg>
     </motion.div>
