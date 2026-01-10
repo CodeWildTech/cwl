@@ -12,7 +12,7 @@ import {
 
 const Logo = () => (
   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-orange-500/20">
-    CW
+    <img src="src/assets/Logo/cwlogo.png" alt=""/>
   </div>
 );
 
@@ -54,7 +54,7 @@ export default function Navbar() {
   }, [isFormOpen]);
 
   return (
-    <div className="pb-20 md:pb-0">
+    <div className=" md:pb-0">
       {/* DESKTOP & MOBILE TOP NAVBAR */}
       <header className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
         <motion.div

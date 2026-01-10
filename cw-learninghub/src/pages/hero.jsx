@@ -39,16 +39,28 @@ const HeroSection = () => {
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            {/* Left Side: Text Content */}
-            <div className="lg:col-span-7 flex flex-col justify-center order-2 lg:order-1">
-              <motion.div style={{ x: x1 }} className="whitespace-nowrap">
+            {/* Left Side: Text Content - Top on mobile - FIXED WHITE SPACE */}
+            <div className="lg:col-span-7 flex flex-col justify-center order-1 lg:order-1 pt-0 -mt-4 lg:mt-0">
+              <motion.div 
+                style={{ x: x1 }}
+                initial={{ x: "100%" }}
+                animate={{ x: "0%" }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+                className="whitespace-nowrap"
+              >
                 <h1 className="text-[12vw] lg:text-[8.5rem] font-black text-white leading-[0.85] tracking-tighter uppercase">
                   IT'S TIME <span className="text-orange-500">TO</span>
                 </h1>
               </motion.div>
               
-              <motion.div style={{ x: x2 }} className="whitespace-nowrap mt-2">
-                <h1 className="text-[12vw] lg:text-[9.5rem] font-black text-transparent stroke-text leading-[0.85] tracking-tighter uppercase">
+              <motion.div 
+                style={{ x: x2 }}
+                initial={{ x: "100%" }}
+                animate={{ x: "0%" }}
+                transition={{ duration: 1.4, ease: "easeOut", delay: 0.2 }}
+                className="whitespace-nowrap mt-2"
+              >
+                <h1 className="text-[10vw] lg:text-[9.5rem] font-black text-transparent stroke-text leading-[1] tracking-tighter uppercase">
                   CHANGE THE GAME
                 </h1>
               </motion.div>
@@ -65,8 +77,8 @@ const HeroSection = () => {
               </motion.div>
             </div>
 
-            {/* Right Side: Compact & Clean Box */}
-            <div className="lg:col-span-5 relative order-1 lg:order-2 flex justify-center">
+            {/* Right Side: Compact & Clean Box - Below text on mobile */}
+            <div className="lg:col-span-5 relative order-2 lg:order-2 flex justify-center">
               <motion.div 
                 style={{ 
                   scale: imageScale, 
