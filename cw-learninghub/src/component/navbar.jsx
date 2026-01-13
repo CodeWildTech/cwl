@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import EnrollmentForm from './enrollmentForm';
-import { motion, AnimatePresence } from 'framer-motion'; // Added Framer Motion
+import { motion, AnimatePresence } from 'framer-motion';
 
 import {
   Home,
@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 
 const Logo = () => (
-  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-orange-500/20">
+  <div className="w-20 h-20 rounded-full flex items-center ">
     <img src="src/assets/Logo/cwlogo.png" alt=""/>
   </div>
 );
@@ -28,6 +28,7 @@ export default function Navbar() {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -43,10 +44,18 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 20); // Slightly increased threshold for stability
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Mobile detection for logo position
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   useEffect(() => {
@@ -54,7 +63,7 @@ export default function Navbar() {
   }, [isFormOpen]);
 
   return (
-    <div className=" md:pb-0">
+    <div className="md:pb-0">
       {/* DESKTOP & MOBILE TOP NAVBAR */}
       <header className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
         <motion.div
@@ -62,12 +71,12 @@ export default function Navbar() {
             scale: scrolled ? 0.94 : 1,
             y: scrolled ? -5 : 0 
           }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }} // Custom Apple-style ease
-          className="w-full max-w-5xl pointer-events-auto"
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="w-full max-w-5xl pointer-events-auto mx-auto"
         >
           <div
             className={`
-              relative flex items-center justify-between
+              relative flex items-center justify-center
               rounded-full px-4 sm:px-6 lg:px-8
               py-2 sm:py-2.5
               border transition-colors duration-700 ease-in-out
@@ -78,12 +87,22 @@ export default function Navbar() {
               }
             `}
           >
-            {/* logo */}
-            <div className="flex items-center gap-2">
-              <Logo />
-            </div>
+            {/* Logo - Outside on Desktop/Laptop, Inside on Mobile */}
+            {!isMobile ? (
+              // Desktop/Laptop: Logo OUTSIDE navbar (fixed spacing)
+              <div className="absolute -left-20 top-1/2 -translate-y-1/2 z-10">
+                <Logo />
+              </div>
+            ) : (
+              // Mobile: Logo INSIDE navbar (smaller size)
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <div className="w-12 h-12 rounded-full flex items-center ">
+                  <img src="src/assets/Logo/cwlogo.png" alt=""/>
+                </div>
+              </div>
+            )}
 
-            {/* desktop nav */}
+            {/* desktop nav - CENTERED */}
             <nav className="hidden md:flex items-center gap-3 lg:gap-4">
               {navLinks.map(({ label, icon: Icon, section }) => (
                 <button
@@ -119,35 +138,42 @@ export default function Navbar() {
               ))}
             </nav>
 
-            {/* CTA Button */}
-            <button
-              onClick={() => setIsFormOpen(true)}
-              className="
-                group relative inline-flex items-center justify-center
-                px-6 py-2.5 rounded-full
-                bg-orange-600 text-sm font-bold text-white
-                transition-all duration-500 ease-[0.22,1,0.36,1]
-                hover:shadow-[0_0_30px_rgba(234,88,12,0.4)]
-                hover:scale-105 active:scale-95
-                overflow-hidden
-              "
+            {/* CTA Button - MOVED TO RIGHT SIDE */}
+            <motion.div 
+              className="absolute right-4 top-1/2 -translate-y-1/2"
+              initial={{ x: 20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <span className="relative z-10">Enroll Now</span>
-            </button>
+              <button
+                onClick={() => setIsFormOpen(true)}
+                className="
+                  group relative inline-flex items-center justify-center
+                  px-6 py-2.5 rounded-full
+                  bg-orange-600 text-sm font-bold text-white
+                  transition-all duration-500 ease-[0.22,1,0.36,1]
+                  hover:shadow-[0_0_30px_rgba(234,88,12,0.4)]
+                  hover:scale-105 active:scale-95
+                  overflow-hidden
+                "
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <span className="relative z-10">Enroll Now</span>
+              </button>
+            </motion.div>
           </div>
         </motion.div>
       </header>
 
       {/* MOBILE BOTTOM NAVIGATION */}
-      <nav className="md:hidden fixed bottom-6 left-0 right-0 z-50 px-6">
+      <nav className="md:hidden fixed bottom-3 left-0 right-0 z-50 px-6">
         <motion.div
           initial={{ y: 100 }}
           animate={{ y: 0 }}
           transition={{ delay: 0.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="
             flex items-center justify-around
-            rounded-[2.5rem] px-2 py-3
+            rounded-[2.5rem] px-2 py-1
             bg-zinc-900/80 border border-white/10
             backdrop-blur-2xl shadow-[0_20px_40px_rgba(0,0,0,0.4)]
           "

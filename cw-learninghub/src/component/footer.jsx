@@ -67,7 +67,7 @@ export default function ContactPage() {
               <div className="block lg:hidden">
                 <button
                   onClick={() => setIsFormModalOpen(true)}
-                  className="w-full max-w-md bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold text-lg py-5 px-8 rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_20px_40px_rgba(249,115,22,0.5)] shadow-[0_10px_25px_rgba(249,115,22,0.4)] border-2 border-orange-500/50 backdrop-blur-sm relative overflow-hidden group"
+                  className="w-full max-w-md bg-orange-600 hover:from-orange-500 hover:to-orange-700 text-white font-bold text-lg py-5 px-8 rounded-2xl transition-all duration-300 hover:scale-[1] hover:shadow-[0_20px_40px_rgba(249,115,22,0.5)] shadow-[0_10px_25px_rgba(249,115,22,0.4)] border-2 border-orange-500/50 backdrop-blur-sm relative overflow-hidden group"
                 >
                   <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <span className="relative z-10 flex items-center justify-center gap-2">
@@ -144,7 +144,7 @@ export default function ContactPage() {
 
                   <button
                     type="submit"
-                    className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-4 rounded-lg transition-transform duration-200 hover:scale-[1.02] shadow-[0_15px_35px_rgba(249,115,22,0.65)]"
+                    className="w-full  bg-orange-600 text-sm font-bold text-white hover:bg-gradient-to-r from-orange-400 to-orange-600 text-white font-semibold py-4 rounded-lg transition-transform duration-200 hover:scale-[1.02] shadow-[0_15px_35px_rgba(249,115,22,0.65)]"
                   >
                     Talk to Us
                   </button>
@@ -242,7 +242,7 @@ export default function ContactPage() {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-transform duration-200 hover:scale-[1.02] shadow-[0_15px_35px_rgba(249,115,22,0.65)]"
+                  className="flex-1 bg-orange-600 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-transform duration-200 hover:scale-[1.02] shadow-[0_15px_35px_rgba(249,115,22,0.65)]"
                 >
                   Send Message
                 </button>

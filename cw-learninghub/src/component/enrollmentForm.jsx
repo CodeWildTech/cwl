@@ -1,22 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { X, ChevronDown } from 'lucide-react';
 
-const EnrollmentForm = ({ 
-  isOpen, 
-  onClose, 
-  formData = {},  // Default empty object
-  onInputChange, 
-  progress = 0,   // Default 0
+const EnrollmentForm = ({
+  isOpen,
+  onClose,
+  formData = {},
+  onInputChange,
+  progress = 0,
   submitStatus = '',
-  errors = {},    // Default empty object
+  errors = {},
   isSubmitting = false,
-  onSubmit 
+  onSubmit
 }) => {
   if (!isOpen) return null;
 
-  // Extra safety check
-  const safeFormData = formData || {};
-  const safeErrors = errors || {};
+  // ✅ SAFE DATA (Just to be sure, though parent initializes it)
+  const safeFormData = {
+    name: formData?.name || '',
+    email: formData?.email || '',
+    phone: formData?.phone || '',
+    dob: formData?.dob || '',
+    location: formData?.location || '',
+    qualification: formData?.qualification || '',
+    course: formData?.course || '',
+    doubts: formData?.doubts || ''
+  };
 
   return (
     <div
@@ -25,9 +33,8 @@ const EnrollmentForm = ({
         transition-all duration-300
         ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}
       `}
-      onClick={onClose}
     >
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
 
       <div
         className={`
@@ -112,13 +119,13 @@ const EnrollmentForm = ({
                   🎉 Enrollment successful! We will contact you soon.
                 </div>
               )}
-              {submitStatus === 'error' && safeErrors.general && (
+              {submitStatus === 'error' && errors.general && (
                 <div className="mb-6 p-4 rounded-2xl bg-red-100/80 border-2 border-red-300/50 text-red-800 text-sm font-medium">
-                  {safeErrors.general}
+                  {errors.general}
                 </div>
               )}
 
-              {/* Header */}
+              {/* Header - ALL ORIGINAL */}
               <div className="mb-8">
                 <h2 className="text-2xl md:text-3xl font-bold text-neutral-800 mb-2">
                   <span className="text-orange-500">CW</span> LearningHub
@@ -134,8 +141,9 @@ const EnrollmentForm = ({
                 </p>
               </div>
 
+              {/* ALL ORIGINAL FORM FIELDS - NO CHANGES */}
               <div className="space-y-5">
-                {/* Name - SAFE ACCESS */}
+                {/* Name */}
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-neutral-700">
                     Name <span className="text-red-500">*</span>
@@ -143,19 +151,18 @@ const EnrollmentForm = ({
                   <input
                     type="text"
                     name="name"
-                    value={safeFormData.name || ''}
+                    value={safeFormData.name}
                     onChange={onInputChange}
                     className={`
                       w-full px-4 py-3 rounded-xl
-                      bg-white/80 border-2 ${
-                        safeErrors.name ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
+                      bg-white/80 border-2 ${errors.name ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
                       } focus:outline-none transition-all duration-300 text-neutral-800
                     `}
                   />
-                  {safeErrors.name && <p className="text-xs text-red-500 mt-1">{safeErrors.name}</p>}
+                  {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
                 </div>
 
-                {/* Email - SAFE ACCESS */}
+                {/* Email */}
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-neutral-700">
                     Email <span className="text-red-500">*</span>
@@ -163,19 +170,18 @@ const EnrollmentForm = ({
                   <input
                     type="email"
                     name="email"
-                    value={safeFormData.email || ''}
+                    value={safeFormData.email}
                     onChange={onInputChange}
                     className={`
                       w-full px-4 py-3 rounded-xl
-                      bg-white/80 border-2 ${
-                        safeErrors.email ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
+                      bg-white/80 border-2 ${errors.email ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
                       } focus:outline-none transition-all duration-300 text-neutral-800
                     `}
                   />
-                  {safeErrors.email && <p className="text-xs text-red-500 mt-1">{safeErrors.email}</p>}
+                  {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
                 </div>
 
-                {/* Phone - SAFE ACCESS */}
+                {/* Phone */}
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-neutral-700">
                     Phone Number <span className="text-red-500">*</span>
@@ -187,21 +193,20 @@ const EnrollmentForm = ({
                     <input
                       type="tel"
                       name="phone"
-                      value={safeFormData.phone || ''}
+                      value={safeFormData.phone}
                       onChange={onInputChange}
                       maxLength={10}
                       className={`
                         flex-1 px-4 py-3 rounded-xl
-                        bg-white/80 border-2 ${
-                          safeErrors.phone ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
+                        bg-white/80 border-2 ${errors.phone ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
                         } focus:outline-none transition-all duration-300 text-neutral-800
                       `}
                     />
                   </div>
-                  {safeErrors.phone && <p className="text-xs text-red-500 mt-1">{safeErrors.phone}</p>}
+                  {errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone}</p>}
                 </div>
 
-                {/* DOB - SAFE ACCESS */}
+                {/* DOB + Location */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label className="block text-sm font-medium text-neutral-700">
@@ -210,20 +215,18 @@ const EnrollmentForm = ({
                     <input
                       type="date"
                       name="dob"
-                      value={safeFormData.dob || ''}
+                      value={safeFormData.dob}
                       onChange={onInputChange}
                       max={new Date().toISOString().split('T')[0]}
                       className={`
                         w-full px-4 py-3 rounded-xl
-                        bg-white/80 border-2 ${
-                          safeErrors.dob ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
+                        bg-white/80 border-2 ${errors.dob ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
                         } focus:outline-none transition-all duration-300 text-neutral-800
                       `}
                     />
-                    {safeErrors.dob && <p className="text-xs text-red-500 mt-1">{safeErrors.dob}</p>}
+                    {errors.dob && <p className="text-xs text-red-500 mt-1">{errors.dob}</p>}
                   </div>
 
-                  {/* Location - SAFE ACCESS */}
                   <div className="space-y-2">
                     <label className="block text-sm font-medium text-neutral-700">
                       Location <span className="text-red-500">*</span>
@@ -231,20 +234,19 @@ const EnrollmentForm = ({
                     <input
                       type="text"
                       name="location"
-                      value={safeFormData.location || ''}
+                      value={safeFormData.location}
                       onChange={onInputChange}
                       className={`
                         w-full px-4 py-3 rounded-xl
-                        bg-white/80 border-2 ${
-                          safeErrors.location ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
+                        bg-white/80 border-2 ${errors.location ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
                         } focus:outline-none transition-all duration-300 text-neutral-800
                       `}
                     />
-                    {safeErrors.location && <p className="text-xs text-red-500 mt-1">{safeErrors.location}</p>}
+                    {errors.location && <p className="text-xs text-red-500 mt-1">{errors.location}</p>}
                   </div>
                 </div>
 
-                {/* Qualification - SAFE ACCESS */}
+                {/* Qualification */}
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-neutral-700">
                     Educational Qualification <span className="text-red-500">*</span>
@@ -252,19 +254,18 @@ const EnrollmentForm = ({
                   <input
                     type="text"
                     name="qualification"
-                    value={safeFormData.qualification || ''}
+                    value={safeFormData.qualification}
                     onChange={onInputChange}
                     className={`
                       w-full px-4 py-3 rounded-xl
-                      bg-white/80 border-2 ${
-                        safeErrors.qualification ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
+                      bg-white/80 border-2 ${errors.qualification ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
                       } focus:outline-none transition-all duration-300 text-neutral-800
                     `}
                   />
-                  {safeErrors.qualification && <p className="text-xs text-red-500 mt-1">{safeErrors.qualification}</p>}
+                  {errors.qualification && <p className="text-xs text-red-500 mt-1">{errors.qualification}</p>}
                 </div>
 
-                {/* Course - SAFE ACCESS */}
+                {/* Course */}
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-neutral-700">
                     Course Interested <span className="text-red-500">*</span>
@@ -272,12 +273,11 @@ const EnrollmentForm = ({
                   <div className="relative">
                     <select
                       name="course"
-                      value={safeFormData.course || ''}
+                      value={safeFormData.course}
                       onChange={onInputChange}
                       className={`
                         w-full px-4 py-3 rounded-xl
-                        bg-white/80 border-2 ${
-                          safeErrors.course ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
+                        bg-white/80 border-2 ${errors.course ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
                         } focus:outline-none transition-all duration-300 text-neutral-800 appearance-none cursor-pointer
                       `}
                     >
@@ -290,17 +290,17 @@ const EnrollmentForm = ({
                     </select>
                     <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400 pointer-events-none" />
                   </div>
-                  {safeErrors.course && <p className="text-xs text-red-500 mt-1">{safeErrors.course}</p>}
+                  {errors.course && <p className="text-xs text-red-500 mt-1">{errors.course}</p>}
                 </div>
 
-                {/* Doubts - SAFE ACCESS */}
+                {/* Doubts */}
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-neutral-700">
                     Do you have any doubts?
                   </label>
                   <textarea
                     name="doubts"
-                    value={safeFormData.doubts || ''}
+                    value={safeFormData.doubts}
                     onChange={onInputChange}
                     rows={3}
                     className="
@@ -312,11 +312,11 @@ const EnrollmentForm = ({
                   />
                 </div>
 
-                {/* Submit */}
+                {/* Submit - NOW CONNECTED TO BACKEND */}
                 <div className="pt-4">
                   <button
                     type="submit"
-                    disabled={isSubmitting || (progress || 0) < 100}
+                    disabled={isSubmitting}
                     className={`
                       w-full md:w-auto md:mx-auto md:block
                       px-12 py-4 rounded-full text-base font-bold text-white
@@ -324,7 +324,7 @@ const EnrollmentForm = ({
                       transition-all duration-300
                       hover:shadow-[0_18px_40px_rgba(255,90,31,0.8)]
                       hover:-translate-y-1 hover:scale-[1.02] active:scale-95
-                      ${isSubmitting || (progress || 0) < 100
+                      ${isSubmitting
                         ? 'bg-gray-500 cursor-not-allowed opacity-75 shadow-none'
                         : 'bg-gradient-to-r from-[#ff6a1a] to-[#ff3c00]'
                       }
@@ -347,18 +347,18 @@ const EnrollmentForm = ({
             </form>
           </div>
         </div>
-      </div>
 
-      {/* scrollbar hiding utility */}
-      <style jsx>{`
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
+        {/* scrollbar hiding utility */}
+        <style jsx>{`
+          .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+          .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+        `}</style>
+      </div>
     </div>
   );
 };

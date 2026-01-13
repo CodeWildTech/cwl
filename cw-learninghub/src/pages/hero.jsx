@@ -1,11 +1,19 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { Sun, Moon, Star } from 'lucide-react';
+import { Star, Code2, Cpu } from 'lucide-react'; // Added Code2 and Cpu icons
 
 const HeroSection = () => {
   const containerRef = useRef(null);
-  const [isDark, setIsDark] = useState(true);
-  
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Screen size check
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
@@ -17,14 +25,18 @@ const HeroSection = () => {
   const x1 = useTransform(smoothProgress, [0, 1], ["0%", "-100%"]);
   const x2 = useTransform(smoothProgress, [0, 1], ["0%", "-40%"]);
 
-  // Right Side Box Animations (Refined)
+  // Scroll Animations
   const imageScale = useTransform(smoothProgress, [0, 0.4], [0.85, 1]);
-  const imageOpacity = useTransform(smoothProgress, [0, 0.3], [0, 1]);
+  const imageOpacityScroll = useTransform(smoothProgress, [0, 0.3], [0, 1]);
   const imageRotate = useTransform(smoothProgress, [0, 0.5], [8, 0]);
 
-  // Floating Elements Parallax (Subtle)
+  // Floating Elements Parallax
   const profileY = useTransform(smoothProgress, [0, 1], [0, -80]);
   const reviewY = useTransform(smoothProgress, [0, 1], [0, -40]);
+
+  // Tech Status Animation
+  const techPulse = useTransform(smoothProgress, [0, 0.5], [0.8, 1.2]);
+  const techRotate = useTransform(smoothProgress, [0, 1], [0, 360]);
 
   return (
     <div ref={containerRef} className="relative h-[250vh] bg-[#030712]">
@@ -39,7 +51,7 @@ const HeroSection = () => {
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            {/* Left Side: Text Content - Top on mobile - FIXED WHITE SPACE */}
+            {/* Left Side: Text Content */}
             <div className="lg:col-span-7 flex flex-col justify-center order-1 lg:order-1 pt-0 -mt-4 lg:mt-0">
               <motion.div 
                 style={{ x: x1 }}
@@ -49,7 +61,7 @@ const HeroSection = () => {
                 className="whitespace-nowrap"
               >
                 <h1 className="text-[12vw] lg:text-[8.5rem] font-black text-white leading-[0.85] tracking-tighter uppercase">
-                  IT'S TIME <span className="text-orange-500">TO</span>
+                  IT'S TIME <span className="text-orange-600">TO</span>
                 </h1>
               </motion.div>
               
@@ -71,23 +83,25 @@ const HeroSection = () => {
                 transition={{ delay: 0.8 }}
                 className="mt-10 hidden lg:block"
               >
-                <button className="px-10 py-4 bg-orange-500 text-white font-bold rounded-full hover:bg-white hover:text-black transition-all duration-300 shadow-lg shadow-orange-500/20">
+                <button className="px-10 py-4 bg-orange-600 text-sm font-bold text-white rounded-full hover:bg-white hover:text-black transition-all duration-300 shadow-lg shadow-orange-500/20">
                   Join Our Hub
                 </button>
               </motion.div>
             </div>
 
-            {/* Right Side: Compact & Clean Box - Below text on mobile */}
+            {/* Right Side: Image Box */}
             <div className="lg:col-span-5 relative order-2 lg:order-2 flex justify-center">
               <motion.div 
                 style={{ 
                   scale: imageScale, 
-                  opacity: imageOpacity,
+                  opacity: isMobile ? undefined : imageOpacityScroll, 
                   rotate: imageRotate
                 }}
+                initial={isMobile ? { x: "100%", opacity: 0 } : {}}
+                animate={isMobile ? { x: "0%", opacity: 1 } : {}}
+                transition={isMobile ? { duration: 1.2, delay: 1.2, ease: "easeOut" } : {}}
                 className="relative w-[280px] md:w-[350px] lg:w-[400px] aspect-[4/5]"
               >
-                {/* Main Image Container */}
                 <div className="w-full h-full rounded-[2.5rem] p-[2px] bg-gradient-to-b from-white/20 to-transparent shadow-2xl relative overflow-visible">
                   <div className="w-full h-full rounded-[2.4rem] overflow-hidden bg-zinc-900 relative">
                     <img 
@@ -95,7 +109,6 @@ const HeroSection = () => {
                       alt="Team" 
                       className="w-full h-full object-cover"
                     />
-                    {/* Bottom Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
                     
                     <div className="absolute bottom-6 left-6">
@@ -104,7 +117,7 @@ const HeroSection = () => {
                     </div>
                   </div>
 
-                  {/* Floating Review - Compact */}
+                  {/* Top Left: Review Badge */}
                   <motion.div
                     style={{ y: reviewY }}
                     className="absolute -top-6 -left-8 z-30 bg-white p-3 rounded-2xl shadow-xl flex flex-col gap-1 border border-zinc-100"
@@ -115,13 +128,48 @@ const HeroSection = () => {
                     <p className="text-black text-xs font-bold leading-tight">Best Learning Hub</p>
                   </motion.div>
 
-                  {/* Theme Switcher - Sleek */}
-                  <div className="absolute top-6 -right-4 z-30 bg-zinc-900/80 backdrop-blur-md border border-white/10 p-1.5 rounded-full flex flex-col gap-2 shadow-xl">
-                    <button onClick={() => setIsDark(false)} className={`p-1.5 rounded-full transition-colors ${!isDark ? 'bg-white text-black' : 'text-white/40'}`}><Sun size={14}/></button>
-                    <button onClick={() => setIsDark(true)} className={`p-1.5 rounded-full transition-colors ${isDark ? 'bg-orange-500 text-white' : 'text-white/40'}`}><Moon size={14}/></button>
-                  </div>
+                  {/* UPDATED: Smaller Coding Icon </> Style */}
+                  <motion.div 
+                    style={{ 
+                      scale: techPulse,
+                      rotate: techRotate
+                    }}
+                    transition={{ 
+                      scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+                      rotate: { duration: 8, repeat: Infinity, ease: "linear" }
+                    }}
+                    className="absolute top-10 -right-6 z-30 backdrop-blur-md border border-white/10 p-2 rounded-2xl flex flex-col items-center gap-1.5 shadow-2xl"
+                  >
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gradient-to-r from-orange-500/30 to-blue-500/30 rounded-full blur-sm animate-ping" />
+                      <motion.div 
+                        className="bg-gradient-to-r from-orange-500/30 to-blue-500/30 p-2 rounded-xl relative border border-white/20 backdrop-blur-sm"
+                        animate={{ 
+                          scale: [1, 1.05, 1],
+                          backgroundColor: ["#f97316", "#3b82f6", "#f97316"]
+                        }}
+                        transition={{ 
+                          scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+                          backgroundColor: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                        }}
+                      >
+                        <Code2 size={12} className="text-white drop-shadow-lg" />
+                      </motion.div>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <span className="text-[7px] font-bold text-white/60 uppercase tracking-widest">Tech</span>
+                      <div className="flex items-center gap-1">
+                        <motion.div 
+                          className="w-2 h-2 rounded-full bg-green-400"
+                          animate={{ scale: [1, 1.4, 1] }}
+                          transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+                        />
+                        <span className="text-white text-[10px] font-bold">LIVE</span>
+                      </div>
+                    </div>
+                  </motion.div>
 
-                  {/* Profile Card - Refined */}
+                  {/* Bottom Right: Profile Card */}
                   <motion.div 
                     style={{ y: profileY }}
                     className="absolute -bottom-4 -right-8 z-30 w-56 bg-zinc-900/90 backdrop-blur-xl border border-white/10 p-4 rounded-3xl shadow-2xl"
@@ -143,7 +191,7 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
+        {/* Scroll Progress Indicator */}
         <div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 h-32 w-[1px] bg-white/10 rounded-full">
           <motion.div style={{ scaleY: smoothProgress }} className="w-full h-full bg-orange-500 origin-top" />
         </div>

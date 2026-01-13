@@ -21,32 +21,32 @@ export default function TestimonialsSection() {
 
   const testimonials = [
     {
-      id: 1, name: "Jenny", role: "Nagercoil",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
+      id: 1, name: "Aslin", role: "Nagercoil",
+      image: "src/assets/students/Aslin.jpeg",
       message: "I enrolled at CodeWild Tech for their Python course, and it completely transformed my career. The mentors were highly supportive and knowledgeable. Thanks to their guidance, I'm now working as a software developer in Trivandrum.",
       position: { top: "6%", right: "35%", mobile: { top: "4%", right: "8%" } }, size: "lg", xType: "right",
     },
     {
-      id: 2, name: "Alex Kumar", role: "Chennai",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
+      id: 2, name: "Jofna", role: "Chennai",
+      image: "src/assets/students/jofna.jpeg",
       message: "The hands-on approach and real-world projects helped me build a strong portfolio. Highly recommended for anyone serious about software development!",
       position: { top: "30%", left: "10%", mobile: { top: "22%", left: "4%" } }, size: "md", xType: "left",
     },
     {
-      id: 3, name: "Sarah Johnson", role: "Bangalore",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop",
+      id: 3, name: "Jose", role: "Bangalore",
+      image: "src/assets/students/jose.jpeg",
       message: "Best decision I made for my career. The instructors are industry experts and the curriculum is up-to-date with current market demands.",
       position: { bottom: "35%", left: "18%", mobile: { bottom: "30%", left: "4%" } }, size: "xl", xType: "left",
     },
     {
-      id: 4, name: "Michael Chen", role: "Kochi",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop",
+      id: 4, name: "Stephin", role: "Kochi",
+      image: "src/assets/students/stephin.jpeg",
       message: "Great learning experience with practical assignments. The support team is always available to help with any queries.",
       position: { top: "48%", left: "32%", mobile: { top: "40%", left: "18%" } }, size: "sm", xType: "left",
     },
     {
       id: 5, name: "Priya Sharma", role: "Mumbai",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop",
+      image: "src/assets/students/ashik.jpeg",
       message: "The course structure is well-organized and the mentors genuinely care about student success. I got placed within 2 months of completion!",
       position: { top: "18%", right: "22%", mobile: { top: "15%", right: "8%" } }, size: "lg", xType: "right",
     },
@@ -303,7 +303,7 @@ export default function TestimonialsSection() {
                 className="text-orange-500 font-bold tracking-[0.3em] uppercase text-sm">Student Testimonials</motion.p>
               <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7, delay: 0.1 }} 
                 className="text-4xl sm:text-5xl lg:text-8xl font-black text-white leading-none tracking-tighter">
-                Voices of <span className="text-orange-500">Success</span>
+                Voices of <span className="text-orange-600">Success</span>
               </motion.h1>
               <p className="text-white/40 max-w-md mx-auto lg:mx-0 text-base lg:text-lg">Join 100+ professionals who transformed their careers through our industry-leading workshops.</p>
             </div>

@@ -138,7 +138,7 @@ export default function ProgramOverview() {
               <span className="text-[11px] sm:text-xs font-black uppercase tracking-[0.3em] text-orange-400">Future-Ready Skills</span>
             </div>
             <h2 className="text-[2.5rem] sm:text-[3rem] lg:text-[3.8rem] font-black mb-5 lg:mb-7 text-white tracking-tight leading-tight">
-              Elevate your <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600">Career</span>
+              Elevate your <span className="text-transparent bg-clip-text bg-orange-600">Career</span>
             </h2>
             <p className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0">Industry-vetted curriculums designed to take you from beginner to professional.</p>
           </header>
@@ -153,7 +153,7 @@ export default function ProgramOverview() {
                   <button
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     className={`w-full group flex items-center justify-between p-4 rounded-2xl transition-all duration-300 border ${
-                      isDropdownOpen ? 'bg-gradient-to-r from-orange-400 to-orange-500 border-white/30 shadow-xl' : 'bg-white/5 border-white/10'
+                      isDropdownOpen ? 'bg-orange-600 border-white/30 shadow-xl' : 'bg-white/5 border-white/10'
                     }`}
                   >
                     <div className="flex items-center gap-3.5">
@@ -221,7 +221,7 @@ export default function ProgramOverview() {
                       </span>
                     )}
 
-                    <h3 className="text-[1.35rem] lg:text-[1.6rem] font-black text-white mb-3.5 group-hover:text-orange-400 transition-colors">
+                    <h3 className="text-[2.35rem] lg:text-[1.6rem] font-black text-white mb-3.5 group-hover:text-orange-600 transition-colors">
                       {course.title}
                     </h3>
                     <p className="text-slate-400 leading-relaxed mb-6 text-sm lg:text-[0.98rem]">
@@ -256,7 +256,7 @@ export default function ProgramOverview() {
                     <div className="flex flex-col sm:flex-row gap-4">
                       <button 
                         onClick={handleEnrollNow}
-                        className="px-8 py-3.5 bg-orange-500 text-white font-black rounded-2xl hover:bg-orange-400 hover:scale-[1.02] active:scale-95 transition-all duration-300 text-sm flex-1 sm:flex-none"
+                        className="px-8 py-3.5  bg-orange-600 text-sm font-bold text-white text-white font-black rounded-2xl hover:bg-orange-400 hover:scale-[1.02] active:scale-95 transition-all duration-300 text-sm flex-1 sm:flex-none"
                       >
                         Enroll Now
                       </button>
