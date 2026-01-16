@@ -103,13 +103,38 @@ export default function EventsSection() {
   };
 
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     console.log("Registration submitted:", formData, selectedEvent);
-    alert("Registration successful! We'll contact you soon.");
-    setShowForm(false);
-    setSelectedEvent(null);
-    setFormData({ name: "", email: "", phone: "", company: "" });
+
+    try {
+      const response = await fetch("http://localhost:8000/api/forms/register-event", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData, // name, email, phone, company
+          eventTitle: selectedEvent.title,
+          eventDate: selectedEvent.date,
+          eventCategory: selectedEvent.category
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Registration successful! We'll contact you soon.");
+        setShowForm(false);
+        setSelectedEvent(null);
+        setFormData({ name: "", email: "", phone: "", company: "" });
+      } else {
+        alert("Registration failed: " + (data.error || "Unknown error"));
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("An error occurred. Please try again.");
+    }
   };
 
 
@@ -144,11 +169,10 @@ export default function EventsSection() {
               <button
                 key={item}
                 onClick={() => setActiveFilter(item)}
-                className={`relative px-5.5 md:px-6.5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
-                  activeFilter === item
+                className={`relative px-5.5 md:px-6.5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${activeFilter === item
                     ? "text-[#0f0a09]"
                     : "text-white/55 hover:text-white"
-                }`}
+                  }`}
               >
                 {activeFilter === item && (
                   <motion.div
@@ -254,7 +278,7 @@ function EventCard({ event, onClick, index }) {
               {event.status}
             </div>
           </div>
-          
+
           <h2 className="text-3xl md:text-4xl font-bold leading-[1.1] text-white group-hover:text-orange-600 transition-colors duration-500">
             {event.title} <br />
             {/* UPDATED: Location name with icon and smaller font */}
@@ -263,7 +287,7 @@ function EventCard({ event, onClick, index }) {
               {event.category}
             </span>
           </h2>
-          
+
           <p className="mt-3.5 text-sm text-white/50 max-w-[260px] line-clamp-2 font-light leading-relaxed">
             {event.desc}
           </p>
@@ -275,7 +299,7 @@ function EventCard({ event, onClick, index }) {
             <span className="text-[10px] uppercase tracking-widest text-white/30 font-bold mb-1">Venue</span>
             <span className="text-sm font-medium text-white/80">{event.location}</span>
           </div>
-          <motion.div 
+          <motion.div
             whileHover={{ scale: 1.08, rotate: -45 }}
             className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center bg-white/5 text-white backdrop-blur-sm"
           >
@@ -326,9 +350,8 @@ function EventModal({ event, onClose, onReserveClick }) {
         </button>
         <div className="p-8 md:p-10">
           <div className="flex items-center gap-3 mb-6">
-            <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
-              isUpcoming ? "bg-green-100 text-green-700" : "bg-slate-100 text-slate-600"
-            }`}>
+            <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${isUpcoming ? "bg-green-100 text-green-700" : "bg-slate-100 text-slate-600"
+              }`}>
               <div className={`w-1.5 h-1.5 rounded-full ${isUpcoming ? "bg-green-500 animate-pulse" : "bg-slate-400"}`} />
               {isUpcoming ? "Registration Open" : "Event Concluded"}
             </div>
