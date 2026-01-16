@@ -4,7 +4,7 @@ import sendEmail from "../utils/email.js";
 export const submitForm = async (req, res) => {
   try {
     console.log("Form received:", req.body); // Log received data
-    const { name, email, phone, dob, location, qualification, course, doubts } = req.body;
+    const { name, email, phone, dob, location, qualification, course, message } = req.body;
 
     // Basic validation
     if (!name || !email || !phone) {
@@ -12,8 +12,8 @@ export const submitForm = async (req, res) => {
     }
 
     await pool.query(
-      "INSERT INTO enquiries (name, email, phone, dob, location, qualification, course, doubts) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-      [name, email, phone, dob, location, qualification, course, doubts]
+      "INSERT INTO enquiries (name, email, phone, dob, location, qualification, course, message) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+      [name, email, phone, dob, location, qualification, course, message]
     );
 
     // Send email (async, don't wait if not critical for response speed, or wait if reliability is key)

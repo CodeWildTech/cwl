@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import EnrollmentForm from "./enrollmentForm";
 
-const EnrollmentContainer = () => {
-  const [isOpen, setIsOpen] = useState(true);
+const EnrollmentContainer = ({ isOpen, onClose }) => {
 
   const [formData, setFormData] = useState({
     name: "",
@@ -12,7 +11,7 @@ const EnrollmentContainer = () => {
     location: "",
     qualification: "",
     course: "",
-    doubts: "",
+    message: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -20,28 +19,41 @@ const EnrollmentContainer = () => {
   const [submitStatus, setSubmitStatus] = useState("");
   const [progress, setProgress] = useState(0);
 
-  // ✅ INPUT CHANGE
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    // Clear error for this field when user types
+    // clear error
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: "" }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
 
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => {
+      const updatedData = {
+        ...prev,
+        [name]: value,
+      };
 
-    // simple progress calculation
-    const currentData = { ...formData, [name]: value };
-    const requiredFields = ['name', 'email', 'phone', 'dob', 'location', 'qualification', 'course'];
-    const filledRequired = requiredFields.filter(field => currentData[field] && currentData[field].trim() !== "").length;
+      // progress calculation using UPDATED data
+      const requiredFields = [
+        "name",
+        "email",
+        "phone",
+        "dob",
+        "location",
+        "qualification",
+        "course",
+      ];
 
-    // Calculate progress based on required fields (7 fields)
-    setProgress(Math.min((filledRequired / 7) * 100, 100));
+      const filledRequired = requiredFields.filter(
+        (field) => updatedData[field]?.trim() !== ""
+      ).length;
+
+      setProgress(Math.min((filledRequired / 7) * 100, 100));
+
+      return updatedData;
+    });
   };
+
 
   const validateForm = () => {
     const newErrors = {};
@@ -90,7 +102,7 @@ const EnrollmentContainer = () => {
 
       // Close modal after success (optional, based on previous behavior)
       setTimeout(() => {
-        setIsOpen(false);
+        onClose();
         setSubmitStatus("");
         // Reset form
         setFormData({
@@ -101,7 +113,7 @@ const EnrollmentContainer = () => {
           location: "",
           qualification: "",
           course: "",
-          doubts: "",
+          message: "",
         });
         setProgress(0);
       }, 2000);
@@ -118,7 +130,7 @@ const EnrollmentContainer = () => {
   return (
     <EnrollmentForm
       isOpen={isOpen}
-      onClose={() => setIsOpen(false)}
+      onClose={onClose}
       formData={formData}
       onInputChange={handleInputChange}
       onSubmit={handleSubmit}

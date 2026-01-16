@@ -4,29 +4,19 @@ import { X, ChevronDown } from 'lucide-react';
 const EnrollmentForm = ({
   isOpen,
   onClose,
-  formData = {},
-  onInputChange,
+  formData = {},          // ✅ IMPORTANT
+  onInputChange = () => {},
   progress = 0,
   submitStatus = '',
   errors = {},
   isSubmitting = false,
   onSubmit
 }) => {
-  if (!isOpen) return null;
 
-  // ✅ SAFE DATA (Just to be sure, though parent initializes it)
-  const safeFormData = {
-    name: formData?.name || '',
-    email: formData?.email || '',
-    phone: formData?.phone || '',
-    dob: formData?.dob || '',
-    location: formData?.location || '',
-    qualification: formData?.qualification || '',
-    course: formData?.course || '',
-    doubts: formData?.doubts || ''
-  };
 
   return (
+    
+
     <div
       className={`
         fixed inset-0 z-[100] flex items-center justify-center p-4
@@ -151,7 +141,7 @@ const EnrollmentForm = ({
                   <input
                     type="text"
                     name="name"
-                    value={safeFormData.name}
+                    value={formData.name ?? ''}
                     onChange={onInputChange}
                     className={`
                       w-full px-4 py-3 rounded-xl
@@ -170,7 +160,7 @@ const EnrollmentForm = ({
                   <input
                     type="email"
                     name="email"
-                    value={safeFormData.email}
+  value={formData.email ?? ''}
                     onChange={onInputChange}
                     className={`
                       w-full px-4 py-3 rounded-xl
@@ -193,7 +183,7 @@ const EnrollmentForm = ({
                     <input
                       type="tel"
                       name="phone"
-                      value={safeFormData.phone}
+value={formData.phone ?? ''}
                       onChange={onInputChange}
                       maxLength={10}
                       className={`
@@ -215,7 +205,7 @@ const EnrollmentForm = ({
                     <input
                       type="date"
                       name="dob"
-                      value={safeFormData.dob}
+value={formData.dob ?? ''}
                       onChange={onInputChange}
                       max={new Date().toISOString().split('T')[0]}
                       className={`
@@ -234,7 +224,7 @@ const EnrollmentForm = ({
                     <input
                       type="text"
                       name="location"
-                      value={safeFormData.location}
+value={formData.location ?? ''}
                       onChange={onInputChange}
                       className={`
                         w-full px-4 py-3 rounded-xl
@@ -254,7 +244,7 @@ const EnrollmentForm = ({
                   <input
                     type="text"
                     name="qualification"
-                    value={safeFormData.qualification}
+value={formData.qualification ?? ''}
                     onChange={onInputChange}
                     className={`
                       w-full px-4 py-3 rounded-xl
@@ -273,7 +263,7 @@ const EnrollmentForm = ({
                   <div className="relative">
                     <select
                       name="course"
-                      value={safeFormData.course}
+value={formData.course ?? ''}
                       onChange={onInputChange}
                       className={`
                         w-full px-4 py-3 rounded-xl
@@ -300,7 +290,7 @@ const EnrollmentForm = ({
                   </label>
                   <textarea
                     name="doubts"
-                    value={safeFormData.doubts}
+value={formData.doubts ?? ''}
                     onChange={onInputChange}
                     rows={3}
                     className="

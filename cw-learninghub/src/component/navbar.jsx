@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import EnrollmentForm from './enrollmentForm';
+import EnrollmentContainer from './enrollmentFormContainer';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import {
@@ -12,7 +12,7 @@ import {
 
 const Logo = () => (
   <div className="w-20 h-20 rounded-full flex items-center ">
-    <img src="src/assets/Logo/cwlogo.png" alt=""/>
+    <img src="src/assets/Logo/cwlogo.png" alt="" />
   </div>
 );
 
@@ -33,7 +33,7 @@ export default function Navbar() {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ 
+      element.scrollIntoView({
         behavior: 'smooth',
         block: 'start'
       });
@@ -67,9 +67,9 @@ export default function Navbar() {
       {/* DESKTOP & MOBILE TOP NAVBAR */}
       <header className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
         <motion.div
-          animate={{ 
+          animate={{
             scale: scrolled ? 0.94 : 1,
-            y: scrolled ? -5 : 0 
+            y: scrolled ? -5 : 0
           }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="w-full max-w-5xl pointer-events-auto mx-auto"
@@ -80,10 +80,9 @@ export default function Navbar() {
               rounded-full px-4 sm:px-6 lg:px-8
               py-2 sm:py-2.5
               border transition-colors duration-700 ease-in-out
-              ${
-                scrolled
-                  ? 'bg-zinc-900/60 border-white/20 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]'
-                  : 'bg-zinc-950/40 border-white/5 backdrop-blur-md shadow-none'
+              ${scrolled
+                ? 'bg-zinc-900/60 border-white/20 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]'
+                : 'bg-zinc-950/40 border-white/5 backdrop-blur-md shadow-none'
               }
             `}
           >
@@ -97,7 +96,7 @@ export default function Navbar() {
               // Mobile: Logo INSIDE navbar (smaller size)
               <div className="flex items-center gap-2 flex-shrink-0">
                 <div className="w-12 h-12 rounded-full flex items-center ">
-                  <img src="src/assets/Logo/cwlogo.png" alt=""/>
+                  <img src="src/assets/Logo/cwlogo.png" alt="" />
                 </div>
               </div>
             )}
@@ -111,19 +110,18 @@ export default function Navbar() {
                   className={`
                     relative flex items-center h-10
                     transition-all duration-500 ease-[0.22,1,0.36,1] group
-                    ${
-                      scrolled
-                        ? 'bg-white/5 hover:bg-white/10 border border-white/10 rounded-full px-3 text-neutral-100/80 overflow-hidden'
-                        : 'text-neutral-400 hover:text-white px-4'
+                    ${scrolled
+                      ? 'bg-white/5 hover:bg-white/10 border border-white/10 rounded-full px-3 text-neutral-100/80 overflow-hidden'
+                      : 'text-neutral-400 hover:text-white px-4'
                     }
                   `}
                 >
                   <Icon className={`${scrolled ? 'w-4 h-4' : 'w-0 h-0 opacity-0'} transition-all duration-500`} />
-                  
+
                   <span
                     className={`
-                      ${scrolled 
-                        ? 'max-w-0 opacity-0 group-hover:max-w-[100px] group-hover:opacity-100 group-hover:ml-2 text-[10px] tracking-widest uppercase' 
+                      ${scrolled
+                        ? 'max-w-0 opacity-0 group-hover:max-w-[100px] group-hover:opacity-100 group-hover:ml-2 text-[10px] tracking-widest uppercase'
                         : 'max-w-[150px] opacity-100 text-[15px] font-medium'}
                       whitespace-nowrap transition-all duration-500 ease-in-out
                     `}
@@ -139,7 +137,7 @@ export default function Navbar() {
             </nav>
 
             {/* CTA Button - MOVED TO RIGHT SIDE */}
-            <motion.div 
+            <motion.div
               className="absolute right-4 top-1/2 -translate-y-1/2"
               initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -193,8 +191,8 @@ export default function Navbar() {
         </motion.div>
       </nav>
 
-      <EnrollmentForm 
-        isOpen={isFormOpen} 
+      <EnrollmentContainer
+        isOpen={isFormOpen}
         onClose={() => setIsFormOpen(false)}
       />
 

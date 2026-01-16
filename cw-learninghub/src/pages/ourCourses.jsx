@@ -17,7 +17,7 @@ import {
   Database,
   ChevronDown,
 } from 'lucide-react';
-import EnrollmentForm from '../component/enrollmentForm';
+import EnrollmentContainer from '../component/enrollmentFormContainer';
 import ProgramOverviewPage from './programOverview'; // ✅ NEW PAGE IMPORT
 
 // Main CoursesSection Component - UPDATED
@@ -152,9 +152,8 @@ export default function ProgramOverview() {
                 <div className="relative">
                   <button
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    className={`w-full group flex items-center justify-between p-4 rounded-2xl transition-all duration-300 border ${
-                      isDropdownOpen ? 'bg-orange-600 border-white/30 shadow-xl' : 'bg-white/5 border-white/10'
-                    }`}
+                    className={`w-full group flex items-center justify-between p-4 rounded-2xl transition-all duration-300 border ${isDropdownOpen ? 'bg-orange-600 border-white/30 shadow-xl' : 'bg-white/5 border-white/10'
+                      }`}
                   >
                     <div className="flex items-center gap-3.5">
                       <div className={`p-2.5 rounded-xl ${isDropdownOpen ? 'bg-white/30' : 'bg-white/10'}`}>
@@ -186,9 +185,8 @@ export default function ProgramOverview() {
                   <button
                     key={cat.name}
                     onClick={() => handleCategoryChange(cat.name)}
-                    className={`w-full group flex items-center justify-between px-4 py-3.5 rounded-xl transition-all duration-300 border-l-4 ${
-                      activeCategory === cat.name ? 'border-orange-400 bg-orange-500/10 text-white' : 'border-transparent text-slate-400 hover:text-white hover:bg-orange-500/5'
-                    }`}
+                    className={`w-full group flex items-center justify-between px-4 py-3.5 rounded-xl transition-all duration-300 border-l-4 ${activeCategory === cat.name ? 'border-orange-400 bg-orange-500/10 text-white' : 'border-transparent text-slate-400 hover:text-white hover:bg-orange-500/5'
+                      }`}
                     style={{ animation: `slideIn 0.4s ease-out forwards ${i * 0.08}s` }}
                   >
                     <div className="flex items-center gap-3.5 flex-1 text-left">
@@ -254,14 +252,14 @@ export default function ProgramOverview() {
 
                     {/* Buttons - PROGRAM OVERVIEW ✅ CONNECTED */}
                     <div className="flex flex-col sm:flex-row gap-4">
-                      <button 
+                      <button
                         onClick={handleEnrollNow}
                         className="px-8 py-3.5  bg-orange-600 text-sm font-bold text-white text-white font-black rounded-2xl hover:bg-orange-400 hover:scale-[1.02] active:scale-95 transition-all duration-300 text-sm flex-1 sm:flex-none"
                       >
                         Enroll Now
                       </button>
 
-                      <button 
+                      <button
                         onClick={() => handleProgramOverview(course)} // ✅ NOW OPENS ProgramOverviewPage
                         className="flex items-center justify-center gap-2 px-8 py-3.5 bg-white/5 border border-white/10 text-white font-semibold rounded-2xl hover:bg-white/10 hover:border-white/20 hover:translate-y-[-2px] active:translate-y-0 transition-all duration-200 text-xs lg:text-sm flex-1 sm:flex-none"
                       >
@@ -303,16 +301,9 @@ export default function ProgramOverview() {
       )}
 
       {/* Enrollment Form Modal */}
-      <EnrollmentForm 
+      <EnrollmentContainer
         isOpen={isEnrollmentFormOpen}
         onClose={() => setIsEnrollmentFormOpen(false)}
-        formData={{}}
-        onInputChange={() => {}}
-        progress={0}
-        submitStatus=""
-        errors={{}}
-        isSubmitting={false}
-        onSubmit={() => {}}
       />
     </>
   );
