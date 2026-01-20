@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Instagram, Linkedin, Youtube, MapPin, Mail, Download, X } from "lucide-react";
+import axios from "axios";
 import developerImg from "../assets/footer/developer.png";
+import { toast, Toaster } from 'sonner'; // Import here
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -11,21 +13,71 @@ export default function ContactPage() {
   });
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Thank you for contacting us!");
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  const loadingToast = toast.loading('Sending your message...'); // Spinner state
+  
+  try {
+    console.log("Sending form data:", formData);
+    const response = await axios.post("http://localhost:8000/api/footer-contact/submit", formData);
+    console.log("Server response:", response.data);
+    
+    toast.dismiss(loadingToast);
+    toast.success('Thank you for contacting us!', {
+      description: 'We will get back to you shortly via email.',
+      duration: 5000,
+      action: {
+        label: 'View Status',
+        onClick: () => setIsFormModalOpen(true),  // Reopen modal or navigate
+      },
+    });
     setFormData({ name: "", phone: "", email: "", message: "" });
     setIsFormModalOpen(false);
-  };
+  } catch (error) {
+    toast.dismiss(loadingToast);
+    console.error("Error submitting form:", error);
+    toast.error('Failed to send message', {
+      description: 'Please check your connection and try again.',
+      duration: 6000,
+      action: {
+        label: 'Retry',
+        onClick: () => handleSubmit(e),  // Retry button!
+      },
+    });
+  }
+};
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // **NEW: Brochure Download Function**
+  const handleDownloadBrochure = () => {
+    // Replace with your actual brochure PDF path
+    const brochureUrl = "/brochures/cw-broucher.pdf"; // or "https://yourdomain.com/brochures/cw-brochure.pdf"
+
+    // Create temporary link for download
+    const link = document.createElement("a");
+    link.href = brochureUrl;
+    link.download = "CW-LearningHub-Brochure.pdf"; // File name when downloaded
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // Optional: Track download
+    console.log("Brochure downloaded!");
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       {/* HERO SECTION */}
+       <Toaster 
+        position="top-right"
+        richColors
+        closeButton
+        expand={true}  // Auto-expands on hover for interactivity
+        duration={4500}
+      />
       <section className="flex-1 relative bg-gradient-to-b from-[#1c0b00] via-[#120300] to-black">
         <div className="max-w-6xl mx-auto px-4 py-22 lg:px-0 min-h-[75vh] flex items-center">
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.1fr] gap-10 lg:gap-14 w-full">
@@ -52,10 +104,15 @@ export default function ContactPage() {
                   Get in touch with our team for any course enquiries or support.
                   We're here to help you start your learning journey with confidence.
                 </p>
-                <button className="inline-flex items-center gap-3 border border-white/70 hover:border-orange-500 px-4 py-2.5 rounded transition-colors">
-                  <span className="text-xs sm:text-sm">CW - Boucher</span>
-                  <div className="bg-orange-500 p-2 rounded group-hover:bg-orange-600 transition-colors">
-                    <Download size={16} />
+
+                {/* **UPDATED: Working Download Button */}
+                <button
+                  onClick={handleDownloadBrochure}
+                  className="inline-flex items-center gap-3 border border-white/70 hover:border-orange-500 hover:bg-orange-500/20 px-4 py-2.5 rounded-lg transition-all duration-300 hover:scale-105 group"
+                >
+                  <span className="text-xs sm:text-sm font-medium">Download Brochure</span>
+                  <div className="bg-orange-500 p-2 rounded-md group-hover:bg-orange-600 transition-all duration-300">
+                    <Download size={16} className="group-hover:rotate-[-45deg] transition-transform duration-300" />
                   </div>
                 </button>
               </div>
@@ -155,6 +212,7 @@ export default function ContactPage() {
         </div>
       </section>
 
+      {/* Rest of your code remains exactly the same */}
       {/* MOBILE FORM MODAL */}
       {isFormModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 lg:hidden">
@@ -275,7 +333,7 @@ export default function ContactPage() {
             </h4>
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://www.instagram.com/codewild.learninghub?igsh=ZDV2NHE2aDRnNWFo"
                 className="bg-zinc-900 hover:bg-orange-500 p-3 rounded-full transition-all duration-200 hover:scale-110"
               >
                 <Instagram size={22} />

@@ -19,7 +19,7 @@ const EVENTS_DATA = [
     size: "md",
     status: "Upcoming",
     date: "Oct 24, 2025",
-    location: "Technopark",
+    location: "CWT Office",
     desc: "Master SEO and Meta Ads.",
     image:
       "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -45,7 +45,7 @@ const EVENTS_DATA = [
     size: "lg",
     status: "Ended",
     date: "Sep 12, 2024",
-    location: "Kochi",
+    location: "CWT Office",
     desc: "Advanced content strategy workshop.",
     image:
       "https://images.pexels.com/photos/6476584/pexels-photo-6476584.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -58,7 +58,7 @@ const EVENTS_DATA = [
     size: "sm",
     status: "Upcoming",
     date: "Nov 05, 2025",
-    location: "Zoom",
+    location: "Online",
     desc: "Introduction to Email Automations.",
     image:
       "https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -87,7 +87,7 @@ export default function EventsSection() {
     name: "",
     email: "",
     phone: "",
-    company: "",
+    current_status: "",
   });
 
 
@@ -107,35 +107,43 @@ export default function EventsSection() {
     e.preventDefault();
     console.log("Registration submitted:", formData, selectedEvent);
 
-    try {
-      const response = await fetch("http://localhost:8000/api/forms/register-event", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...formData, // name, email, phone, company
-          eventTitle: selectedEvent.title,
-          eventDate: selectedEvent.date,
-          eventCategory: selectedEvent.category
-        }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        alert("Registration successful! We'll contact you soon.");
-        setShowForm(false);
-        setSelectedEvent(null);
-        setFormData({ name: "", email: "", phone: "", company: "" });
-      } else {
-        alert("Registration failed: " + (data.error || "Unknown error"));
+  try { 
+  const response = await fetch("http://localhost:8000/api/forms/register-event", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      ...formData, // name, email, phone, company
+      eventTitle: selectedEvent.title,
+      eventDate: selectedEvent.date,
+      eventCategory: selectedEvent.category,
+      // ✅ ADD THESE TWO LINES:
+      type: "event",  // This tells backend it's EVENT
+      eventData: {
+        title: selectedEvent.title,
+        date: selectedEvent.date,
+        mode: selectedEvent.location || selectedEvent.category
       }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("An error occurred. Please try again.");
-    }
+    }),
+  });
+
+  const data = await response.json();
+
+  if (response.ok) {
+    alert("🎉 Registration successful! Check your email for confirmation.");
+    setShowForm(false);
+    setSelectedEvent(null);
+    setFormData({ name: "", email: "", phone: "", current_status: "" });
+  } else {
+    alert("Registration failed: " + (data.error || "Unknown error"));
+  }
+} catch (error) {
+  console.error("Error submitting form:", error);
+  alert("An error occurred. Please try again.");
+}
   };
+
 
 
   const handleFormChange = (e) => {
@@ -170,8 +178,8 @@ export default function EventsSection() {
                 key={item}
                 onClick={() => setActiveFilter(item)}
                 className={`relative px-5.5 md:px-6.5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${activeFilter === item
-                    ? "text-[#0f0a09]"
-                    : "text-white/55 hover:text-white"
+                  ? "text-[#0f0a09]"
+                  : "text-white/55 hover:text-white"
                   }`}
               >
                 {activeFilter === item && (
@@ -225,7 +233,7 @@ export default function EventsSection() {
             onClose={() => {
               setShowForm(false);
               setSelectedEvent(null);
-              setFormData({ name: "", email: "", phone: "", company: "" });
+              setFormData({ name: "", email: "", phone: "", current_status: "" });
             }}
           />
         )}
@@ -510,8 +518,8 @@ function RegistrationForm({ event, formData, onSubmit, onChange, onClose }) {
               </label>
               <input
                 type="text"
-                name="company"
-                value={formData.company}
+                name="current_status"
+                value={formData.current_status}
                 onChange={onChange}
                 className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-orange-500 focus:outline-none transition-all bg-slate-50 text-slate-900 font-medium"
                 placeholder="Student or Working Professional"

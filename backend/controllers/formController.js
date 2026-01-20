@@ -1,32 +1,67 @@
 import pool from "../config/db.js";
 import sendEmail from "../utils/email.js";
 
+/* =========================
+   ENQUIRY FORM SUBMIT
+========================= */
 export const submitForm = async (req, res) => {
   try {
-    console.log("Form received:", req.body); // Log received data
-    const { name, email, phone, dob, location, qualification, course, message } = req.body;
+    console.log("Enquiry Form received:", req.body);
 
-    // Basic validation
+    const {
+      name,
+      email,
+      phone,
+      dob,
+      location,
+      qualification,
+      course,
+      message,
+    } = req.body;
+
     if (!name || !email || !phone) {
-       return res.status(400).json({ error: "Missing required fields" });
+      return res.status(400).json({
+        error: "Missing required fields",
+      });
     }
 
+    // DB insert
     await pool.query(
-      "INSERT INTO enquiries (name, email, phone, dob, location, qualification, course, message) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-      [name, email, phone, dob, location, qualification, course, message]
+      `
+        INSERT INTO enquiries
+        (name, email, phone, dob, location, qualification, course, message)
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+      `,
+      [
+        name,
+        email,
+        phone,
+        dob,
+        location,
+        qualification,
+        course,
+        message,
+      ]
     );
 
-    // Send email (async, don't wait if not critical for response speed, or wait if reliability is key)
-    // catch email errors separately so they don't block success response
+    // 📩 Enquiry mail
     try {
-        await sendEmail(email, name);
+      await sendEmail({
+        type: "submit",
+        name,
+        email,
+      });
     } catch (emailErr) {
-        console.error("Email sending failed:", emailErr);
+      console.error("❌ Enquiry mail failed:", emailErr);
     }
 
-    res.status(201).json({ message: "Form submitted successfully" });
+    return res.status(201).json({
+      message: "Enquiry submitted successfully",
+    });
   } catch (err) {
     console.error("Database error:", err);
-    res.status(500).json({ error: "Server error" });
+    return res.status(500).json({
+      error: "Server error",
+    });
   }
 };

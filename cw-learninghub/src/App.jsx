@@ -12,6 +12,7 @@ import ContactPage from './component/footer'
 
 function App() {
   return (
+    
     <Router>
       <div className="relative">
         <ScrollProgress />

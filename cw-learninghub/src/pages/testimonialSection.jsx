@@ -27,13 +27,13 @@ export default function TestimonialsSection() {
       position: { top: "6%", right: "35%", mobile: { top: "4%", right: "8%" } }, size: "lg", xType: "right",
     },
     {
-      id: 2, name: "Jofna", role: "Chennai",
+      id: 2, name: "Jofna", role: "Kochi",
       image: "src/assets/students/jofna.jpeg",
       message: "The hands-on approach and real-world projects helped me build a strong portfolio. Highly recommended for anyone serious about software development!",
       position: { top: "30%", left: "10%", mobile: { top: "22%", left: "4%" } }, size: "md", xType: "left",
     },
     {
-      id: 3, name: "Jose", role: "Bangalore",
+      id: 3, name: "Jose", role: "Nagercoil",
       image: "src/assets/students/jose.jpeg",
       message: "Best decision I made for my career. The instructors are industry experts and the curriculum is up-to-date with current market demands.",
       position: { bottom: "35%", left: "18%", mobile: { bottom: "30%", left: "4%" } }, size: "xl", xType: "left",
@@ -45,32 +45,32 @@ export default function TestimonialsSection() {
       position: { top: "48%", left: "32%", mobile: { top: "40%", left: "18%" } }, size: "sm", xType: "left",
     },
     {
-      id: 5, name: "Priya Sharma", role: "Mumbai",
+      id: 5, name: "Ashik", role: "Trivandrum",
       image: "src/assets/students/ashik.jpeg",
       message: "The course structure is well-organized and the mentors genuinely care about student success. I got placed within 2 months of completion!",
       position: { top: "18%", right: "22%", mobile: { top: "15%", right: "8%" } }, size: "lg", xType: "right",
     },
     {
-      id: 6, name: "David Wilson", role: "Pune",
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop",
+      id: 6, name: "Nikhitha J S", role: "Trivandrum",
+      image: "src/assets/students/nikkitha.jpg",
       message: "Excellent teaching methodology and great community support. The projects helped me understand real-world applications.",
       position: { top: "56%", right: "13%", mobile: { top: "50%", right: "12%" } }, size: "md", xType: "right",
     },
     {
-      id: 7, name: "Aisha Patel", role: "Hyderabad",
-      image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop",
+      id: 7, name: "Sandra A S", role: "Trivandrum",
+      image: "src/assets/students/sandra.jpg",
       message: "From basics to advanced concepts, everything was covered thoroughly. The placement assistance was also very helpful.",
       position: { bottom: "24%", right: "34%", mobile: { bottom: "20%", right: "18%" } }, size: "xl", xType: "right",
     },
     {
-      id: 8, name: "Raj Malhotra", role: "Delhi",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop",
+      id: 8, name: "Anandhu R S", role: "Kollam",
+      image: "src/assets/students/anandhu.jpg",
       message: "Interactive sessions and doubt-clearing classes made complex topics easy to understand. Worth every penny!",
       position: { top: "32%", right: "8%", mobile: { top: "34%", right: "4%" } }, size: "sm", xType: "right",
     },
     {
-      id: 9, name: "Emma Davis", role: "Coimbatore",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop",
+      id: 9, name: "Vandana", role: "Trivandrum",
+      image: "src/assets/students/vandana.jpg",
       message: "The course exceeded my expectations. Got hands-on experience with industry-standard tools and technologies.",
       position: { bottom: "14%", right: "23%", mobile: { bottom: "10%", right: "8%" } }, size: "lg", xType: "right",
     },
@@ -305,7 +305,7 @@ export default function TestimonialsSection() {
                 className="text-4xl sm:text-5xl lg:text-8xl font-black text-white leading-none tracking-tighter">
                 Voices of <span className="text-orange-600">Success</span>
               </motion.h1>
-              <p className="text-white/40 max-w-md mx-auto lg:mx-0 text-base lg:text-lg">Join 100+ professionals who transformed their careers through our industry-leading workshops.</p>
+              <p className="text-white/90 max-w-md mx-auto lg:mx-0 text-base lg:text-lg">Join 100+ professionals who transformed their careers through our industry-leading workshops.</p>
             </div>
 
             {/* Desktop view - positioned profiles */}
