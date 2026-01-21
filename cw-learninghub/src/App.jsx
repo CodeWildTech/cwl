@@ -9,6 +9,7 @@ import CoursesSection from './pages/ourCourses'
 import EventsSection from './pages/eventSection'
 import TestimonialsSection from './pages/testimonialSection'
 import ContactPage from './component/footer'
+import RedesignedProgramPage from './pages/programOverview'
 
 function App() {
   return (
@@ -37,6 +38,9 @@ function App() {
           <Route path="/events" element={<div id="events"><EventsSection/></div>} />
           <Route path="/testimonials" element={<div id="testimonials"><TestimonialsSection/></div>} />
           <Route path="/contact" element={<div id="contact"><ContactPage/></div>} />
+          
+         <Route path="/courses/:category/:slug" element={<RedesignedProgramPage />} />
+
           
           <Route path="*" element={<div id="home"><HeroSection/></div>} />
         </Routes>

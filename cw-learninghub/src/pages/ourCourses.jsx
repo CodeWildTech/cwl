@@ -16,19 +16,25 @@ import {
   Target,
   Database,
   ChevronDown,
+  MessageCircle,
+  X, // ✅ Added X icon for close button
 } from 'lucide-react';
 import EnrollmentContainer from '../component/enrollmentFormContainer';
-import ProgramOverviewPage from './programOverview'; // ✅ NEW PAGE IMPORT
+import ProgramOverviewPage from './programOverview'; 
+import { coursesData } from '../data/courses';
 
-// Main CoursesSection Component - UPDATED
+// Main CoursesSection Component - FULLY CONNECTED TO JSON + TIMER POPUP
 export default function ProgramOverview() {
   const [activeCategory, setActiveCategory] = useState('Development');
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const [isOverviewPageOpen, setIsOverviewPageOpen] = useState(false); // ✅ NEW STATE
+  const [isOverviewPageOpen, setIsOverviewPageOpen] = useState(false);
   const [isEnrollmentFormOpen, setIsEnrollmentFormOpen] = useState(false);
+  const [showTimerPopup, setShowTimerPopup] = useState(false);
+  const [hasShownPopup, setHasShownPopup] = useState(false);
   const scrollContainerRef = useRef(null);
+  const sessionStartTime = useRef(Date.now());
 
   const categories = useMemo(
     () => [
@@ -41,31 +47,31 @@ export default function ProgramOverview() {
     []
   );
 
-  const courses = useMemo(
-    () => ({
-      Development: [
-        { title: 'Java Full Stack', description: 'Master backend logic with Spring Boot and frontend with modern frameworks.', duration: '4 Months', mentors: 5, tag: 'Bestseller' },
-        { title: 'Python Full Stack', description: 'Scale applications using Django and high-performance Python architectures.', duration: '5 Months', mentors: 6, tag: 'Trending' },
-        { title: 'MERN Stack', description: 'Build modern scalable apps using MongoDB, Express, React, and Node.', duration: '6 Months', mentors: 4 },
-        { title: 'React Native', description: 'Create high-performance cross-platform mobile applications for iOS & Android.', duration: '4 Months', mentors: 3 },
-      ],
-      Design: [
-        { title: 'UI/UX Design', description: 'Master Figma and user psychology to build world-class digital products.', duration: '3 Months', mentors: 4, tag: 'New' },
-        { title: 'Motion Graphics', description: 'Bring designs to life with After Effects and cinematic storytelling.', duration: '3 Months', mentors: 3 },
-      ],
-      'AI & ML': [
-        { title: 'Machine Learning', description: 'Deep dive into neural networks and predictive modeling with Python.', duration: '6 Months', mentors: 7, tag: 'Hot' },
-        { title: 'Data Science', description: 'Turn raw data into business intelligence through advanced statistics.', duration: '5 Months', mentors: 5 },
-      ],
-      Marketing: [
-        { title: 'Digital Growth', description: 'Modern SEO, SEM, and performance marketing strategies.', duration: '3 Months', mentors: 4 },
-      ],
-      Data: [
-        { title: 'Big Data', description: 'Processing massive datasets using Hadoop and Spark ecosystems.', duration: '5 Months', mentors: 6 },
-      ],
-    }),
-    []
-  );
+  const courses = useMemo(() => coursesData, []);
+
+  useEffect(() => {
+    const checkTime = () => {
+      const timeSpent = (Date.now() - sessionStartTime.current) / 1000;
+      if (timeSpent >= 15 && !showTimerPopup && !hasShownPopup) {
+        setShowTimerPopup(true);
+        setHasShownPopup(true);
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        sessionStartTime.current = Date.now();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    const interval = setInterval(checkTime, 1000);
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [hasShownPopup]);
 
   // Scroll handler
   const handleScroll = useCallback(() => {
@@ -88,27 +94,37 @@ export default function ProgramOverview() {
     if (window.innerWidth < 1024) setIsDropdownOpen(false);
   };
 
-  // ✅ UPDATED: Enroll Now handler
   const handleEnrollNow = () => {
     setIsEnrollmentFormOpen(true);
   };
 
-  // ✅ UPDATED: Program Overview handler - NOW OPENS NEW PAGE
   const handleProgramOverview = (course) => {
-    setSelectedCourse(course);
-    setIsOverviewPageOpen(true); // ✅ USES NEW PAGE
+    const fullCourseData = Object.values(coursesData).flat().find(
+      c => c.title === course.title
+    );
+    setSelectedCourse(fullCourseData || course);
+    setIsOverviewPageOpen(true);
   };
 
-  // ✅ NEW: Close overview page handler
   const closeOverviewPage = () => {
     setIsOverviewPageOpen(false);
     setSelectedCourse(null);
   };
 
-  // ✅ NEW: Enroll from overview page
   const handleEnrollFromOverview = () => {
     setIsOverviewPageOpen(false);
     setIsEnrollmentFormOpen(true);
+  };
+
+  const handleWhatsAppClick = () => {
+    window.open('https://wa.me/917356227477?text=Hello%20I%20am%20interested%20in%20your%20course', '_blank');
+    setShowTimerPopup(false);
+    setHasShownPopup(true);
+  };
+
+  const closeTimerPopup = () => {
+    setShowTimerPopup(false);
+    setHasShownPopup(true);
   };
 
   return (
@@ -209,7 +225,7 @@ export default function ProgramOverview() {
               >
                 {(courses[activeCategory] || []).map((course, idx) => (
                   <div
-                    key={course.title}
+                    key={course.slug}
                     className="group relative bg-[#1A1210] border border-white/5 px-7 py-7 lg:px-8 lg:py-8 rounded-[1.75rem] lg:rounded-[2rem] hover:border-orange-500/50 transition-all duration-500"
                     style={{ animation: `fadeIn 0.5s ease-out forwards ${idx * 0.08}s` }}
                   >
@@ -250,17 +266,17 @@ export default function ProgramOverview() {
                       </div>
                     </div>
 
-                    {/* Buttons - PROGRAM OVERVIEW ✅ CONNECTED */}
+                    {/* Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4">
                       <button
                         onClick={handleEnrollNow}
-                        className="px-8 py-3.5  bg-orange-600 text-sm font-bold text-white text-white font-black rounded-2xl hover:bg-orange-400 hover:scale-[1.02] active:scale-95 transition-all duration-300 text-sm flex-1 sm:flex-none"
+                        className="px-8 py-3.5 bg-orange-600 text-sm font-bold text-white text-white font-black rounded-2xl hover:bg-orange-400 hover:scale-[1.02] active:scale-95 transition-all duration-300 text-sm flex-1 sm:flex-none"
                       >
                         Enroll Now
                       </button>
 
                       <button
-                        onClick={() => handleProgramOverview(course)} // ✅ NOW OPENS ProgramOverviewPage
+                        onClick={() => handleProgramOverview(course)}
                         className="flex items-center justify-center gap-2 px-8 py-3.5 bg-white/5 border border-white/10 text-white font-semibold rounded-2xl hover:bg-white/10 hover:border-white/20 hover:translate-y-[-2px] active:translate-y-0 transition-all duration-200 text-xs lg:text-sm flex-1 sm:flex-none"
                       >
                         <Download size={16} />
@@ -291,7 +307,7 @@ export default function ProgramOverview() {
         </div>
       </section>
 
-      {/* ✅ PROGRAM OVERVIEW PAGE MODAL - NEW */}
+      {/* PROGRAM OVERVIEW MODAL */}
       {isOverviewPageOpen && selectedCourse && (
         <ProgramOverviewPage
           course={selectedCourse}
@@ -305,6 +321,82 @@ export default function ProgramOverview() {
         isOpen={isEnrollmentFormOpen}
         onClose={() => setIsEnrollmentFormOpen(false)}
       />
+
+      {/* ✅ TIMER POPUP - CLOSE BUTTON MOVED TO TOP RIGHT OF PAGE */}
+      {showTimerPopup && (
+        <>
+          {/* ✅ NEW: Close button on top right of page - dull color */}
+          <button
+            onClick={closeTimerPopup}
+            className="fixed top-6 right-6 z-[1001] w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl hover:bg-white/20 transition-all duration-200 flex items-center justify-center shadow-xl hover:shadow-2xl active:scale-95 text-slate-400 hover:text-slate-200"
+          >
+            <X size={20} strokeWidth={2.5} />
+          </button>
+          
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[1000] flex items-center justify-center p-6">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/20 rounded-3xl max-w-md w-full shadow-2xl overflow-hidden">
+              {/* Clean header - REMOVED close button from here */}
+              <div className="bg-gradient-to-r from-orange-600 to-orange-600 p-8 text-white text-center relative">
+                <div className="flex items-center justify-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                  </div>
+                </div>
+
+                <h3 className="text-4xl font-bold mb-4 leading-tight">
+                  Confused about choosing the right path?
+                </h3>
+                <p className="text-slate-300 text-lg mb-2 font-medium">
+                  We're here to help you
+                </p>
+                <p className="text-slate-400 text-sm">
+                  Get personalized course recommendations tailored for you
+                </p>
+              </div>
+
+              {/* Clean content area */}
+              <div className="p-8 space-y-6">
+                {/* Course expert info */}
+                <div className="flex items-center gap-4 p-4 bg-white/5 rounded-2xl border border-white/10">
+                  <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white text-lg">Course Expert</p>
+                    <p className="text-slate-400 text-sm">Live 1:1 guidance</p>
+                  </div>
+                </div>
+
+                {/* ✅ WHATSAPP GREEN BUTTON */}
+                <button
+                  onClick={handleWhatsAppClick}
+                  className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold text-lg py-4 px-6 rounded-2xl transition-all duration-200 shadow-xl hover:shadow-2xl active:scale-[0.98] border border-green-500/30 flex items-center justify-center gap-3 group"
+                >
+                  <svg className="w-6 h-6 group-hover:-translate-y-0.5 transition-transform duration-200" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-8.696-5.238 9.8 9.8 0 01-1.312-4.175 9.83 9.83 0 011.12-4.309 9.75 9.75 0 013.292-3.319 9.84 9.84 0 016.258-1.512 9.69 9.69 0 014.288 1.316 9.71 9.71 0 013.526 3.551 9.84 9.84 0 011.199 4.903c-.017.34-.11.677-.288.978a10.3 10.3 0 01-.883 1.222 10.62 1"/>
+                  </svg>
+                  <span>Just Chat on WhatsApp</span>
+                </button>
+
+                {/* Trust signals */}
+                <div className="space-y-3 text-center">
+                  <div className="flex items-center justify-center gap-2 text-sm text-slate-300">
+                    <svg className="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                    </svg>
+                    24/7 Support Available
+                  </div>
+                  <p className="text-xs text-slate-400">No spam, just expert guidance</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 }

@@ -1,4 +1,16 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import Aslin from "../assets/students/Aslin.jpeg";
+import Jofna from "../assets/students/jofna.jpeg";
+import Jose from "../assets/students/jose.jpeg";
+import Stephin from "../assets/students/stephin.jpeg";
+import Ashik from "../assets/students/ashik.jpeg";
+import Nikhitha from "../assets/students/nikkitha.jpg";
+import Sandra from "../assets/students/sandra.jpg";
+import Anandhu from "../assets/students/anandhu.jpg";
+import Vandana from "../assets/students/vandana.jpg";
+import Hannah from "../assets/students/hannah.jpeg";
+
+
 import { motion } from "framer-motion";
 import { Zap, Cpu, Sparkles, Rocket, Star, Code } from 'lucide-react';
 
@@ -18,69 +30,119 @@ export default function TestimonialsSection() {
   const mobileScrollRef = useRef(null);
 
   const techIcons = [Zap, Cpu, Sparkles, Rocket, Star, Code];
+const testimonials = [
+  {
+    id: 1,
+    name: "Aslin",
+    role: "Nagercoil",
+    image: Aslin,
+    message:
+      "Before joining CodeWild Tech, I was confused about my career path. The Python course gave me strong fundamentals and confidence. The mentors were always approachable, and today I’m working as a software developer in Trivandrum.",
+    position: { top: "6%", right: "35%", mobile: { top: "4%", right: "8%" } },
+    size: "lg",
+    xType: "right",
+  },
+  {
+    id: 2,
+    name: "Jofna",
+    role: "Kochi",
+    image: Jofna,
+    message:
+      "What I liked most was the practical teaching style. Every concept was explained with real examples. The projects really helped me improve my skills and build confidence.",
+    position: { top: "30%", left: "10%", mobile: { top: "22%", left: "4%" } },
+    size: "md",
+    xType: "left",
+  },
+  {
+    id: 3,
+    name: "Jose",
+    role: "Nagercoil",
+    image: Jose,
+    message:
+      "The course content is well structured and updated. Mentors explain things clearly and patiently. I felt well prepared for real-world development after completing the course.",
+    position: { bottom: "35%", left: "18%", mobile: { bottom: "30%", left: "4%" } },
+    size: "xl",
+    xType: "left",
+  },
+  {
+    id: 4,
+    name: "Stephin",
+    role: "Kochi",
+    image: Stephin,
+    message:
+      "Assignments and practical sessions helped me understand concepts deeply. Whenever I had doubts, the support team responded quickly. Overall, a very positive learning experience.",
+    position: { top: "48%", left: "32%", mobile: { top: "40%", left: "18%" } },
+    size: "sm",
+    xType: "left",
+  },
+  {
+    id: 5,
+    name: "Ashik",
+    role: "Trivandrum",
+    image: Ashik,
+    message:
+      "The mentors genuinely care about students. The step-by-step teaching and placement guidance helped me get placed within a short time after course completion.",
+    position: { top: "18%", right: "22%", mobile: { top: "15%", right: "8%" } },
+    size: "lg",
+    xType: "right",
+  },
+  {
+    id: 6,
+    name: "Nikhitha J S",
+    role: "Trivandrum",
+    image: Nikhitha,
+    message:
+      "I had no strong technical background initially, but the teaching approach made learning easy. Projects and live sessions boosted my confidence a lot.",
+    position: { top: "56%", right: "13%", mobile: { top: "50%", right: "12%" } },
+    size: "md",
+    xType: "right",
+  },
+  {
+    id: 7,
+    name: "Sandra A S",
+    role: "Trivandrum",
+    image: Sandra,
+    message:
+      "Everything was taught from basics, so it was easy to follow along. The community support and mentor guidance were very helpful throughout the journey.",
+    position: { bottom: "24%", right: "34%", mobile: { bottom: "20%", right: "18%" } },
+    size: "xl",
+    xType: "right",
+  },
+  {
+    id: 8,
+    name: "Anandhu R S",
+    role: "Kollam",
+    image: Anandhu,
+    message:
+      "Classes were interactive and doubts were cleared immediately. Even complex topics were explained in a simple way. Definitely worth joining.",
+    position: { top: "32%", right: "8%", mobile: { top: "34%", right: "4%" } },
+    size: "sm",
+    xType: "right",
+  },
+  {
+    id: 9,
+    name: "Vandana",
+    role: "Trivandrum",
+    image: Vandana,
+    message:
+      "The course gave me hands-on experience with real tools and projects. I feel much more confident attending interviews now.",
+    position: { bottom: "14%", right: "23%", mobile: { bottom: "10%", right: "8%" } },
+    size: "lg",
+    xType: "right",
+  },
+  {
+    id: 10,
+    name: "Hannath",
+    role: "Trivandrum",
+    image:Hannah,
+    message:
+      "Professional mentors, good learning environment, and well-planned sessions. I’m very satisfied with the overall learning experience.",
+    position: { bottom: "40%", right: "44%", mobile: { bottom: "44%", right: "22%" } },
+    size: "md",
+    xType: "right",
+  },
+];
 
-  const testimonials = [
-    {
-      id: 1, name: "Aslin", role: "Nagercoil",
-      image: "src/assets/students/Aslin.jpeg",
-      message: "I enrolled at CodeWild Tech for their Python course, and it completely transformed my career. The mentors were highly supportive and knowledgeable. Thanks to their guidance, I'm now working as a software developer in Trivandrum.",
-      position: { top: "6%", right: "35%", mobile: { top: "4%", right: "8%" } }, size: "lg", xType: "right",
-    },
-    {
-      id: 2, name: "Jofna", role: "Kochi",
-      image: "src/assets/students/jofna.jpeg",
-      message: "The hands-on approach and real-world projects helped me build a strong portfolio. Highly recommended for anyone serious about software development!",
-      position: { top: "30%", left: "10%", mobile: { top: "22%", left: "4%" } }, size: "md", xType: "left",
-    },
-    {
-      id: 3, name: "Jose", role: "Nagercoil",
-      image: "src/assets/students/jose.jpeg",
-      message: "Best decision I made for my career. The instructors are industry experts and the curriculum is up-to-date with current market demands.",
-      position: { bottom: "35%", left: "18%", mobile: { bottom: "30%", left: "4%" } }, size: "xl", xType: "left",
-    },
-    {
-      id: 4, name: "Stephin", role: "Kochi",
-      image: "src/assets/students/stephin.jpeg",
-      message: "Great learning experience with practical assignments. The support team is always available to help with any queries.",
-      position: { top: "48%", left: "32%", mobile: { top: "40%", left: "18%" } }, size: "sm", xType: "left",
-    },
-    {
-      id: 5, name: "Ashik", role: "Trivandrum",
-      image: "src/assets/students/ashik.jpeg",
-      message: "The course structure is well-organized and the mentors genuinely care about student success. I got placed within 2 months of completion!",
-      position: { top: "18%", right: "22%", mobile: { top: "15%", right: "8%" } }, size: "lg", xType: "right",
-    },
-    {
-      id: 6, name: "Nikhitha J S", role: "Trivandrum",
-      image: "src/assets/students/nikkitha.jpg",
-      message: "Excellent teaching methodology and great community support. The projects helped me understand real-world applications.",
-      position: { top: "56%", right: "13%", mobile: { top: "50%", right: "12%" } }, size: "md", xType: "right",
-    },
-    {
-      id: 7, name: "Sandra A S", role: "Trivandrum",
-      image: "src/assets/students/sandra.jpg",
-      message: "From basics to advanced concepts, everything was covered thoroughly. The placement assistance was also very helpful.",
-      position: { bottom: "24%", right: "34%", mobile: { bottom: "20%", right: "18%" } }, size: "xl", xType: "right",
-    },
-    {
-      id: 8, name: "Anandhu R S", role: "Kollam",
-      image: "src/assets/students/anandhu.jpg",
-      message: "Interactive sessions and doubt-clearing classes made complex topics easy to understand. Worth every penny!",
-      position: { top: "32%", right: "8%", mobile: { top: "34%", right: "4%" } }, size: "sm", xType: "right",
-    },
-    {
-      id: 9, name: "Vandana", role: "Trivandrum",
-      image: "src/assets/students/vandana.jpg",
-      message: "The course exceeded my expectations. Got hands-on experience with industry-standard tools and technologies.",
-      position: { bottom: "14%", right: "23%", mobile: { bottom: "10%", right: "8%" } }, size: "lg", xType: "right",
-    },
-    {
-      id: 10, name: "Arjun Reddy", role: "Trivandrum",
-      image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=150&h=150&fit=crop",
-      message: "Professional instructors, great infrastructure, and excellent learning environment. Highly satisfied with my experience.",
-      position: { bottom: "40%", right: "44%", mobile: { bottom: "44%", right: "22%" } }, size: "md", xType: "right",
-    },
-  ];
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
@@ -268,7 +330,7 @@ export default function TestimonialsSection() {
     { name: "L & T", src: "/logos/lt.png" },
     { name: "Myntra", src: "/logos/myntra.png" },
     { name: "Zoho", src: "/logos/zoho.png" },
-    { name: "Mastercard", src: "/logos/mastercard.svg" },
+    { name: "Amazon", src: "/logos/amazon.png" },
   ];
 
   const getSizeClasses = (size) => ({
