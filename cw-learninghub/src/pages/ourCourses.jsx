@@ -338,7 +338,7 @@ export default function ProgramOverview() {
               {/* Clean header - REMOVED close button from here */}
               <div className="bg-gradient-to-r from-orange-600 to-orange-600 p-8 text-white text-center relative">
                 <div className="flex items-center justify-center gap-4 mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg">
+                  <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-300 rounded-2xl flex items-center justify-center shadow-lg">
                     <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                     </svg>
@@ -351,7 +351,7 @@ export default function ProgramOverview() {
                 <p className="text-slate-300 text-lg mb-2 font-medium">
                   We're here to help you
                 </p>
-                <p className="text-slate-400 text-sm">
+                <p className="text-slate-200 text-sm">
                   Get personalized course recommendations tailored for you
                 </p>
               </div>

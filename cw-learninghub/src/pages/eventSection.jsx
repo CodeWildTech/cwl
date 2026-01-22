@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import toast, { Toaster } from 'react-hot-toast'; // Add this import
+
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowDownRight,
@@ -27,7 +29,7 @@ const EVENTS_DATA = [
   {
     id: 2,
     number: "02",
-    title: "Digital Marketing",
+    title: "Web Development Bootcamp",
     category: "Trivandrum",
     size: "xl",
     status: "Upcoming",
@@ -40,7 +42,7 @@ const EVENTS_DATA = [
   {
     id: 3,
     number: "03",
-    title: "Digital Marketing",
+    title: "FrontEnd Development",
     category: "Trivandrum",
     size: "lg",
     status: "Ended",
@@ -53,10 +55,10 @@ const EVENTS_DATA = [
   {
     id: 4,
     number: "04",
-    title: "Digital Marketing",
+    title: "AI Integration Workshop",
     category: "Online",
     size: "sm",
-    status: "Upcoming",
+    status: "Ended",
     date: "Nov 05, 2025",
     location: "Online",
     desc: "Introduction to Email Automations.",
@@ -66,7 +68,7 @@ const EVENTS_DATA = [
   {
     id: 5,
     number: "05",
-    title: "Digital Marketing",
+    title: "Future of AI in Tech",
     category: "Online",
     size: "sm",
     status: "Ended",
@@ -103,47 +105,54 @@ export default function EventsSection() {
   };
 
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    console.log("Registration submitted:", formData, selectedEvent);
+
+const handleFormSubmit = async (e) => {
+  e.preventDefault();
+  console.log("Registration submitted:", formData, selectedEvent);
+
+  const loadingToast = toast.loading("Submitting registration..."); // Modern loading state
 
   try { 
-  const response = await fetch("http://localhost:8000/api/forms/register-event", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      ...formData, // name, email, phone, company
-      eventTitle: selectedEvent.title,
-      eventDate: selectedEvent.date,
-      eventCategory: selectedEvent.category,
-      // ✅ ADD THESE TWO LINES:
-      type: "event",  // This tells backend it's EVENT
-      eventData: {
-        title: selectedEvent.title,
-        date: selectedEvent.date,
-        mode: selectedEvent.location || selectedEvent.category
-      }
-    }),
-  });
+    const response = await fetch("http://localhost:8000/api/register-event/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...formData,
+        eventTitle: selectedEvent.title,
+        eventDate: selectedEvent.date,
+        eventCategory: selectedEvent.category,
+        type: "event",
+        eventData: {
+          title: selectedEvent.title,
+          date: selectedEvent.date,
+          mode: selectedEvent.location || selectedEvent.category
+        }
+      }),
+    });
 
-  const data = await response.json();
+    const data = await response.json();
 
-  if (response.ok) {
-    alert("🎉 Registration successful! Check your email for confirmation.");
-    setShowForm(false);
-    setSelectedEvent(null);
-    setFormData({ name: "", email: "", phone: "", current_status: "" });
-  } else {
-    alert("Registration failed: " + (data.error || "Unknown error"));
+    toast.dismiss(loadingToast); // Dismiss loading
+
+    if (response.ok) {
+      toast.success(`🎉 ${selectedEvent.title} registration successful! Check your email.`, {
+        duration: 5000,
+        position: "top-right"
+      });
+      setShowForm(false);
+      setSelectedEvent(null);
+      setFormData({ name: "", email: "", phone: "", current_status: "" });
+    } else {
+      toast.error(`Registration failed: ${data.error || "Unknown error"}`);
+    }
+  } catch (error) {
+    toast.dismiss(loadingToast);
+    console.error("Error submitting form:", error);
+    toast.error("Network error. Please check your connection and try again.");
   }
-} catch (error) {
-  console.error("Error submitting form:", error);
-  alert("An error occurred. Please try again.");
-}
-  };
-
+};
 
 
   const handleFormChange = (e) => {
@@ -153,6 +162,7 @@ export default function EventsSection() {
 
   return (
     <section className="relative min-h-[85vh] text-white px-6 lg:px-14 py-16 overflow-hidden bg-black">
+    <Toaster position="top-right" richColors />
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_50%,rgba(255,106,26,0.3)_0%,rgba(249,115,22,0.15)_30%,rgba(234,88,12,0.08)_50%,transparent_70%)] backdrop-blur-[80px]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_40%_at_50%_50%,rgba(255,106,26,0.15)_0%,rgba(249,115,22,0.08)_40%,transparent_60%)] backdrop-blur-[120px]" />

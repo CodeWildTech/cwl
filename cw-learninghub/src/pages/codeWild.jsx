@@ -9,12 +9,12 @@ const CodeWildLanding = () => {
 
   // Mentors data (unchanged)
   const mentors = [
-    { id: 1, top: "5%", right: "8%", mobileRight: "2%", delay: 0.1, img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop", name: "Sarah", role: "UX Designer" },
-    { id: 2, top: "18%", right: "2%", mobileRight: "0%", delay: 0.2, img: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=400&h=400&fit=crop", name: "Steve", role: "Developer" },
-    { id: 3, top: "35%", right: "12%", mobileRight: "5%", delay: 0.3, img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop", name: "Elena", role: "Product Manager" },
-    { id: 4, top: "50%", right: "4%", mobileRight: "1%", delay: 0.4, img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop", name: "Marcus", role: "Data Scientist" },
-    { id: 5, top: "65%", right: "15%", mobileRight: "8%", delay: 0.5, img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop", name: "Aria", role: "Tech Lead" },
-    { id: 6, top: "80%", right: "8%", mobileRight: "2%", delay: 0.6, img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop", name: "James", role: "Cloud Architect" },
+    { id: 1, top: "5%", right: "8%", mobileRight: "2%", delay: 0.1, img: "src/assets/mentors/Sarah.jpg", name: "Sarah", role: "UX Designer" },
+    { id: 2, top: "18%", right: "2%", mobileRight: "0%", delay: 0.2, img: "src/assets/mentors/Steve.jpg", name: "Steve", role: "Developer" },
+    { id: 3, top: "35%", right: "12%", mobileRight: "5%", delay: 0.3, img: "src/assets/mentors/James.jpg", name: "James", role: "Product Manager" },
+    { id: 4, top: "50%", right: "4%", mobileRight: "1%", delay: 0.4, img: "src/assets/mentors/Marcus.jpg", name: "Marcus", role: "Data Scientist" },
+    { id: 5, top: "65%", right: "15%", mobileRight: "8%", delay: 0.5, img: "src/assets/mentors/Stark.jpg", name: "Stark", role: "Tech Lead" },
+    { id: 6, top: "80%", right: "8%", mobileRight: "2%", delay: 0.6, img: "src/assets/mentors/Angelin.jpg", name: "Angelin", role: "Cloud Architect" },
   ];
 
   const mentorPaths = [
@@ -191,7 +191,7 @@ const CodeWildLanding = () => {
           <div className="relative w-full max-w-7xl h-[450px] md:h-[650px] mb-8">
             <div className="absolute left-[2%] md:left-[8%] top-1/2 -translate-y-1/2 z-20 flex flex-col items-center gap-2 md:gap-3">
               <div className="w-16 h-20 md:w-24 md:h-32 rounded-xl md:rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl shadow-white/5">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" alt="Student" className="w-full h-full object-cover" />
+                <img src="src/assets/students/stud.jpg" alt="Student" className="w-full h-full object-cover" />
               </div>
               <span className="text-white/80 font-medium tracking-widest text-[8px] md:text-xs uppercase bg-white/10 px-2 md:px-4 py-1 rounded-full border border-white/10">Student</span>
             </div>

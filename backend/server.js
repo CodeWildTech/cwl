@@ -6,7 +6,7 @@ import cors from "cors";
 import formRoutes from "./routes/formRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import footerContactRoutes from "./routes/footerContactRoutes.js";
-
+import eventRoutes from "./routes/eventRoutes.js";
 
 const app = express();
 
@@ -18,6 +18,8 @@ app.use(express.json());
 app.use("/api/forms", formRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/footer-contact", footerContactRoutes);
+app.use("/api/register-event", eventRoutes);
+
 
 
 // Start server

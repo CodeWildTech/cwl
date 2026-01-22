@@ -37,7 +37,7 @@ const testimonials = [
     role: "Nagercoil",
     image: Aslin,
     message:
-      "Before joining CodeWild Tech, I was confused about my career path. The Python course gave me strong fundamentals and confidence. The mentors were always approachable, and today I’m working as a software developer in Trivandrum.",
+      "Before joining CodeWild Tech, I was really confused about my career direction. The Python course helped me build strong basics step by step and boosted my confidence a lot. The mentors were friendly and always ready to help. Today, I’m working as a software developer in Trivandrum, and I’m very thankful for the guidance I received here.",
     position: { top: "6%", right: "35%", mobile: { top: "4%", right: "8%" } },
     size: "lg",
     xType: "right",
@@ -48,7 +48,7 @@ const testimonials = [
     role: "Kochi",
     image: Jofna,
     message:
-      "What I liked most was the practical teaching style. Every concept was explained with real examples. The projects really helped me improve my skills and build confidence.",
+      "What I loved most about the course was the practical teaching style. Every topic was explained using real-life examples, which made learning easy. The hands-on projects helped me improve my skills and gain confidence to work on my own.",
     position: { top: "30%", left: "10%", mobile: { top: "22%", left: "4%" } },
     size: "md",
     xType: "left",
@@ -59,7 +59,7 @@ const testimonials = [
     role: "Nagercoil",
     image: Jose,
     message:
-      "The course content is well structured and updated. Mentors explain things clearly and patiently. I felt well prepared for real-world development after completing the course.",
+      "The course content was well structured and easy to follow. Everything felt updated and relevant to current industry needs. Mentors explained concepts patiently and clearly. After completing the course, I felt confident to handle real-world development tasks.",
     position: { bottom: "35%", left: "18%", mobile: { bottom: "30%", left: "4%" } },
     size: "xl",
     xType: "left",
@@ -70,7 +70,7 @@ const testimonials = [
     role: "Kochi",
     image: Stephin,
     message:
-      "Assignments and practical sessions helped me understand concepts deeply. Whenever I had doubts, the support team responded quickly. Overall, a very positive learning experience.",
+      "The assignments and practical sessions helped me understand concepts in depth. Whenever I had doubts, the support team was quick to respond and clarify. Overall, it was a smooth and positive learning experience for me.",
     position: { top: "48%", left: "32%", mobile: { top: "40%", left: "18%" } },
     size: "sm",
     xType: "left",
@@ -81,7 +81,7 @@ const testimonials = [
     role: "Trivandrum",
     image: Ashik,
     message:
-      "The mentors genuinely care about students. The step-by-step teaching and placement guidance helped me get placed within a short time after course completion.",
+      "The mentors genuinely care about student growth and progress. The step-by-step teaching approach made learning comfortable. The placement guidance and support really helped me get placed within a short time after completing the course.",
     position: { top: "18%", right: "22%", mobile: { top: "15%", right: "8%" } },
     size: "lg",
     xType: "right",
@@ -92,7 +92,7 @@ const testimonials = [
     role: "Trivandrum",
     image: Nikhitha,
     message:
-      "I had no strong technical background initially, but the teaching approach made learning easy. Projects and live sessions boosted my confidence a lot.",
+      "I didn’t have a strong technical background initially, but the teaching style made everything easy to understand. The live sessions and project work helped me gain confidence and improve my practical knowledge a lot.",
     position: { top: "56%", right: "13%", mobile: { top: "50%", right: "12%" } },
     size: "md",
     xType: "right",
@@ -103,7 +103,7 @@ const testimonials = [
     role: "Trivandrum",
     image: Sandra,
     message:
-      "Everything was taught from basics, so it was easy to follow along. The community support and mentor guidance were very helpful throughout the journey.",
+      "Everything was taught clearly from the basics, so it was easy to keep up with the sessions. The mentor guidance and community support were very helpful throughout the learning journey. I never felt stuck or left behind.",
     position: { bottom: "24%", right: "34%", mobile: { bottom: "20%", right: "18%" } },
     size: "xl",
     xType: "right",
@@ -114,7 +114,7 @@ const testimonials = [
     role: "Kollam",
     image: Anandhu,
     message:
-      "Classes were interactive and doubts were cleared immediately. Even complex topics were explained in a simple way. Definitely worth joining.",
+      "Classes were interactive and doubts were cleared instantly. Even complex topics were explained in a simple and understandable way. The overall learning experience was smooth and definitely worth the time and effort.",
     position: { top: "32%", right: "8%", mobile: { top: "34%", right: "4%" } },
     size: "sm",
     xType: "right",
@@ -125,7 +125,7 @@ const testimonials = [
     role: "Trivandrum",
     image: Vandana,
     message:
-      "The course gave me hands-on experience with real tools and projects. I feel much more confident attending interviews now.",
+      "This course gave me great hands-on experience with real tools and live projects. It helped me understand how things work in real scenarios. I now feel much more confident while attending interviews and technical discussions.",
     position: { bottom: "14%", right: "23%", mobile: { bottom: "10%", right: "8%" } },
     size: "lg",
     xType: "right",
@@ -134,14 +134,15 @@ const testimonials = [
     id: 10,
     name: "Hannath",
     role: "Trivandrum",
-    image:Hannah,
+    image: Hannah,
     message:
-      "Professional mentors, good learning environment, and well-planned sessions. I’m very satisfied with the overall learning experience.",
+      "The mentors were professional and supportive, and the learning environment was really positive. Sessions were well planned and easy to follow. Overall, I’m very satisfied with the course and the learning experience.",
     position: { bottom: "40%", right: "44%", mobile: { bottom: "44%", right: "22%" } },
     size: "md",
     xType: "right",
   },
 ];
+
 
 
   useEffect(() => {
