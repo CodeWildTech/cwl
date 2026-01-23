@@ -197,7 +197,7 @@ const CodeWildLanding = () => {
           <div className="relative w-full max-w-7xl h-[450px] md:h-[650px] mb-8">
             <div className="absolute left-[2%] md:left-[8%] top-1/2 -translate-y-1/2 z-20 flex flex-col items-center gap-2 md:gap-3">
               <div className="w-16 h-20 md:w-24 md:h-32 rounded-xl md:rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl shadow-white/5">
-                <img src="src/assets/students/stud.jpg" alt="Student" className="w-full h-full object-cover" />
+                <img src="/mentors/stud.jpg" alt="Student" className="w-full h-full object-cover" />
               </div>
               <span className="text-white/80 font-medium tracking-widest text-[8px] md:text-xs uppercase bg-white/10 px-2 md:px-4 py-1 rounded-full border border-white/10">Student</span>
             </div>

@@ -336,7 +336,7 @@ export default function ProgramOverview() {
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[1000] flex items-center justify-center p-6">
             <div className="bg-white/5 backdrop-blur-xl border border-white/20 rounded-3xl max-w-md w-full shadow-2xl overflow-hidden">
               {/* Clean header - REMOVED close button from here */}
-              <div className="bg-gradient-to-r from-orange-600 to-orange-600 p-8 text-white text-center relative">
+              <div className="bg-gradient-to-r from-slate-800 to-slate-800 p-8 text-white text-center relative">
                 <div className="flex items-center justify-center gap-4 mb-6">
                   <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-300 rounded-2xl flex items-center justify-center shadow-lg">
                     <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
