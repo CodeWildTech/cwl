@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Code, Users, BookOpen, X } from 'lucide-react';
+import Sarah from "../assets/mentors/Sarah.jpg";
+import Steve from "../assets/mentors/Steve.jpg";
+import James from "../assets/mentors/James.jpg";
+import Marcus from "../assets/mentors/Marcus.jpg";
+import Stark from "../assets/mentors/Stark.jpg";
+import Angelin from "../assets/mentors/Angelin.jpg";
 
 const CodeWildLanding = () => {
   const [activeRow, setActiveRow] = useState(null);
@@ -9,12 +15,12 @@ const CodeWildLanding = () => {
 
   // Mentors data (unchanged)
   const mentors = [
-    { id: 1, top: "5%", right: "8%", mobileRight: "2%", delay: 0.1, img: "src/assets/mentors/Sarah.jpg", name: "Sarah", role: "UX Designer" },
-    { id: 2, top: "18%", right: "2%", mobileRight: "0%", delay: 0.2, img: "src/assets/mentors/Steve.jpg", name: "Steve", role: "Developer" },
-    { id: 3, top: "35%", right: "12%", mobileRight: "5%", delay: 0.3, img: "src/assets/mentors/James.jpg", name: "James", role: "Product Manager" },
-    { id: 4, top: "50%", right: "4%", mobileRight: "1%", delay: 0.4, img: "src/assets/mentors/Marcus.jpg", name: "Marcus", role: "Data Scientist" },
-    { id: 5, top: "65%", right: "15%", mobileRight: "8%", delay: 0.5, img: "src/assets/mentors/Stark.jpg", name: "Stark", role: "Tech Lead" },
-    { id: 6, top: "80%", right: "8%", mobileRight: "2%", delay: 0.6, img: "src/assets/mentors/Angelin.jpg", name: "Angelin", role: "Cloud Architect" },
+    { id: 1, top: "5%", right: "8%", mobileRight: "2%", delay: 0.1, img: {Sarah}, name: "Sarah", role: "UX Designer" },
+    { id: 2, top: "18%", right: "2%", mobileRight: "0%", delay: 0.2, img: {Steve}, name: "Steve", role: "Developer" },
+    { id: 3, top: "35%", right: "12%", mobileRight: "5%", delay: 0.3, img: {James}, name: "James", role: "Product Manager" },
+    { id: 4, top: "50%", right: "5%", mobileRight: "1%", delay: 0.4, img: {Marcus}, name: "Marcus", role: "Data Scientist" },
+    { id: 5, top: "68%", right: "10%", mobileRight: "3%", delay: 0.5, img: {Stark}, name: "Stark", role: "DevOps Engineer" },
+    { id: 6, top: "82%", right: "4%", mobileRight: "0%", delay: 0.6, img: {Angelin}, name: "Angelin", role: "QA Specialist" },
   ];
 
   const mentorPaths = [
