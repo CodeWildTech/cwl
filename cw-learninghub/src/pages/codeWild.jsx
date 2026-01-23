@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Code, Users, BookOpen, X } from 'lucide-react';
-import Sarah from "../assets/mentors/Sarah.jpg";
-import Steve from "../assets/mentors/Steve.jpg";
-import James from "../assets/mentors/James.jpg";
-import Marcus from "../assets/mentors/Marcus.jpg";
-import Stark from "../assets/mentors/Stark.jpg";
-import Angelin from "../assets/mentors/Angelin.jpg";
+import Sarah from "/mentors/Sarah.jpg";
+import Steve from "/mentors/Steve.jpg";
+import James from "/mentors/James.jpg";
+import Marcus from "/mentors/Marcus.jpg";
+import Stark from "/mentors/Stark.jpg";
+import Angelin from "/mentors/Angelin.jpg";
 
 const CodeWildLanding = () => {
   const [activeRow, setActiveRow] = useState(null);
