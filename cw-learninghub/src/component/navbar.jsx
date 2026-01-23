@@ -12,7 +12,7 @@ import {
 
 const Logo = () => (
   <div className="w-20 h-20 rounded-full flex items-center ">
-    <img src="src/assets/Logo/cwlogo.png" alt="" />
+    <img src="/logos/cwlogo.png" alt="" />
   </div>
 );
 

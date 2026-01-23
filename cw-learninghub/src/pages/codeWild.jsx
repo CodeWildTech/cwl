@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Code, Users, BookOpen, X } from 'lucide-react';
-import Sarah from "/mentors/Sarah.jpg";
-import Steve from "/mentors/Steve.jpg";
-import James from "/mentors/James.jpg";
-import Marcus from "/mentors/Marcus.jpg";
-import Stark from "/mentors/Stark.jpg";
-import Angelin from "/mentors/Angelin.jpg";
 
 const CodeWildLanding = () => {
   const [activeRow, setActiveRow] = useState(null);
@@ -15,12 +9,12 @@ const CodeWildLanding = () => {
 
   // Mentors data (unchanged)
   const mentors = [
-    { id: 1, top: "5%", right: "8%", mobileRight: "2%", delay: 0.1, img: {Sarah}, name: "Sarah", role: "UX Designer" },
-    { id: 2, top: "18%", right: "2%", mobileRight: "0%", delay: 0.2, img: {Steve}, name: "Steve", role: "Developer" },
-    { id: 3, top: "35%", right: "12%", mobileRight: "5%", delay: 0.3, img: {James}, name: "James", role: "Product Manager" },
-    { id: 4, top: "50%", right: "5%", mobileRight: "1%", delay: 0.4, img: {Marcus}, name: "Marcus", role: "Data Scientist" },
-    { id: 5, top: "68%", right: "10%", mobileRight: "3%", delay: 0.5, img: {Stark}, name: "Stark", role: "DevOps Engineer" },
-    { id: 6, top: "82%", right: "4%", mobileRight: "0%", delay: 0.6, img: {Angelin}, name: "Angelin", role: "QA Specialist" },
+    { id: 1, top: "5%", right: "8%", mobileRight: "2%", delay: 0.1, img: "public/mentors/Sarah.jpg", name: "Sarah", role: "UX Designer" },
+    { id: 2, top: "18%", right: "2%", mobileRight: "0%", delay: 0.2, img: "public/mentors/Steve.jpg", name: "Steve", role: "Developer" },
+    { id: 3, top: "35%", right: "12%", mobileRight: "5%", delay: 0.3, img: "public/mentors/James.jpg", name: "James", role: "Product Manager" },
+    { id: 4, top: "50%", right: "5%", mobileRight: "1%", delay: 0.4, img: "public/mentors/Marcus.jpg", name: "Marcus", role: "Data Scientist" },
+    { id: 5, top: "68%", right: "10%", mobileRight: "3%", delay: 0.5, img: "public/mentors/Stark.jpg", name: "Stark", role: "DevOps Engineer" },
+    { id: 6, top: "82%", right: "4%", mobileRight: "0%", delay: 0.6, img: "public/mentors/Angelin.jpg", name: "Angelin", role: "QA Specialist" },
   ];
 
   const mentorPaths = [
