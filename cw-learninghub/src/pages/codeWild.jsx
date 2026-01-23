@@ -9,12 +9,12 @@ const CodeWildLanding = () => {
 
   // Mentors data (unchanged)
   const mentors = [
-    { id: 1, top: "5%", right: "8%", mobileRight: "2%", delay: 0.1, img: "public/mentors/Sarah.jpg", name: "Sarah", role: "UX Designer" },
-    { id: 2, top: "18%", right: "2%", mobileRight: "0%", delay: 0.2, img: "public/mentors/Steve.jpg", name: "Steve", role: "Developer" },
-    { id: 3, top: "35%", right: "12%", mobileRight: "5%", delay: 0.3, img: "public/mentors/James.jpg", name: "James", role: "Product Manager" },
-    { id: 4, top: "50%", right: "5%", mobileRight: "1%", delay: 0.4, img: "public/mentors/Marcus.jpg", name: "Marcus", role: "Data Scientist" },
-    { id: 5, top: "68%", right: "10%", mobileRight: "3%", delay: 0.5, img: "public/mentors/Stark.jpg", name: "Stark", role: "DevOps Engineer" },
-    { id: 6, top: "82%", right: "4%", mobileRight: "0%", delay: 0.6, img: "public/mentors/Angelin.jpg", name: "Angelin", role: "QA Specialist" },
+    { id: 1, top: "5%", right: "8%", mobileRight: "2%", delay: 0.1, img: "/Sarah.jpg", name: "Sarah", role: "UX Designer" },
+    { id: 2, top: "18%", right: "2%", mobileRight: "0%", delay: 0.2, img: "/Steve.jpg", name: "Steve", role: "Developer" },
+    { id: 3, top: "35%", right: "12%", mobileRight: "5%", delay: 0.3, img: "/James.jpg", name: "James", role: "Product Manager" },
+    { id: 4, top: "50%", right: "5%", mobileRight: "1%", delay: 0.4, img: "/Marcus.jpg", name: "Marcus", role: "Data Scientist" },
+    { id: 5, top: "68%", right: "10%", mobileRight: "3%", delay: 0.5, img: "/Stark.jpg", name: "Stark", role: "DevOps Engineer" },
+    { id: 6, top: "82%", right: "4%", mobileRight: "0%", delay: 0.6, img: "/Angelin.jpg", name: "Angelin", role: "QA Specialist" },
   ];
 
   const mentorPaths = [
@@ -187,7 +187,7 @@ const CodeWildLanding = () => {
         </div>
 
         {/* Mentorship Section */}
-        <div className="flex flex-col items-center justify-center py-12 px-4 mb-20">
+        <div className="flex flex-col items-center justify-center py-12 px-4">
           <div className="relative w-full max-w-7xl h-[450px] md:h-[650px] mb-8">
             <div className="absolute left-[2%] md:left-[8%] top-1/2 -translate-y-1/2 z-20 flex flex-col items-center gap-2 md:gap-3">
               <div className="w-16 h-20 md:w-24 md:h-32 rounded-xl md:rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl shadow-white/5">
@@ -237,7 +237,7 @@ const CodeWildLanding = () => {
             ))}
           </div>
 
-          <div className="relative w-screen h-[400px] sm:h-[500px] overflow-visible flex items-center justify-center">
+          <div className="relative w-screen overflow-visible flex items-center justify-center">
             <div className="absolute inset-0 w-full h-full z-0">
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black via-black/50 to-transparent z-10" />
                 <img

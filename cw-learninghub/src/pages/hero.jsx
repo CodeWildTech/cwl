@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { Star, Code2, Cpu } from 'lucide-react'; // Added Code2 and Cpu icons
+import { Star, Code2, Cpu } from 'lucide-react';
 
 const HeroSection = () => {
   const containerRef = useRef(null);
@@ -28,7 +28,9 @@ const HeroSection = () => {
   // Scroll Animations
   const imageScale = useTransform(smoothProgress, [0, 0.4], [0.85, 1]);
   const imageOpacityScroll = useTransform(smoothProgress, [0, 0.3], [0, 1]);
-  const imageRotate = useTransform(smoothProgress, [0, 0.5], [8, 0]);
+  
+  // ✅ FIXED: Changed [8, 0] to [0, 0] so it starts and stays straight
+  const imageRotate = useTransform(smoothProgress, [0, 0.5], [0, 0]);
 
   // Floating Elements Parallax
   const profileY = useTransform(smoothProgress, [0, 1], [0, -80]);
@@ -36,7 +38,6 @@ const HeroSection = () => {
 
   // Tech Status Animation
   const techPulse = useTransform(smoothProgress, [0, 0.5], [0.8, 1.2]);
-  const techRotate = useTransform(smoothProgress, [0, 1], [0, 360]);
 
   return (
     <div ref={containerRef} className="relative h-[250vh] bg-[#030712]">
@@ -44,8 +45,8 @@ const HeroSection = () => {
         
         {/* Ambient Background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-[10%] left-[-5%] w-[40%] h-[40%] bg-orange-500/10 blur-[100px] rounded-full" />
-          <div className="absolute bottom-[10%] right-[-5%] w-[40%] h-[40%] bg-blue-600/10 blur-[100px] rounded-full" />
+         <div className="absolute top-[10%] left-[-5%] w-[40%] h-[40%] bg-orange-500/10 blur-[100px] rounded-full" />
+         <div className="absolute bottom-[10%] right-[-5%] w-[40%] h-[40%] bg-blue-600/10 blur-[100px] rounded-full" />
         </div>
 
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
@@ -128,16 +129,9 @@ const HeroSection = () => {
                     <p className="text-black text-xs font-bold leading-tight">Best Learning Hub</p>
                   </motion.div>
 
-                  {/* UPDATED: Smaller Coding Icon </> Style */}
+                  {/* Tech Icon */}
                   <motion.div 
-                    style={{ 
-                      scale: techPulse,
-                      rotate: techRotate
-                    }}
-                    transition={{ 
-                      scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-                      rotate: { duration: 8, repeat: Infinity, ease: "linear" }
-                    }}
+                    style={{ scale: techPulse }}
                     className="absolute top-10 -right-6 z-30 backdrop-blur-md border border-white/10 p-2 rounded-2xl flex flex-col items-center gap-1.5 shadow-2xl"
                   >
                     <div className="relative">
@@ -193,7 +187,7 @@ const HeroSection = () => {
 
         {/* Scroll Progress Indicator */}
         <div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 h-32 w-[1px] bg-white/10 rounded-full">
-          <motion.div style={{ scaleY: smoothProgress }} className="w-full h-full bg-orange-500 origin-top" />
+         <motion.div style={{ scaleY: smoothProgress }} className="w-full h-full bg-orange-500 origin-top" />
         </div>
       </div>
 

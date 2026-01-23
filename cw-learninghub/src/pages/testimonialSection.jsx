@@ -6,13 +6,13 @@ import Stephin from "../assets/students/stephin.jpeg";
 import Ashik from "../assets/students/ashik.jpeg";
 import Nikhitha from "../assets/students/nikkitha.jpg";
 import Sandra from "../assets/students/sandra.jpg";
-import Anandhu from "../assets/students/Anandhu.jpg";
+import Anandhu from "../assets/students/anandhu.jpg";
 import Vandana from "../assets/students/vandana.jpg";
-import Hannah from "../assets/students/Hannah.jpeg";
-
+import Hannah from "../assets/students/hannah.jpeg";
 
 import { motion } from "framer-motion";
 import { Zap, Cpu, Sparkles, Rocket, Star, Code } from 'lucide-react';
+import EnrollmentForm from '../component/enrollmentForm'; // ✅ IMPORT YOUR ENROLLMENT FORM
 
 export default function TestimonialsSection() {
   const [isMobile, setIsMobile] = useState(false);
@@ -24,6 +24,7 @@ export default function TestimonialsSection() {
   const [isPaused, setIsPaused] = useState(false);
   const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
+  const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false); // ✅ NEW STATE
   
   const containerRef = useRef(null);
   const intervalRef = useRef(null);
@@ -92,7 +93,7 @@ const testimonials = [
     role: "Trivandrum",
     image: Nikhitha,
     message:
-      "I didn’t have a strong technical background initially, but the teaching style made everything easy to understand. The live sessions and project work helped me gain confidence and improve my practical knowledge a lot.",
+      "I didn't have a strong technical background initially, but the teaching style made everything easy to understand. The live sessions and project work helped me gain confidence and improve my practical knowledge a lot.",
     position: { top: "56%", right: "13%", mobile: { top: "50%", right: "12%" } },
     size: "md",
     xType: "right",
@@ -136,14 +137,12 @@ const testimonials = [
     role: "Trivandrum",
     image: Hannah,
     message:
-      "The mentors were professional and supportive, and the learning environment was really positive. Sessions were well planned and easy to follow. Overall, I’m very satisfied with the course and the learning experience.",
+      "The mentors were professional and supportive, and the learning environment was really positive. Sessions were well planned and easy to follow. Overall, I'm very satisfied with the course and the learning experience.",
     position: { bottom: "40%", right: "44%", mobile: { bottom: "44%", right: "22%" } },
     size: "md",
     xType: "right",
   },
 ];
-
-
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
@@ -187,8 +186,8 @@ const testimonials = [
         const scrollPosition = spacerWidth + (profileAndGapWidth * nextIndex);
         
         scrollContainer.scrollTo({
-          left: scrollPosition,
-          behavior: 'smooth'
+         left: scrollPosition,
+         behavior: 'smooth'
         });
       }
     }, 4000);
@@ -318,6 +317,14 @@ const testimonials = [
     }, 1200);
   };
 
+  const handleOpenEnrollment = () => {
+    setIsEnrollmentOpen(true); // ✅ OPEN ENROLLMENT FORM
+  };
+
+  const handleCloseEnrollment = () => {
+    setIsEnrollmentOpen(false); // ✅ CLOSE ENROLLMENT FORM
+  };
+
   const companyLogos = [
     { name: "Cognizant", src: "/logos/cognizant.png" },
     { name: "Fresh Works", src: "/logos/freshworks.png" },
@@ -325,7 +332,7 @@ const testimonials = [
     { name: "Hcl", src: "/logos/hcl.png" },
     { name: "mindtree", src: "/logos/mindtree.png" },
     { name: "NttData", src: "/logos/nttdata (2).png" },
-    { name: "Tcs", src: "/logos/Tata.png" },
+    { name: "Tcs", sArc: "/logos/Tata.png" },
     { name: "capgemini-logo", src: "/logos/capgemini-logo.png" },
     
     { name: "L & T", src: "/logos/lt.png" },
@@ -346,14 +353,14 @@ const testimonials = [
       {/* Background SVG */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <svg className="w-full h-full lg:block hidden" viewBox="0 0 2200 1000" preserveAspectRatio="none">
-          <path className="curve-1" d="M -600 320 C -450 280, -300 400, -100 260 S 200 420, 500 500 S 800 300, 1100 420 S 1500 650, 1800 420 S 2100 200, 2400 420" 
-                fill="none" stroke="#dc4109" strokeWidth="30" strokeLinecap="round" strokeLinejoin="round" opacity="0.9" style={{ filter: "url(#glow)" }} />
-          <defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+         <path className="curve-1" d="M -600 320 C -450 280, -300 400, -100 260 S 200 420, 500 500 S 800 300, 1100 420 S 1500 650, 1800 420 S 2100 200, 2400 420" 
+           fill="none" stroke="#dc4109" strokeWidth="30" strokeLinecap="round" strokeLinejoin="round" opacity="0.9" style={{ filter: "url(#glow)" }} />
+         <defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
         </svg>
         {/* Mobile wave */}
         <svg className="w-full h-full lg:hidden block" viewBox="0 0 400 600" preserveAspectRatio="none">
-          <path d="M 0 100 Q 100 80, 200 100 T 400 100 L 400 0 L 0 0 Z" fill="#dc4109" opacity="0.15" />
-          <path d="M 0 200 Q 100 180, 200 200 T 400 200" fill="none" stroke="#dc4109" strokeWidth="3" opacity="0.6" />
+         <path d="M 0 100 Q 100 80, 200 100 T 400 100 L 400 0 L 0 0 Z" fill="#dc4109" opacity="0.15" />
+         <path d="M 0 200 Q 100 180, 200 200 T 400 200" fill="none" stroke="#dc4109" strokeWidth="3" opacity="0.6" />
         </svg>
       </div>
 
@@ -572,6 +579,7 @@ const testimonials = [
                 </div>
               </div>
             )}
+
           </div>
 
           {/* Centered CTA */}
@@ -586,8 +594,12 @@ const testimonials = [
                   </span>
                 );
               })}
-              <motion.button onClick={handleButtonClick} whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.94 }}
-                className="relative px-8 lg:px-12 py-3 lg:py-4 rounded-full font-semibold tracking-wider text-white text-sm lg:text-base bg-black border border-orange-500/40 shadow-[0_0_40px_rgba(249,115,22,0.35)] overflow-hidden group">
+              <motion.button 
+                onClick={handleOpenEnrollment} // ✅ CONNECTED TO ENROLLMENT FORM
+                whileHover={{ scale: 1.08 }} 
+                whileTap={{ scale: 0.94 }}
+                className="relative px-8 lg:px-12 py-3 lg:py-4 rounded-full font-semibold tracking-wider text-white text-sm lg:text-base bg-black border border-orange-500/40 shadow-[0_0_40px_rgba(249,115,22,0.35)] overflow-hidden group"
+              >
                 <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-orange-500/40 via-amber-400/30 to-orange-500/40 blur-xl" />
                 <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                 <span className="relative z-10 flex items-center gap-3">
@@ -599,45 +611,58 @@ const testimonials = [
         </div>
       </div>
       
+      {/* ✅ ENROLLMENT FORM MODAL */}
+      <EnrollmentForm
+        isOpen={isEnrollmentOpen}
+        onClose={handleCloseEnrollment}
+        formData={{}}
+        onInputChange={() => {}}
+        progress={0}
+        submitStatus=""
+        errors={{}}
+        isSubmitting={false}
+        onSubmit={() => {}}
+      />
+      
 {/* Logo marquee */}
       <div className="relative z-10 mt-12 lg:mt-16 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="mb-6 flex items-center justify-center gap-3">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-orange-500/50" />
-            <div className="text-xs font-semibold tracking-[0.25em] uppercase text-orange-400/60">Trusted Partners</div>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-orange-500/50" />
-          </div>
-          <div className="relative py-8">
-            <div className="pointer-events-none absolute left-0 top-0 h-full w-24 lg:w-32  via-[#060302]/90 to-transparent z-10" />
-            <div className="pointer-events-none absolute right-0 top-0 h-full w-24 lg:w-32  via-[#060302]/90 to-transparent z-10" />
-            <div className="logo-strip flex items-center gap-6 lg:gap-10">
-              {[...companyLogos, ...companyLogos, ...companyLogos].map((logo, idx) => (
-                <div key={logo.name + idx} className="group relative flex h-16 w-28 lg:h-20 lg:w-36 items-center justify-center flex-shrink-0">
-                  <img src={logo.src} alt={logo.name} className="max-h-11 lg:max-h-20 w-auto object-contain   group-hover:saturate-100 group-hover:brightness-110 group-hover:scale-110 group-hover:drop-shadow-[0_0_12px_rgba(251,146,60,0.4)] transition-all duration-500" />
-                </div>
-              ))}
-            </div>
-          </div>
+         <div className="mb-6 flex items-center justify-center gap-3">
+           <div className="h-px w-12 bg-gradient-to-r from-transparent to-orange-500/50" />
+           <div className="text-xs font-semibold tracking-[0.25em] uppercase text-orange-400/60">Trusted Partners</div>
+           <div className="h-px w-12 bg-gradient-to-l from-transparent to-orange-500/50" />
+         </div>
+         <div className="relative py-8">
+           <div className="pointer-events-none absolute left-0 top-0 h-full w-24 lg:w-32  via-[#060302]/90 to-transparent z-10" />
+           <div className="pointer-events-none absolute right-0 top-0 h-full w-24 lg:w-32  via-[#060302]/90 to-transparent z-10" />
+           <div className="logo-strip flex items-center gap-6 lg:gap-10">
+             {[...companyLogos, ...companyLogos, ...companyLogos].map((logo, idx) => (
+               <div key={logo.name + idx} className="group relative flex h-16 w-28 lg:h-20 lg:w-36 items-center justify-center flex-shrink-0">
+                 <img src={logo.src} alt={logo.name} className="max-h-11 lg:max-h-20 w-auto object-contain   group-hover:saturate-100 group-hover:brightness-110 group-hover:scale-110 group-hover:drop-shadow-[0_0_12px_rgba(251,146,60,0.4)] transition-all duration-500" />
+               </div>
+             ))}
+           </div>
+         </div>
         </div>
       </div>
        
       <style jsx>{`
         @keyframes float {
-          0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
-          25% { transform: translateY(-10px) translateX(2px) rotate(1deg); }
-          50% { transform: translateY(-6px) translateX(-2px) rotate(-1deg); }
-          75% { transform: translateY(-12px) translateX(1px) rotate(0.5deg); }
+         0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+         25% { transform: translateY(-10px) translateX(2px) rotate(1deg); }
+         50% { transform: translateY(-6px) translateX(-2px) rotate(-1deg); }
+         75% { transform: translateY(-12px) translateX(1px) rotate(0.5deg); }
         }
         @keyframes burst {
-          0% { transform: translate(-50%, -50%) scale(0.3) rotate(0deg); opacity: 0; }
-          20% { opacity: 1; }
-          100% { transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1) rotate(var(--r)); opacity: 0; }
+         0% { transform: translate(-50%, -50%) scale(0.3) rotate(0deg); opacity: 0; }
+         20% { opacity: 1; }
+         100% { transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1) rotate(var(--r)); opacity: 0; }
         }
         .logo-strip { width: max-content; animation: logos-slide 24s linear infinite; }
         .logo-strip:hover { animation-play-state: paused; }
         @keyframes logos-slide {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+         0% { transform: translateX(0); }
+         100% { transform: translateX(-50%); }
         }
         .line-clamp-5 { display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
         .animate-fade-in-delay { animation: fadeIn 1s ease-out 0.3s both; }

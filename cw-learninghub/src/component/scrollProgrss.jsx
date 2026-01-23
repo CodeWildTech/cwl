@@ -53,7 +53,7 @@ const ScrollProgress = () => {
 
           {/* Percentage Text */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-orange-600 font-mono">
-            <span className="text-xl font-bold leading-none">{percent}%</span>
+            <span className="text-md font-bold leading-none">{percent}%</span>
             <span className="text-[8px] uppercase tracking-tighter opacity-70">Scrolling</span>
           </div>
         </div>

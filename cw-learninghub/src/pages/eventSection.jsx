@@ -55,7 +55,7 @@ const EVENTS_DATA = [
   {
     id: 4,
     number: "04",
-    title: "AI Integration Workshop",
+    title: "AI Integration ",
     category: "Online",
     size: "sm",
     status: "Ended",

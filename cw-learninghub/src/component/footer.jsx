@@ -120,15 +120,16 @@ export default function ContactPage() {
 
             {/* RIGHT: MOBILE BUTTON / DESKTOP FORM */}
             <div className="flex justify-center lg:justify-end">
-              {/* MOBILE: Enhanced Professional Contact Button */}
+              {/* MOBILE: Redesigned Compact Contact Button */}
               <div className="block lg:hidden">
                 <button
                   onClick={() => setIsFormModalOpen(true)}
-                  className="w-full max-w-md bg-orange-600 hover:from-orange-500 hover:to-orange-700 text-white font-bold text-lg py-5 px-8 rounded-2xl transition-all duration-300 hover:scale-[1] hover:shadow-[0_20px_40px_rgba(249,115,22,0.5)] shadow-[0_10px_25px_rgba(249,115,22,0.4)] border-2 border-orange-500/50 backdrop-blur-sm relative overflow-hidden group"
+                  className="w-full max-w-sm bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold text-sm py-3 px-6 rounded-xl shadow-lg shadow-orange-500/40 hover:shadow-xl hover:shadow-orange-500/60 border border-orange-400/50 transition-all duration-300 hover:-translate-y-0.5 active:scale-95 overflow-hidden relative group"
                 >
-                  <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-white/20 blur-xl scale-110 group-hover:opacity-100 opacity-0 transition-all duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 transform -translate-x-[30%] group-hover:translate-x-[100%] transition-transform duration-700" />
                   <span className="relative z-10 flex items-center justify-center gap-2">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                     </svg>
                     Contact Us
@@ -212,7 +213,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Rest of your code remains exactly the same */}
       {/* MOBILE FORM MODAL */}
       {isFormModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 lg:hidden">
@@ -310,53 +310,53 @@ export default function ContactPage() {
         </div>
       )}
 
-      {/* BOTTOM INFO STRIP */}
-      <section className="bg-black border-t border-white/5">
-        <div className="max-w-6xl mx-auto px-4 py-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+      {/* BOTTOM INFO STRIP - FIXED FOR ALL SCREENS */}
+      <section className="bg-black border-t border-white/5 px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto py-6 sm:py-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 sm:gap-6 lg:gap-8">
           {/* Address & name */}
-          <div className="flex items-start gap-3">
-            <MapPin className="text-orange-500 mt-1" size={26} />
-            <div>
-              <h3 className="text-2xl lg:text-3xl font-bold">CW LearningHub</h3>
-              <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
+          <div className="flex items-start gap-2 sm:gap-3 min-w-0 flex-1">
+            <MapPin className="text-orange-500 mt-1 flex-shrink-0" size={24} />
+            <div className="min-w-0">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight">CW LearningHub</h3>
+              <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mt-1 line-clamp-2">
                 Aristo Junction, Thiruvananthapuram,
-                <br />
+                <br className="hidden sm:block" />
                 Kerala - 695041
               </p>
             </div>
           </div>
 
           {/* Social icons */}
-          <div className="flex flex-col gap-3">
-            <h4 className="text-sm font- text-gray-200  tracking-[0.18em]">
+          <div className="flex flex-col gap-2 sm:gap-3 w-full sm:w-auto">
+            <h4 className="text-xs sm:text-sm font-medium text-gray-200 tracking-[0.18em]">
               Connect With Us
             </h4>
-            <div className="flex gap-4">
+            <div className="flex gap-2 sm:gap-4">
               <a
                 href="https://www.instagram.com/codewild.learninghub?igsh=ZDV2NHE2aDRnNWFo"
-                className="bg-zinc-900 hover:bg-orange-500 p-3 rounded-full transition-all duration-200 hover:scale-110"
+                className="bg-zinc-900 hover:bg-orange-500 p-2 sm:p-3 rounded-full transition-all duration-200 hover:scale-110 flex-shrink-0"
               >
-                <Instagram size={22} />
+                <Instagram size={20} />
               </a>
               <a
                 href="#"
-                className="bg-zinc-900 hover:bg-orange-500 p-3 rounded-full transition-all duration-200 hover:scale-110"
+                className="bg-zinc-900 hover:bg-orange-500 p-2 sm:p-3 rounded-full transition-all duration-200 hover:scale-110 flex-shrink-0"
               >
-                <Linkedin size={22} />
+                <Linkedin size={20} />
               </a>
               <a
                 href="#"
-                className="bg-zinc-900 hover:bg-orange-500 p-3 rounded-full transition-all duration-200 hover:scale-110"
+                className="bg-zinc-900 hover:bg-orange-500 p-2 sm:p-3 rounded-full transition-all duration-200 hover:scale-110 flex-shrink-0"
               >
-                <Youtube size={22} />
+                <Youtube size={20} />
               </a>
             </div>
           </div>
 
           {/* Email pill */}
-          <button className="inline-flex items-center gap-3 bg-zinc-900 rounded-full px-4 py-2 text-sm text-gray-200 hover:text-orange-500 transition-colors">
-            <Mail size={20} />
-            <span>codewildlearninghub@gmail.com</span>
+          <button className="inline-flex items-center gap-2 sm:gap-3 bg-zinc-900 rounded-full px-3 sm:px-4 py-2 text-xs sm:text-sm text-gray-200 hover:text-orange-500 transition-colors flex-shrink-0">
+            <Mail size={18} />
+            <span className="truncate">codewildlearninghub@gmail.com</span>
           </button>
         </div>
       </section>
