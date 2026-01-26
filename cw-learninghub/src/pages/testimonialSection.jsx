@@ -6,7 +6,7 @@ import Stephin from "../assets/students/stephin.jpeg";
 import Ashik from "../assets/students/ashik.jpeg";
 import Nikhitha from "../assets/students/nikkitha.jpg";
 import Sandra from "../assets/students/sandra.jpg";
-import Anandhu from "../assets/students/anandhu.jpg";
+import Anandhu from "../assets/students/Anandhu.jpg";
 import Vandana from "../assets/students/vandana.jpg";
 import Hannah from "../assets/students/hannah.jpeg";
 
