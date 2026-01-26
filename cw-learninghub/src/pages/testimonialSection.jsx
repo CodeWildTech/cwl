@@ -8,7 +8,7 @@ import Nikhitha from "../assets/students/nikkitha.jpg";
 import Sandra from "../assets/students/sandra.jpg";
 import Anandhu from "../assets/students/Anandhu.jpg";
 import Vandana from "../assets/students/vandana.jpg";
-import Hannah from "../assets/students/hannah.jpeg";
+import Hannah from "../assets/students/Hannah.jpeg";
 
 import { motion } from "framer-motion";
 import { Zap, Cpu, Sparkles, Rocket, Star, Code } from 'lucide-react';
