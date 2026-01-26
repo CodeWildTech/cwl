@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Star, Code2, Cpu } from 'lucide-react';
+import logoIm from '../assets/Logo/cwlogo.png';
 
 const HeroSection = () => {
   const containerRef = useRef(null);
@@ -170,7 +171,7 @@ const HeroSection = () => {
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-orange-500 flex-shrink-0 border-2 border-white/10 overflow-hidden">
-                         <img src="../src/assets/Logo/cwlogo.png" alt="CW" className="w-full h-full object-cover" />
+                         <img src={logoIm} alt="CW" className="w-full h-full object-cover" />
                       </div>
                       <div className="overflow-hidden">
                         <p className="text-white font-bold text-xs truncate">Learning Hub</p>

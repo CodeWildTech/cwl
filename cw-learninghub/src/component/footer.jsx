@@ -356,14 +356,14 @@ export default function ContactPage() {
           {/* Email pill */}
           <button className="inline-flex items-center gap-2 sm:gap-3 bg-zinc-900 rounded-full px-3 sm:px-4 py-2 text-xs sm:text-sm text-gray-200 hover:text-orange-500 transition-colors flex-shrink-0">
             <Mail size={18} />
-            <span className="truncate">codewildlearninghub@gmail.com</span>
+            <span className="truncate">contact@codewildlearn.com</span>
           </button>
         </div>
       </section>
 
       {/* FOOTER */}
       <footer className="bg-black text-center py-5 text-gray-500 text-xs border-t border-zinc-900">
-        © 2025 Design &amp; Developed by Code Wild Tech
+        © 2025 Design &amp; Developed by CodeWild Tech
       </footer>
     </div>
   );

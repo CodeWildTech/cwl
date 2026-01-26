@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import EnrollmentContainer from './enrollmentFormContainer';
 import { motion, AnimatePresence } from 'framer-motion';
+import mainLogo from '../assets/Logo/cwlogo.png';
 
 import {
   Home,
@@ -12,7 +13,7 @@ import {
 
 const Logo = () => (
   <div className="w-20 h-20 rounded-full flex items-center ">
-    <img src="src/assets/Logo/cwlogo.png" alt="" />
+    <img src={mainLogo} alt="" />
   </div>
 );
 
@@ -80,7 +81,7 @@ const scrollToSection = (sectionId) => {
             py-2 sm:py-2.5
             border transition-colors duration-700 ease-in-out
             ${scrolled
-              ? 'bg-zinc-900/60 border-white/20 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]'
+              ? 'bg-zinc-700/60 border-white/20 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]'
               : 'bg-zinc-950/40 border-white/5 backdrop-blur-md shadow-none'
             }
           `}

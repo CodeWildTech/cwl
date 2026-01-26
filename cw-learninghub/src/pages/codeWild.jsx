@@ -6,6 +6,7 @@ import james from '../assets/mentors/James.jpg';
 import marcus from '../assets/mentors/Marcus.jpg';
 import stark from '../assets/mentors/Stark.jpg';
 import angelin from '../assets/mentors/Angelin.jpg';
+import studentImg from '../assets/mentors/stud.jpg';
 
 const CodeWildLanding = () => {
   const [activeRow, setActiveRow] = useState(null);
@@ -197,7 +198,7 @@ const CodeWildLanding = () => {
           <div className="relative w-full max-w-7xl h-[450px] md:h-[650px] mb-8">
             <div className="absolute left-[2%] md:left-[8%] top-1/2 -translate-y-1/2 z-20 flex flex-col items-center gap-2 md:gap-3">
               <div className="w-16 h-20 md:w-24 md:h-32 rounded-xl md:rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl shadow-white/5">
-                <img src="/mentors/stud.jpg" alt="Student" className="w-full h-full object-cover" />
+                <img src={studentImg} alt="Student" className="w-full h-full object-cover" />
               </div>
               <span className="text-white/80 font-medium tracking-widest text-[8px] md:text-xs uppercase bg-white/10 px-2 md:px-4 py-1 rounded-full border border-white/10">Student</span>
             </div>
@@ -205,7 +206,7 @@ const CodeWildLanding = () => {
             <div className="absolute left-[30%] md:left-[35%] top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
               <div className="w-8 h-8 md:w-12 md:h-12 bg-orange-600 rounded-full flex items-center justify-center shadow-[0_0_20px_#ff4500]">
                 <div className="w-4 h-4 md:w-6 md:h-6 bg-white/30 rounded-full animate-ping" />
-              </div>
+              </div>e
             </div>
 
             <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet">

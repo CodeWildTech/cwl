@@ -49,6 +49,15 @@ export default function ProgramOverview() {
 
   const courses = useMemo(() => coursesData, []);
 
+
+  const mentors = [
+  "https://images.unsplash.com/photo-1560250097-0b93528c311a",
+  "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2",
+  "https://images.unsplash.com/photo-1556157382-97eda2d62296",
+  "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1",
+];
+
+
   useEffect(() => {
     const checkTime = () => {
       const timeSpent = (Date.now() - sessionStartTime.current) / 1000;
@@ -252,11 +261,11 @@ export default function ProgramOverview() {
                         <div className="flex -space-x-2 mr-3">
                           {[1, 2, 3].map((i) => (
                             <div key={i} className="w-7 h-7 lg:w-8 lg:h-8 rounded-full border-2 border-[#1A1210] overflow-hidden bg-slate-800">
-                              <img
-                                src={`https://i.pravatar.cc/100?img=${i + (idx * 3)}`}
-                                alt="mentor"
-                                className="w-full h-full object-cover opacity-80"
-                              />
+                           <img
+  src={mentors[i % mentors.length]}
+  alt="mentor"
+  className="w-full h-full object-cover"
+/>
                             </div>
                           ))}
                         </div>
