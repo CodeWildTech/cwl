@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Star, Code2, Cpu } from 'lucide-react';
-import logoIm from '../assets/Logo/cwlogo1.png';
+import logoIm from '../assets/Logo/cwlogo.png';
 
 const HeroSection = () => {
   const containerRef = useRef(null);

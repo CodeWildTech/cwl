@@ -6,7 +6,7 @@ import james from '../assets/mentors/James.jpg';
 import marcus from '../assets/mentors/Marcus.jpg';
 import stark from '../assets/mentors/Stark.jpg';
 import angelin from '../assets/mentors/Angelin.jpg';
-import studentImg from '../assets/mentors/stud.jpg';
+import studentImg from '../assets/students/stud.jpg';
 
 const CodeWildLanding = () => {
   const [activeRow, setActiveRow] = useState(null);
