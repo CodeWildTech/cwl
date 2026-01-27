@@ -96,7 +96,7 @@ const scrollToSection = (sectionId) => {
             // Mobile: Logo LEFT SIDE inside navbar
             <div className="flex items-center flex-shrink-0">
               <div className="w-12 h-12 rounded-full flex items-center ">
-                <img src="src/assets/Logo/cwlogo.png" alt="" />
+                <img src={mainLogo} alt="" />
               </div>
             </div>
           )}
