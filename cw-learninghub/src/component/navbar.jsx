@@ -89,7 +89,7 @@ const scrollToSection = (sectionId) => {
           {/* Logo - Outside on Desktop/Laptop, LEFT SIDE on Mobile */}
           {!isMobile ? (
             // Desktop/Laptop: Logo OUTSIDE navbar (fixed spacing)
-            <div className="absolute -left-58 top-1/2 -translate-y-1/2 z-10">
+            <div className="absolute -left-32 top-1/2 -translate-y-1/2 z-10">
               <Logo />
             </div>
           ) : (
