@@ -12,11 +12,10 @@ import {
 } from 'lucide-react';
 
 const Logo = () => (
-  <div className="w-12 h-12 rounded-full flex items-center">
-    <img src={mainLogo} alt="CWL" className="h-10 w-auto" />
+  <div className="w-20 h-20 rounded-full flex items-center ">
+    <img src={mainLogo} alt="" />
   </div>
 );
-
 
 const navLinks = [
   { label: 'Home', icon: Home, section: 'hero' },
@@ -91,13 +90,13 @@ const scrollToSection = (sectionId) => {
           {!isMobile ? (
             // Desktop/Laptop: Logo OUTSIDE navbar (fixed spacing)
             <div className="absolute -left-58 top-1/2 -translate-y-1/2 z-10">
-                <img src={mainLogo} alt="CWL" />
+              <Logo />
             </div>
           ) : (
             // Mobile: Logo LEFT SIDE inside navbar
             <div className="flex items-center flex-shrink-0">
               <div className="w-12 h-12 rounded-full flex items-center ">
-                <img src={mainLogo} alt="CWL"/>
+                <img src="src/assets/Logo/cwlogo.png" alt="" />
               </div>
             </div>
           )}
