@@ -12,10 +12,11 @@ import {
 } from 'lucide-react';
 
 const Logo = () => (
-  <div className="w-20 h-20 rounded-full flex items-center ">
-    <img src={mainLogo} alt="" />
+  <div className="w-12 h-12 rounded-full flex items-center">
+    <img src={mainLogo} alt="CWL" className="h-10 w-auto" />
   </div>
 );
+
 
 const navLinks = [
   { label: 'Home', icon: Home, section: 'hero' },
