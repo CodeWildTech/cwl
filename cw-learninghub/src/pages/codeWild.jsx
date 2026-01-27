@@ -206,7 +206,7 @@ const CodeWildLanding = () => {
             <div className="absolute left-[30%] md:left-[35%] top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
               <div className="w-8 h-8 md:w-12 md:h-12 bg-orange-600 rounded-full flex items-center justify-center shadow-[0_0_20px_#ff4500]">
                 <div className="w-4 h-4 md:w-6 md:h-6 bg-white/30 rounded-full animate-ping" />
-              </div>e
+              </div>
             </div>
 
             <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet">

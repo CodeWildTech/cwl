@@ -90,13 +90,13 @@ const scrollToSection = (sectionId) => {
           {!isMobile ? (
             // Desktop/Laptop: Logo OUTSIDE navbar (fixed spacing)
             <div className="absolute -left-58 top-1/2 -translate-y-1/2 z-10">
-              <Logo />
+                <img src={mainLogo} alt="CWL" />
             </div>
           ) : (
             // Mobile: Logo LEFT SIDE inside navbar
             <div className="flex items-center flex-shrink-0">
               <div className="w-12 h-12 rounded-full flex items-center ">
-                <img src="src/assets/Logo/cwlogo.png" alt="" />
+                <img src={mainLogo} alt="CWL"/>
               </div>
             </div>
           )}

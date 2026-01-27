@@ -6,13 +6,13 @@ import Stephin from "../assets/students/stephin.jpeg";
 import Ashik from "../assets/students/ashik.jpeg";
 import Nikhitha from "../assets/students/nikkitha.jpg";
 import Sandra from "../assets/students/sandra.jpg";
-import Anandhu from "../assets/students/Anandhu.jpg";
+import Anandhu from "../assets/students/anandhu.jpg";
 import Vandana from "../assets/students/vandana.jpg";
-import Hannah from "../assets/students/Hannah.jpeg";
+import Hannah from "../assets/students/hannah.jpeg";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Zap, Cpu, Sparkles, Rocket, Star, Code } from 'lucide-react';
-import EnrollmentForm from '../component/enrollmentForm'; // ✅ IMPORT YOUR ENROLLMENT FORM
+import EnrollmentForm from '../component/enrollmentForm'; 
 
 export default function TestimonialsSection() {
   const [isMobile, setIsMobile] = useState(false);
@@ -24,125 +24,115 @@ export default function TestimonialsSection() {
   const [isPaused, setIsPaused] = useState(false);
   const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
-  const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false); // ✅ NEW STATE
+  const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false); 
   
   const containerRef = useRef(null);
   const intervalRef = useRef(null);
   const mobileScrollRef = useRef(null);
 
   const techIcons = [Zap, Cpu, Sparkles, Rocket, Star, Code];
-const testimonials = [
-  {
-    id: 1,
-    name: "Aslin",
-    role: "Nagercoil",
-    image: Aslin,
-    message:
-      "Before joining CodeWild Tech, I was really confused about my career direction. The Python course helped me build strong basics step by step and boosted my confidence a lot. The mentors were friendly and always ready to help. Today, I’m working as a software developer in Trivandrum, and I’m very thankful for the guidance I received here.",
-    position: { top: "6%", right: "35%", mobile: { top: "4%", right: "8%" } },
-    size: "lg",
-    xType: "right",
-  },
-  {
-    id: 2,
-    name: "Jofna",
-    role: "Kochi",
-    image: Jofna,
-    message:
-      "What I loved most about the course was the practical teaching style. Every topic was explained using real-life examples, which made learning easy. The hands-on projects helped me improve my skills and gain confidence to work on my own.",
-    position: { top: "30%", left: "10%", mobile: { top: "22%", left: "4%" } },
-    size: "md",
-    xType: "left",
-  },
-  {
-    id: 3,
-    name: "Jose",
-    role: "Nagercoil",
-    image: Jose,
-    message:
-      "The course content was well structured and easy to follow. Everything felt updated and relevant to current industry needs. Mentors explained concepts patiently and clearly. After completing the course, I felt confident to handle real-world development tasks.",
-    position: { bottom: "35%", left: "18%", mobile: { bottom: "30%", left: "4%" } },
-    size: "xl",
-    xType: "left",
-  },
-  {
-    id: 4,
-    name: "Stephin",
-    role: "Kochi",
-    image: Stephin,
-    message:
-      "The assignments and practical sessions helped me understand concepts in depth. Whenever I had doubts, the support team was quick to respond and clarify. Overall, it was a smooth and positive learning experience for me.",
-    position: { top: "48%", left: "32%", mobile: { top: "40%", left: "18%" } },
-    size: "sm",
-    xType: "left",
-  },
-  {
-    id: 5,
-    name: "Ashik",
-    role: "Trivandrum",
-    image: Ashik,
-    message:
-      "The mentors genuinely care about student growth and progress. The step-by-step teaching approach made learning comfortable. The placement guidance and support really helped me get placed within a short time after completing the course.",
-    position: { top: "18%", right: "22%", mobile: { top: "15%", right: "8%" } },
-    size: "lg",
-    xType: "right",
-  },
-  {
-    id: 6,
-    name: "Nikhitha J S",
-    role: "Trivandrum",
-    image: Nikhitha,
-    message:
-      "I didn't have a strong technical background initially, but the teaching style made everything easy to understand. The live sessions and project work helped me gain confidence and improve my practical knowledge a lot.",
-    position: { top: "56%", right: "13%", mobile: { top: "50%", right: "12%" } },
-    size: "md",
-    xType: "right",
-  },
-  {
-    id: 7,
-    name: "Sandra A S",
-    role: "Trivandrum",
-    image: Sandra,
-    message:
-      "Everything was taught clearly from the basics, so it was easy to keep up with the sessions. The mentor guidance and community support were very helpful throughout the learning journey. I never felt stuck or left behind.",
-    position: { bottom: "24%", right: "34%", mobile: { bottom: "20%", right: "18%" } },
-    size: "xl",
-    xType: "right",
-  },
-  {
-    id: 8,
-    name: "Anandhu R S",
-    role: "Kollam",
-    image: Anandhu,
-    message:
-      "Classes were interactive and doubts were cleared instantly. Even complex topics were explained in a simple and understandable way. The overall learning experience was smooth and definitely worth the time and effort.",
-    position: { top: "32%", right: "8%", mobile: { top: "34%", right: "4%" } },
-    size: "sm",
-    xType: "right",
-  },
-  {
-    id: 9,
-    name: "Vandana",
-    role: "Trivandrum",
-    image: Vandana,
-    message:
-      "This course gave me great hands-on experience with real tools and live projects. It helped me understand how things work in real scenarios. I now feel much more confident while attending interviews and technical discussions.",
-    position: { bottom: "14%", right: "23%", mobile: { bottom: "10%", right: "8%" } },
-    size: "lg",
-    xType: "right",
-  },
-  {
-    id: 10,
-    name: "Hannath",
-    role: "Trivandrum",
-    image: Hannah,
-    message:
-      "The mentors were professional and supportive, and the learning environment was really positive. Sessions were well planned and easy to follow. Overall, I'm very satisfied with the course and the learning experience.",
-    position: { bottom: "40%", right: "44%", mobile: { bottom: "44%", right: "22%" } },
-    size: "md",
-    xType: "right",
-  },
-];
+  const testimonials = [
+    {
+      id: 1,
+      name: "Ascilin",
+      role: "Nagercoil",
+      image: Aslin,
+      message: "Before joining CodeWild Tech, I was really confused about my career direction. The Python course helped me build strong basics step by step and boosted my confidence a lot. The mentors were friendly and always ready to help. Today, I’m working as a software developer in Trivandrum, and I’m very thankful for the guidance I received here.",
+      position: { top: "6%", right: "35%", mobile: { top: "4%", right: "8%" } },
+      size: "lg",
+      xType: "right", // Appears to the left of the image
+    },
+    {
+      id: 2,
+      name: "Jofna",
+      role: "Kochi",
+      image: Jofna,
+      message: "What I loved most about the course was the practical teaching style. Every topic was explained using real-life examples, which made learning easy. The hands-on projects helped me improve my skills and gain confidence to work on my own.",
+      position: { top: "30%", left: "10%", mobile: { top: "22%", left: "4%" } },
+      size: "md",
+      xType: "left", // Appears to the right of the image
+    },
+    {
+      id: 3,
+      name: "Jose",
+      role: "Nagercoil",
+      image: Jose,
+      message: "The course content was well structured and easy to follow. Everything felt updated and relevant to current industry needs. Mentors explained concepts patiently and clearly. After completing the course, I felt confident to handle real-world development tasks.",
+      position: { bottom: "35%", left: "18%", mobile: { bottom: "30%", left: "4%" } },
+      size: "xl",
+      xType: "left",
+    },
+    {
+      id: 4,
+      name: "Stephin",
+      role: "Kochi",
+      image: Stephin,
+      message: "The assignments and practical sessions helped me understand concepts in depth. Whenever I had doubts, the support team was quick to respond and clarify. Overall, it was a smooth and positive learning experience for me.",
+      position: { top: "48%", left: "32%", mobile: { top: "40%", left: "18%" } },
+      size: "sm",
+      xType: "left",
+    },
+    {
+      id: 5,
+      name: "Ashik",
+      role: "Trivandrum",
+      image: Ashik,
+      message: "The mentors genuinely care about student growth and progress. The step-by-step teaching approach made learning comfortable. The placement guidance and support really helped me get placed within a short time after completing the course.",
+      position: { top: "18%", right: "22%", mobile: { top: "15%", right: "8%" } },
+      size: "lg",
+      xType: "right",
+    },
+    {
+      id: 6,
+      name: "Nikhitha J S",
+      role: "Trivandrum",
+      image: Nikhitha,
+      message: "I didn't have a strong technical background initially, but the teaching style made everything easy to understand. The live sessions and project work helped me gain confidence and improve my practical knowledge a lot.",
+      position: { top: "56%", right: "13%", mobile: { top: "50%", right: "12%" } },
+      size: "md",
+      xType: "right",
+    },
+    {
+      id: 7,
+      name: "Sandra A S",
+      role: "Trivandrum",
+      image: Sandra,
+      message: "Everything was taught clearly from the basics, so it was easy to keep up with the sessions. The mentor guidance and community support were very helpful throughout the learning journey. I never felt stuck or left behind.",
+      position: { bottom: "24%", right: "34%", mobile: { bottom: "20%", right: "18%" } },
+      size: "xl",
+      xType: "right",
+    },
+    {
+      id: 8,
+      name: "Ananthu R S",
+      role: "Kollam",
+      image: Anandhu,
+      message: "Classes were interactive and doubts were cleared instantly. Even complex topics were explained in a simple and understandable way. The overall learning experience was smooth and definitely worth the time and effort.",
+      position: { top: "32%", right: "8%", mobile: { top: "34%", right: "4%" } },
+      size: "sm",
+      xType: "right",
+    },
+    {
+      id: 9,
+      name: "Vandana",
+      role: "Trivandrum",
+      image: Vandana,
+      message: "This course gave me great hands-on experience with real tools and live projects. It helped me understand how things work in real scenarios. I now feel much more confident while attending interviews and technical discussions.",
+      position: { bottom: "14%", right: "23%", mobile: { bottom: "10%", right: "8%" } },
+      size: "lg",
+      xType: "right",
+    },
+    {
+      id: 10,
+      name: "Hannah",
+      role: "Trivandrum",
+      image: Hannah,
+      message: "The mentors were professional and supportive, and the learning environment was really positive. Sessions were well planned and easy to follow. Overall, I'm very satisfied with the course and the learning experience.",
+      position: { bottom: "40%", right: "44%", mobile: { bottom: "44%", right: "22%" } },
+      size: "md",
+      xType: "right",
+    },
+  ];
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
@@ -162,7 +152,6 @@ const testimonials = [
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Auto-rotate with pause
   useEffect(() => {
     if (isPaused) {
       if (intervalRef.current) clearInterval(intervalRef.current);
@@ -174,15 +163,11 @@ const testimonials = [
       setCurrentTestimonial(nextIndex);
       setShowCard(true);
       
-      // Auto-scroll on mobile
       if (isMobile && mobileScrollRef.current) {
         const scrollContainer = mobileScrollRef.current;
         const containerWidth = scrollContainer.offsetWidth;
-        const totalScrollWidth = scrollContainer.scrollWidth;
-        const spacerWidth = (containerWidth / 2) - 48; // 48px is half of profile width
-        const profileAndGapWidth = 24 * 4 + 32; // 96px profile + 32px gap
-        
-        // Calculate scroll position to center the profile
+        const spacerWidth = (containerWidth / 2) - 48;
+        const profileAndGapWidth = 24 * 4 + 32; 
         const scrollPosition = spacerWidth + (profileAndGapWidth * nextIndex);
         
         scrollContainer.scrollTo({
@@ -205,12 +190,10 @@ const testimonials = [
     setShowCard(true);
     setIsPaused(true);
     
-    // Resume after 6 seconds
     setTimeout(() => {
       setIsPaused(false);
     }, 6000);
     
-    // Scroll to clicked profile on mobile
     if (isMobile && mobileScrollRef.current) {
       const scrollContainer = mobileScrollRef.current;
       const containerWidth = scrollContainer.offsetWidth;
@@ -233,7 +216,6 @@ const testimonials = [
     }
   };
 
-  // Handle mobile scroll
   const handleMobileScroll = () => {
     if (!isMobile || !mobileScrollRef.current) return;
     
@@ -243,15 +225,12 @@ const testimonials = [
     const spacerWidth = (containerWidth / 2) - 48;
     const profileAndGapWidth = 24 * 4 + 32;
     
-    // Calculate which profile is centered
     const activeIndex = Math.round((scrollPosition - spacerWidth) / profileAndGapWidth);
     const clampedIndex = Math.max(0, Math.min(activeIndex, testimonials.length - 1));
     
     if (clampedIndex !== currentTestimonial && clampedIndex >= 0 && clampedIndex < testimonials.length) {
       setCurrentTestimonial(clampedIndex);
       setShowCard(true);
-      
-      // Pause auto-scroll when user manually scrolls
       setIsPaused(true);
       setTimeout(() => {
         setIsPaused(false);
@@ -259,9 +238,8 @@ const testimonials = [
     }
   };
 
-  // Drag handlers
   const handleMouseDown = useCallback((e) => {
-    if (isMobile) return; // Disable drag on mobile
+    if (isMobile) return;
     
     e.preventDefault();
     setIsDragging(true);
@@ -297,32 +275,12 @@ const testimonials = [
     window.addEventListener('mouseup', handleMouseUp);
   }, [isDragging, isMobile]);
 
-  const handleButtonClick = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    
-    const newParticles = Array.from({ length: 8 }, (_, i) => ({
-      id: Date.now() + i,
-      Icon: techIcons[Math.floor(Math.random() * techIcons.length)],
-      x: Math.random() * 200 - 100,
-      y: -(Math.random() * 150 + 50),
-      rotation: Math.random() * 360,
-      delay: Math.random() * 100
-    }));
-    
-    setParticles(newParticles);
-    setTimeout(() => {
-      setIsAnimating(false);
-      setParticles([]);
-    }, 1200);
-  };
-
   const handleOpenEnrollment = () => {
-    setIsEnrollmentOpen(true); // ✅ OPEN ENROLLMENT FORM
+    setIsEnrollmentOpen(true);
   };
 
   const handleCloseEnrollment = () => {
-    setIsEnrollmentOpen(false); // ✅ CLOSE ENROLLMENT FORM
+    setIsEnrollmentOpen(false);
   };
 
   const companyLogos = [
@@ -332,9 +290,8 @@ const testimonials = [
     { name: "Hcl", src: "/logos/hcl.png" },
     { name: "mindtree", src: "/logos/mindtree.png" },
     { name: "NttData", src: "/logos/nttdata (2).png" },
-    { name: "Tcs", sArc: "/logos/Tata.png" },
+    { name: "Tcs", src: "/logos/Tata.png" },
     { name: "capgemini-logo", src: "/logos/capgemini-logo.png" },
-    
     { name: "L & T", src: "/logos/lt.png" },
     { name: "Myntra", src: "/logos/myntra.png" },
     { name: "Zoho", src: "/logos/zoho.png" },
@@ -342,22 +299,20 @@ const testimonials = [
   ];
 
   const getSizeClasses = (size) => ({
-    sm: "w-12 h-12 hover:scale-[1.18]",
-    md: "w-16 h-16 hover:scale-[1.16]",
-    lg: "w-20 h-20 hover:scale-[1.12]",
-    xl: "w-24 h-24 hover:scale-[1.08]",
+    sm: "w-12 h-12",
+    md: "w-16 h-16",
+    lg: "w-20 h-20",
+    xl: "w-24 h-24",
   }[size]);
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-black via-[#120806] to-[#1a0903] overflow-hidden">
-      {/* Background SVG */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <svg className="w-full h-full lg:block hidden" viewBox="0 0 2200 1000" preserveAspectRatio="none">
          <path className="curve-1" d="M -600 320 C -450 280, -300 400, -100 260 S 200 420, 500 500 S 800 300, 1100 420 S 1500 650, 1800 420 S 2100 200, 2400 420" 
-           fill="none" stroke="#dc4109" strokeWidth="30" strokeLinecap="round" strokeLinejoin="round" opacity="0.9" style={{ filter: "url(#glow)" }} />
+            fill="none" stroke="#dc4109" strokeWidth="30" strokeLinecap="round" strokeLinejoin="round" opacity="0.9" style={{ filter: "url(#glow)" }} />
          <defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
         </svg>
-        {/* Mobile wave */}
         <svg className="w-full h-full lg:hidden block" viewBox="0 0 400 600" preserveAspectRatio="none">
          <path d="M 0 100 Q 100 80, 200 100 T 400 100 L 400 0 L 0 0 Z" fill="#dc4109" opacity="0.15" />
          <path d="M 0 200 Q 100 180, 200 200 T 400 200" fill="none" stroke="#dc4109" strokeWidth="3" opacity="0.6" />
@@ -367,7 +322,6 @@ const testimonials = [
       <div className="relative z-10 w-full px-4 sm:px-8 lg:px-16 py-12 sm:py-16 lg:py-24">
         <div className="max-w-7xl mx-auto">
           <div className="space-y-12 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
-            {/* Text content */}
             <div className="w-full lg:w-1/2 text-center lg:text-left space-y-6">
               <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }} 
                 className="text-orange-500 font-bold tracking-[0.3em] uppercase text-sm">Student Testimonials</motion.p>
@@ -378,7 +332,6 @@ const testimonials = [
               <p className="text-white/90 max-w-md mx-auto lg:mx-0 text-base lg:text-lg">Join 100+ professionals who transformed their careers through our industry-leading workshops.</p>
             </div>
 
-            {/* Desktop view - positioned profiles */}
             {!isMobile && (
               <div ref={containerRef} className="relative h-[540px] mt-6 lg:mt-0 animate-fade-in-delay">
                 {testimonials.map((testimonial, index) => {
@@ -394,11 +347,11 @@ const testimonials = [
                       animation: isDragging ? 'none' : `float ${2.5 + index * 0.25}s ease-in-out infinite`,
                       animationDelay: `${index * 0.12}s`,
                     }}>
-                      <div className="relative">
+                      <div className="relative flex items-center justify-center">
                         <div 
                           className={`${sizeClasses} rounded-full overflow-hidden shadow-2xl transition-all duration-300 ring-2 ring-white/20
                             ${isCurrent 
-                              ? `ring-orange-500/50 ring-4 shadow-orange-500/30 scale-105 cursor-grab hover:scale-[1.12] ${isDragging ? 'shadow-2xl shadow-orange-500/60 scale-110 cursor-grabbing' : ''}`
+                              ? `ring-orange-500/50 ring-4 shadow-orange-500/30 scale-105 cursor-grab ${isDragging ? 'shadow-2xl shadow-orange-500/60 scale-110 cursor-grabbing' : ''}`
                               : 'hover:shadow-orange-500/50 hover:scale-110 hover:-rotate-3 cursor-pointer'
                             }`}
                           style={isCurrent ? {
@@ -412,30 +365,37 @@ const testimonials = [
                           <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover" />
                         </div>
 
+                        <AnimatePresence>
                         {showCard && isCurrent && (
                           <motion.div
                             key={`card-${currentTestimonial}`}
-                            initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.9, y: 10 }}
-                            transition={{ duration: 0.4 }}
+                            initial={{ opacity: 0, scale: 0.9, x: alignLeft ? 20 : -20 }}
+                            animate={{ opacity: 1, scale: 1, x: 0 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            transition={{ duration: 0.3 }}
                             className={`absolute w-72 bg-white/95 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-white/20 z-50
-                              ${alignLeft ? "top-0 left-full ml-8" : "top-0 right-full mr-8"}`}
+                              ${alignLeft ? "left-full ml-6" : "right-full mr-6"}`}
                             onMouseEnter={handleCardMouseEnter}
                             onMouseLeave={handleCardMouseLeave}
                           >
                             <div className="flex items-start gap-3 mb-4">
                               <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full object-cover ring-2 ring-orange-500/30 flex-shrink-0" />
-                              <div>
-                                <h3 className="font-bold text-orange-500 text-lg">{testimonial.name}</h3>
+                              <div className="min-w-0">
+                                <h3 className="font-bold text-orange-500 text-lg truncate">{testimonial.name}</h3>
                                 <p className="text-gray-500 text-sm">{testimonial.role}</p>
                               </div>
                             </div>
                             <p className="text-gray-700 text-sm leading-relaxed line-clamp-5">{testimonial.message}</p>
-                            <div className={`absolute top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent
-                              ${alignLeft ? "-right-2 border-l-8 border-l-white/95" : "-left-2 border-r-8 border-r-white/95"}`} />
+                            
+                            {/* Pointing Arrow Correction */}
+                            <div className={`absolute top-1/2 -translate-y-1/2 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent
+                              ${alignLeft 
+                                ? "-left-2 border-r-[10px] border-r-white/95" 
+                                : "-right-2 border-l-[10px] border-l-white/95"}`} 
+                            />
                           </motion.div>
                         )}
+                        </AnimatePresence>
                       </div>
                     </div>
                   );
@@ -443,10 +403,8 @@ const testimonials = [
               </div>
             )}
 
-            {/* Mobile view - horizontal scroll carousel */}
             {isMobile && (
               <div className="w-full space-y-6">
-                {/* Scrollable profiles carousel */}
                 <div className="relative overflow-hidden">
                   <div 
                     ref={mobileScrollRef}
@@ -455,114 +413,62 @@ const testimonials = [
                     style={{ 
                       scrollbarWidth: 'none', 
                       msOverflowStyle: 'none',
-                      scrollSnapType: 'x mandatory',
-                      scrollBehavior: 'smooth'
                     }}
                   >
-                    {/* Left padding spacer */}
                     <div className="flex-shrink-0" style={{ width: 'calc(50vw - 48px)' }}></div>
-                    
                     {testimonials.map((testimonial, index) => {
                       const isCurrent = currentTestimonial === index;
                       return (
                         <div 
                           key={testimonial.id} 
-                          className="flex-shrink-0 snap-center transition-all duration-500"
+                          className="flex-shrink-0 snap-center"
                           onClick={() => handleProfileClick(index)}
-                          style={{ scrollSnapAlign: 'center' }}
                         >
                           <motion.div
                             animate={{
                               scale: isCurrent ? 1.15 : 0.85,
                               opacity: isCurrent ? 1 : 0.5
                             }}
-                            transition={{ duration: 0.5, ease: "easeOut" }}
+                            transition={{ duration: 0.5 }}
                             className="relative"
                           >
                             <div 
-                              className={`w-24 h-24 rounded-full overflow-hidden shadow-2xl transition-all duration-500 ring-2
+                              className={`w-24 h-24 rounded-full overflow-hidden shadow-2xl ring-2
                                 ${isCurrent 
-                                  ? 'ring-orange-500 ring-4 shadow-orange-500/60 shadow-2xl'
+                                  ? 'ring-orange-500 ring-4 shadow-orange-500/60'
                                   : 'ring-white/20'
                                 }`}
                             >
                               <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover" />
                             </div>
-                            {isCurrent && (
-                              <motion.div
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-orange-500 rounded-full shadow-lg"
-                              />
-                            )}
                           </motion.div>
                         </div>
                       );
                     })}
-                    
-                    {/* Right padding spacer */}
                     <div className="flex-shrink-0" style={{ width: 'calc(50vw - 48px)' }}></div>
                   </div>
-                  
-                  {/* Gradient overlays for carousel effect */}
-                  <div className="absolute left-0 top-0 bottom-0 w-20  to-transparent pointer-events-none z-10" />
+                  <div className="absolute left-0 top-0 bottom-0 w-20 to-transparent pointer-events-none z-10" />
                   <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#120806] to-transparent pointer-events-none z-10" />
                 </div>
 
-                {/* Centered message card with smooth transitions */}
                 {showCard && (
                   <motion.div
                     key={`mobile-card-${currentTestimonial}`}
-                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                     className="w-full max-w-md mx-auto bg-white/95 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-white/20"
                   >
                     <div className="flex items-start gap-3 mb-4">
-                      <motion.img 
-                        key={`img-${currentTestimonial}`}
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ duration: 0.3 }}
-                        src={testimonials[currentTestimonial].image} 
-                        alt={testimonials[currentTestimonial].name} 
-                        className="w-12 h-12 rounded-full object-cover ring-2 ring-orange-500/30 flex-shrink-0" 
-                      />
+                      <img src={testimonials[currentTestimonial].image} alt={testimonials[currentTestimonial].name} className="w-12 h-12 rounded-full object-cover ring-2 ring-orange-500/30 flex-shrink-0" />
                       <div className="flex-1 min-w-0">
-                        <motion.h3 
-                          key={`name-${currentTestimonial}`}
-                          initial={{ x: -10, opacity: 0 }}
-                          animate={{ x: 0, opacity: 1 }}
-                          transition={{ duration: 0.3, delay: 0.1 }}
-                          className="font-bold text-orange-500 text-lg"
-                        >
-                          {testimonials[currentTestimonial].name}
-                        </motion.h3>
-                        <motion.p 
-                          key={`role-${currentTestimonial}`}
-                          initial={{ x: -10, opacity: 0 }}
-                          animate={{ x: 0, opacity: 1 }}
-                          transition={{ duration: 0.3, delay: 0.15 }}
-                          className="text-gray-500 text-sm"
-                        >
-                          {testimonials[currentTestimonial].role}
-                        </motion.p>
+                        <h3 className="font-bold text-orange-500 text-lg">{testimonials[currentTestimonial].name}</h3>
+                        <p className="text-gray-500 text-sm">{testimonials[currentTestimonial].role}</p>
                       </div>
                     </div>
-                    <motion.p 
-                      key={`message-${currentTestimonial}`}
-                      initial={{ y: 10, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ duration: 0.4, delay: 0.2 }}
-                      className="text-gray-700 text-sm leading-relaxed"
-                    >
-                      {testimonials[currentTestimonial].message}
-                    </motion.p>
+                    <p className="text-gray-700 text-sm leading-relaxed">{testimonials[currentTestimonial].message}</p>
                   </motion.div>
                 )}
 
-                {/* Scroll indicators with animations */}
                 <div className="flex justify-center gap-2 pt-4">
                   {testimonials.map((_, index) => (
                     <motion.button
@@ -572,17 +478,14 @@ const testimonials = [
                         width: currentTestimonial === index ? 32 : 8,
                         backgroundColor: currentTestimonial === index ? '#f97316' : 'rgba(255,255,255,0.3)'
                       }}
-                      transition={{ duration: 0.3 }}
                       className="h-2 rounded-full"
                     />
                   ))}
                 </div>
               </div>
             )}
-
           </div>
 
-          {/* Centered CTA */}
           <div className="flex justify-center mt-12 lg:mt-16">
             <div className="relative">
               {particles.map((p) => {
@@ -595,7 +498,7 @@ const testimonials = [
                 );
               })}
               <motion.button 
-                onClick={handleOpenEnrollment} // ✅ CONNECTED TO ENROLLMENT FORM
+                onClick={handleOpenEnrollment}
                 whileHover={{ scale: 1.08 }} 
                 whileTap={{ scale: 0.94 }}
                 className="relative px-8 lg:px-12 py-3 lg:py-4 rounded-full font-semibold tracking-wider text-white text-sm lg:text-base bg-black border border-orange-500/40 shadow-[0_0_40px_rgba(249,115,22,0.35)] overflow-hidden group"
@@ -611,7 +514,6 @@ const testimonials = [
         </div>
       </div>
       
-      {/* ✅ ENROLLMENT FORM MODAL */}
       <EnrollmentForm
         isOpen={isEnrollmentOpen}
         onClose={handleCloseEnrollment}
@@ -624,21 +526,20 @@ const testimonials = [
         onSubmit={() => {}}
       />
       
-{/* Logo marquee */}
       <div className="relative z-10 mt-12 lg:mt-16 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
          <div className="mb-6 flex items-center justify-center gap-3">
-           <div className="h-px w-12 bg-gradient-to-r from-transparent to-orange-500/50" />
-           <div className="text-xs font-semibold tracking-[0.25em] uppercase text-orange-400/60">Trusted Partners</div>
-           <div className="h-px w-12 bg-gradient-to-l from-transparent to-orange-500/50" />
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-orange-500/50" />
+            <div className="text-xs font-semibold tracking-[0.25em] uppercase text-orange-400/60">Trusted Partners</div>
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-orange-500/50" />
          </div>
          <div className="relative py-8">
-           <div className="pointer-events-none absolute left-0 top-0 h-full w-24 lg:w-32  via-[#060302]/90 to-transparent z-10" />
-           <div className="pointer-events-none absolute right-0 top-0 h-full w-24 lg:w-32  via-[#060302]/90 to-transparent z-10" />
+           <div className="pointer-events-none absolute left-0 top-0 h-full w-24 lg:w-32 z-10" />
+           <div className="pointer-events-none absolute right-0 top-0 h-full w-24 lg:w-32 z-10" />
            <div className="logo-strip flex items-center gap-6 lg:gap-10">
              {[...companyLogos, ...companyLogos, ...companyLogos].map((logo, idx) => (
                <div key={logo.name + idx} className="group relative flex h-16 w-28 lg:h-20 lg:w-36 items-center justify-center flex-shrink-0">
-                 <img src={logo.src} alt={logo.name} className="max-h-11 lg:max-h-20 w-auto object-contain   group-hover:saturate-100 group-hover:brightness-110 group-hover:scale-110 group-hover:drop-shadow-[0_0_12px_rgba(251,146,60,0.4)] transition-all duration-500" />
+                 <img src={logo.src} alt={logo.name} className="max-h-11 lg:max-h-20 w-auto object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
                </div>
              ))}
            </div>

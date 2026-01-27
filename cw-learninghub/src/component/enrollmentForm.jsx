@@ -250,12 +250,23 @@ value={formData.course ?? ''}
                         } focus:outline-none transition-all duration-300 text-neutral-800 appearance-none cursor-pointer
                       `}
                     >
-                      <option value="">Select a course</option>
-                      <option value="web-development">Web Development</option>
-                      <option value="data-science">Data Science</option>
-                      <option value="mobile-development">Mobile Development</option>
-                      <option value="ui-ux-design">UI/UX Design</option>
-                      <option value="digital-marketing">Digital Marketing</option>
+<option value="">Select a course</option>
+                      <option value="Web-development">Web Development</option>
+                      <option value="Graphic-design">Graphic Design</option>
+                      <option value="Frontend development">Frontend Development</option>
+                      <option value="Big Data Analytics">Big Data Analytics</option>
+                      <option value="Java Fullstack">Java Fullstack</option>
+                     <option value="Python Fullstack">Python Fullstack</option>
+                    <option value="Cyber Security">Cyber Security</option>
+                    <option value="Devops">Devops</option>
+                     <option value="Mern Stack">Mern Stack</option>
+                      <option value="Data Science">Data Science</option>
+                      <option value="Mobile Development">Mobile Development</option>
+                      <option value="UI/UX Design">UI/UX Design</option>
+                      <option value="Digital Marketing">Digital Marketing</option>
+                     <option value="Machine Learning">Machine Learning</option>
+                      <option value="Artificial Intelligence">Artificial Intelligence</option>
+                      <option value="Others">Others</option>
                     </select>
                     <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400 pointer-events-none" />
                   </div>
