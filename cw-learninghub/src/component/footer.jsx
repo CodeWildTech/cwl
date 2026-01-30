@@ -311,56 +311,58 @@ export default function ContactPage() {
       )}
 
       {/* BOTTOM INFO STRIP - FIXED FOR ALL SCREENS */}
-      <section className="bg-black border-t border-white/5 px-4 sm:px-6">
-        <div className="max-w-6xl mx-auto py-6 sm:py-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 sm:gap-6 lg:gap-8">
-          {/* Address & name */}
-          <div className="flex items-start gap-2 sm:gap-3 min-w-0 flex-1">
-            <MapPin className="text-orange-500 mt-1 flex-shrink-0" size={24} />
-            <div className="min-w-0">
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight">CW LearningHub</h3>
-              <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mt-1 line-clamp-2">
-                Aristo Junction, Thiruvananthapuram,
-                <br className="hidden sm:block" />
-                Kerala - 695041
-              </p>
-            </div>
-          </div>
+     <section className="bg-black border-t border-white/5 px-4 sm:px-6">
+  <div className="max-w-6xl mx-auto py-6 sm:py-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 sm:gap-6 lg:gap-8">
+    {/* Address & name */}
+    <div className="flex items-start gap-2 sm:gap-3 min-w-0 flex-1">
+      <MapPin className="text-orange-500 mt-1 flex-shrink-0" size={24} />
+      <div className="min-w-0">
+        <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight">CW LearningHub</h3>
+        <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mt-1">
+          Aristo Junction, Thiruvananthapuram,
+          <br className="hidden sm:block" />
+          Kerala - 695041
+        </p>
+      </div>
+    </div>
 
-          {/* Social icons */}
-          <div className="flex flex-col gap-2 sm:gap-3 w-full sm:w-auto">
-            <h4 className="text-xs sm:text-sm font-medium text-gray-200 tracking-[0.18em]">
-              Connect With Us
-            </h4>
-            <div className="flex gap-2 sm:gap-4">
-              <a
-                href="https://www.instagram.com/codewild.learninghub?igsh=ZDV2NHE2aDRnNWFo"
-                className="bg-zinc-900 hover:bg-orange-500 p-2 sm:p-3 rounded-full transition-all duration-200 hover:scale-110 flex-shrink-0"
-              >
-                <Instagram size={20} />
-              </a>
-              <a
-                href="#"
-                className="bg-zinc-900 hover:bg-orange-500 p-2 sm:p-3 rounded-full transition-all duration-200 hover:scale-110 flex-shrink-0"
-              >
-                <Linkedin size={20} />
-              </a>
-              <a
-                href="#"
-                className="bg-zinc-900 hover:bg-orange-500 p-2 sm:p-3 rounded-full transition-all duration-200 hover:scale-110 flex-shrink-0"
-              >
-                <Youtube size={20} />
-              </a>
-            </div>
-          </div>
-
-          {/* Email pill */}
-          <button className="inline-flex items-center gap-2 sm:gap-3 bg-zinc-900 rounded-full px-3 sm:px-4 py-2 text-xs sm:text-sm text-gray-200 hover:text-orange-500 transition-colors flex-shrink-0">
-            <Mail size={18} />
-            <span className="truncate">contact@codewildlearn.com</span>
-          </button>
+    {/* Right Side Container: Socials and Email on the same line */}
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full lg:w-auto">
+      {/* Social icons */}
+      <div className="flex flex-col gap-2">
+        <h4 className="text-xs sm:text-sm font-medium text-gray-200 tracking-[0.18em]">
+          Connect With Us
+        </h4>
+        <div className="flex gap-2 sm:gap-4">
+          <a
+            href="https://www.instagram.com/codewild.learninghub?igsh=ZDV2NHE2aDRnNWFo"
+            className="bg-zinc-900 hover:bg-orange-500 p-2 sm:p-3 rounded-full transition-all duration-200 hover:scale-110 flex-shrink-0"
+          >
+            <Instagram size={20} />
+          </a>
+          <a
+            href="#"
+            className="bg-zinc-900 hover:bg-orange-500 p-2 sm:p-3 rounded-full transition-all duration-200 hover:scale-110 flex-shrink-0"
+          >
+            <Linkedin size={20} />
+          </a>
+          <a
+            href="#"
+            className="bg-zinc-900 hover:bg-orange-500 p-2 sm:p-3 rounded-full transition-all duration-200 hover:scale-110 flex-shrink-0"
+          >
+            <Youtube size={20} />
+          </a>
         </div>
-      </section>
+      </div>
 
+      {/* Email pill - Now aligned with the social section via the parent flex-row */}
+      <button className="inline-flex items-center gap-2 sm:gap-3 bg-zinc-900 rounded-full px-4 py-3 text-xs sm:text-sm text-gray-200 hover:text-orange-500 transition-colors flex-shrink-0 mt-auto sm:mt-6">
+        <Mail size={18} />
+        <span className="truncate">codewildlearninghub@gmail.com</span>
+      </button>
+    </div>
+  </div>
+</section>
       {/* FOOTER */}
       <footer className="bg-black text-center py-5 text-gray-500 text-xs border-t border-zinc-900">
         © 2025 Design &amp; Developed by CodeWild Tech

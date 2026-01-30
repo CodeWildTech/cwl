@@ -22,6 +22,7 @@ import {
 import EnrollmentContainer from '../component/enrollmentFormContainer';
 import ProgramOverviewPage from './programOverview'; 
 import { coursesData } from '../data/courses';
+import { Helmet } from 'react-helmet-async';
 
 // Main CoursesSection Component - FULLY CONNECTED TO JSON + TIMER POPUP
 export default function ProgramOverview() {
@@ -138,6 +139,15 @@ export default function ProgramOverview() {
 
   return (
     <>
+
+    <Helmet>
+        <title>Tech Courses </title>
+        <meta
+          name="description"
+          content="Explore beginner to advanced tech and non-tech courses with real-world projects and corporate mentor support."
+        />
+        <link rel="canonical" href="https://codewildlearn.com/courses" />
+      </Helmet>
       <section className="py-24 lg:py-28 bg-[#0A0504] relative overflow-hidden text-slate-200">
         {/* Background elements */}
         <div

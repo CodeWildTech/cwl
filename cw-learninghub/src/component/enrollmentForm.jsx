@@ -12,6 +12,55 @@ const EnrollmentForm = ({
   isSubmitting = false,
   onSubmit
 }) => {
+  // 🔧 INPUT VALIDATION HANDLERS
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    
+    // Phone number - only digits allowed (10 digits max)
+    if (name === 'phone') {
+      const phoneValue = value.replace(/[^0-9]/g, '').slice(0, 10);
+      onInputChange({ target: { name, value: phoneValue } });
+      return;
+    }
+    
+    // Name - only letters, spaces, and common characters
+    if (name === 'name') {
+      const nameValue = value.replace(/[^a-zA-Z\s.'\-]/g, '').slice(0, 50);
+      onInputChange({ target: { name, value: nameValue } });
+      return;
+    }
+    
+    // Email - basic email pattern
+    if (name === 'email') {
+      const emailValue = value.slice(0, 100);
+      onInputChange({ target: { name, value: emailValue } });
+      return;
+    }
+    
+    // Location - alphanumeric + common characters
+    if (name === 'location') {
+      const locationValue = value.replace(/[^a-zA-Z0-9\s.,\-]/g, '').slice(0, 100);
+      onInputChange({ target: { name, value: locationValue } });
+      return;
+    }
+    
+    // Qualification - alphanumeric + common characters
+    if (name === 'qualification') {
+      const qualValue = value.replace(/[^a-zA-Z0-9\s(),.\-]/g, '').slice(0, 100);
+      onInputChange({ target: { name, value: qualValue } });
+      return;
+    }
+    
+    // Doubts - alphanumeric + common characters
+    if (name === 'doubts') {
+      const doubtsValue = value.replace(/[^a-zA-Z0-9\s.,!?;:\-'"]/g, '').slice(0, 500);
+      onInputChange({ target: { name, value: doubtsValue } });
+      return;
+    }
+    
+    onInputChange(e);
+  };
+
   return (
     <div
       className={`
@@ -25,6 +74,7 @@ const EnrollmentForm = ({
         className="absolute inset-0 bg-black/60 backdrop-blur-sm z-0"
         onClick={onClose}
       />
+
 
       {/* 🔧 MODAL — z-10 ENSURES ABOVE BACKDROP */}
       <div
@@ -42,6 +92,7 @@ const EnrollmentForm = ({
         <div className="absolute top-20 right-10 w-32 h-32 rounded-full bg-orange-200/30 blur-3xl pointer-events-none" />
         <div className="absolute bottom-20 left-10 w-40 h-40 rounded-full bg-orange-300/20 blur-3xl pointer-events-none" />
 
+
         {/* close (CANCEL) button — NO CHANGE */}
         <button
           onClick={onClose}
@@ -57,6 +108,7 @@ const EnrollmentForm = ({
         >
           <X className="w-5 h-5 text-orange-600 group-hover:text-orange-700" />
         </button>
+
 
         {/* layout */}
         <div className="relative z-10 flex">
@@ -77,6 +129,7 @@ const EnrollmentForm = ({
             </span>
           </div>
 
+
           {/* form */}
           <div className="flex-1">
             <form onSubmit={onSubmit} className="relative p-8 md:p-12 pt-8">
@@ -91,6 +144,7 @@ const EnrollmentForm = ({
                   {errors.general}
                 </div>
               )}
+
 
               {/* header */}
               <div className="mb-8">
@@ -108,9 +162,8 @@ const EnrollmentForm = ({
                 </p>
               </div>
 
-              {/* ALL YOUR ORIGINAL FORM FIELDS — UNCHANGED */}
-              {/* (inputs, selects, textarea, submit button exactly same) */}
-               {/* ALL ORIGINAL FORM FIELDS - NO CHANGES */}
+
+              {/* ALL YOUR ORIGINAL FORM FIELDS — NOW WITH VALIDATION */}
               <div className="space-y-5">
                 {/* Name */}
                 <div className="space-y-2">
@@ -121,7 +174,7 @@ const EnrollmentForm = ({
                     type="text"
                     name="name"
                     value={formData.name ?? ''}
-                    onChange={onInputChange}
+                    onChange={handleInputChange}
                     className={`
                       w-full px-4 py-3 rounded-xl
                       bg-white/80 border-2 ${errors.name ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
@@ -131,6 +184,7 @@ const EnrollmentForm = ({
                   {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
                 </div>
 
+
                 {/* Email */}
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-neutral-700">
@@ -139,8 +193,8 @@ const EnrollmentForm = ({
                   <input
                     type="email"
                     name="email"
-  value={formData.email ?? ''}
-                    onChange={onInputChange}
+                    value={formData.email ?? ''}
+                    onChange={handleInputChange}
                     className={`
                       w-full px-4 py-3 rounded-xl
                       bg-white/80 border-2 ${errors.email ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
@@ -149,6 +203,7 @@ const EnrollmentForm = ({
                   />
                   {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
                 </div>
+
 
                 {/* Phone */}
                 <div className="space-y-2">
@@ -162,9 +217,11 @@ const EnrollmentForm = ({
                     <input
                       type="tel"
                       name="phone"
-value={formData.phone ?? ''}
-                      onChange={onInputChange}
+                      value={formData.phone ?? ''}
+                      onChange={handleInputChange}
                       maxLength={10}
+                      pattern="[0-9]{10}"
+                      inputMode="numeric"
                       className={`
                         flex-1 px-4 py-3 rounded-xl
                         bg-white/80 border-2 ${errors.phone ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
@@ -175,6 +232,7 @@ value={formData.phone ?? ''}
                   {errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone}</p>}
                 </div>
 
+
                 {/* DOB + Location */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
@@ -184,8 +242,8 @@ value={formData.phone ?? ''}
                     <input
                       type="date"
                       name="dob"
-value={formData.dob ?? ''}
-                      onChange={onInputChange}
+                      value={formData.dob ?? ''}
+                      onChange={handleInputChange}
                       max={new Date().toISOString().split('T')[0]}
                       className={`
                         w-full px-4 py-3 rounded-xl
@@ -196,6 +254,7 @@ value={formData.dob ?? ''}
                     {errors.dob && <p className="text-xs text-red-500 mt-1">{errors.dob}</p>}
                   </div>
 
+
                   <div className="space-y-2">
                     <label className="block text-sm font-medium text-neutral-700">
                       Location <span className="text-red-500">*</span>
@@ -203,8 +262,8 @@ value={formData.dob ?? ''}
                     <input
                       type="text"
                       name="location"
-value={formData.location ?? ''}
-                      onChange={onInputChange}
+                      value={formData.location ?? ''}
+                      onChange={handleInputChange}
                       className={`
                         w-full px-4 py-3 rounded-xl
                         bg-white/80 border-2 ${errors.location ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
@@ -215,6 +274,7 @@ value={formData.location ?? ''}
                   </div>
                 </div>
 
+
                 {/* Qualification */}
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-neutral-700">
@@ -223,8 +283,8 @@ value={formData.location ?? ''}
                   <input
                     type="text"
                     name="qualification"
-value={formData.qualification ?? ''}
-                    onChange={onInputChange}
+                    value={formData.qualification ?? ''}
+                    onChange={handleInputChange}
                     className={`
                       w-full px-4 py-3 rounded-xl
                       bg-white/80 border-2 ${errors.qualification ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
@@ -234,6 +294,7 @@ value={formData.qualification ?? ''}
                   {errors.qualification && <p className="text-xs text-red-500 mt-1">{errors.qualification}</p>}
                 </div>
 
+
                 {/* Course */}
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-neutral-700">
@@ -242,29 +303,29 @@ value={formData.qualification ?? ''}
                   <div className="relative">
                     <select
                       name="course"
-value={formData.course ?? ''}
-                      onChange={onInputChange}
+                      value={formData.course ?? ''}
+                      onChange={handleInputChange}
                       className={`
                         w-full px-4 py-3 rounded-xl
                         bg-white/80 border-2 ${errors.course ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
                         } focus:outline-none transition-all duration-300 text-neutral-800 appearance-none cursor-pointer
                       `}
                     >
-<option value="">Select a course</option>
+                      <option value="">Select a course</option>
                       <option value="Web-development">Web Development</option>
                       <option value="Graphic-design">Graphic Design</option>
                       <option value="Frontend development">Frontend Development</option>
                       <option value="Big Data Analytics">Big Data Analytics</option>
                       <option value="Java Fullstack">Java Fullstack</option>
-                     <option value="Python Fullstack">Python Fullstack</option>
-                    <option value="Cyber Security">Cyber Security</option>
-                    <option value="Devops">Devops</option>
-                     <option value="Mern Stack">Mern Stack</option>
+                      <option value="Python Fullstack">Python Fullstack</option>
+                      <option value="Cyber Security">Cyber Security</option>
+                      <option value="Devops">Devops</option>
+                      <option value="Mern Stack">Mern Stack</option>
                       <option value="Data Science">Data Science</option>
                       <option value="Mobile Development">Mobile Development</option>
                       <option value="UI/UX Design">UI/UX Design</option>
                       <option value="Digital Marketing">Digital Marketing</option>
-                     <option value="Machine Learning">Machine Learning</option>
+                      <option value="Machine Learning">Machine Learning</option>
                       <option value="Artificial Intelligence">Artificial Intelligence</option>
                       <option value="Others">Others</option>
                     </select>
@@ -273,6 +334,7 @@ value={formData.course ?? ''}
                   {errors.course && <p className="text-xs text-red-500 mt-1">{errors.course}</p>}
                 </div>
 
+
                 {/* Doubts */}
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-neutral-700">
@@ -280,8 +342,8 @@ value={formData.course ?? ''}
                   </label>
                   <textarea
                     name="doubts"
-value={formData.doubts ?? ''}
-                    onChange={onInputChange}
+                    value={formData.doubts ?? ''}
+                    onChange={handleInputChange}
                     rows={3}
                     className="
                       w-full px-4 py-3 rounded-xl
@@ -291,6 +353,7 @@ value={formData.doubts ?? ''}
                     "
                   />
                 </div>
+
 
                 {/* Submit - NOW CONNECTED TO BACKEND */}
                 <div className="pt-4">
@@ -327,6 +390,7 @@ value={formData.doubts ?? ''}
             </form>
           </div>
         </div>
+
 
         <style jsx>{`
           .hide-scrollbar::-webkit-scrollbar {
