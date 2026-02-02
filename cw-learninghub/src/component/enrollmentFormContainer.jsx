@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import EnrollmentForm from "./enrollmentForm";
+import API from "../config/api.js";
 
 const EnrollmentContainer = ({ isOpen, onClose }) => {
 
@@ -84,7 +85,7 @@ const EnrollmentContainer = ({ isOpen, onClose }) => {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/api/forms/submit",
+        `${API}/api/forms/submit`,
         {
           method: "POST",
           headers: {

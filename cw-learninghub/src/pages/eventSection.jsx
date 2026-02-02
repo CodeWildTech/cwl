@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import toast, { Toaster } from 'react-hot-toast'; // Add this import
+import toast, { Toaster } from 'react-hot-toast';
+importAPI from "../config/api.js";
 
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -9,8 +10,8 @@ import {
   X,
   CheckCircle2,
   Clock,
+  Share2,
 } from "lucide-react";
-
 
 const EVENTS_DATA = [
   {
@@ -80,6 +81,10 @@ const EVENTS_DATA = [
   },
 ];
 
+const generateShareLink = (event) => {
+  const baseUrl = window.location.origin;
+  return `${baseUrl}/event-register/${event.id}?title=${encodeURIComponent(event.title)}&date=${encodeURIComponent(event.date)}&category=${encodeURIComponent(event.category)}`;
+};
 
 export default function EventsSection() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -91,84 +96,109 @@ export default function EventsSection() {
     phone: "",
     current_status: "",
   });
-
+  const [showShareModal, setShowShareModal] = useState(false);
+  const [currentShareEvent, setCurrentShareEvent] = useState(null);
 
   const filteredEvents =
     activeFilter === "All"
       ? EVENTS_DATA
       : EVENTS_DATA.filter((e) => e.category === activeFilter);
 
-
   const handleReserveClick = (event) => {
     setSelectedEvent(event);
     setShowForm(true);
   };
 
+  const handleShareClick = (event) => {
+    setCurrentShareEvent(event);
+    setShowShareModal(true);
+  };
 
-
-const handleFormSubmit = async (e) => {
-  e.preventDefault();
-  console.log("Registration submitted:", formData, selectedEvent);
-
-  const loadingToast = toast.loading("Submitting registration..."); // Modern loading state
-
-  try { 
-    const response = await fetch("http://localhost:8000/api/register-event/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...formData,
-        eventTitle: selectedEvent.title,
-        eventDate: selectedEvent.date,
-        eventCategory: selectedEvent.category,
-        type: "event",
-        eventData: {
-          title: selectedEvent.title,
-          date: selectedEvent.date,
-          mode: selectedEvent.location || selectedEvent.category
-        }
-      }),
-    });
-
-    const data = await response.json();
-
-    toast.dismiss(loadingToast); // Dismiss loading
-
-    if (response.ok) {
-      toast.success(`🎉 ${selectedEvent.title} registration successful! Check your email.`, {
-        duration: 5000,
-        position: "top-right"
+  const handleCopyLink = () => {
+    const shareLink = generateShareLink(currentShareEvent);
+    navigator.clipboard.writeText(shareLink).then(() => {
+      toast.success("📎 Link copied to clipboard!", {
+        duration: 3000,
+        position: "top-right",
       });
-      setShowForm(false);
-      setSelectedEvent(null);
-      setFormData({ name: "", email: "", phone: "", current_status: "" });
-    } else {
-      toast.error(`Registration failed: ${data.error || "Unknown error"}`);
-    }
-  } catch (error) {
-    toast.dismiss(loadingToast);
-    console.error("Error submitting form:", error);
-    toast.error("Network error. Please check your connection and try again.");
-  }
-};
+      setShowShareModal(false);
+    }).catch(() => {
+      toast.error("Failed to copy link");
+    });
+  };
 
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Registration submitted:", formData, selectedEvent);
+
+    const loadingToast = toast.loading("Submitting registration...");
+
+    try { 
+      const response = await fetch(`${API}/api/register-event/submit`, {
+        method: "POST",
+        headers: {
+         "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          eventTitle: selectedEvent.title,
+          eventDate: selectedEvent.date,
+          eventCategory: selectedEvent.category,
+          type: "event",
+          eventData: {
+            title: selectedEvent.title,
+            date: selectedEvent.date,
+            mode: selectedEvent.location || selectedEvent.category
+          }
+        }),
+      });
+
+      const data = await response.json();
+
+      toast.dismiss(loadingToast);
+
+      if (response.ok) {
+        toast.success(`🎉 ${selectedEvent.title} registration successful! Check your email.`, {
+          duration: 5000,
+          position: "top-right"
+        });
+        setShowForm(false);
+        setSelectedEvent(null);
+        setFormData({ name: "", email: "", phone: "", current_status: "" });
+      } else {
+        toast.error(`Registration failed: ${data.error || "Unknown error"}`);
+      }
+    } catch (error) {
+      toast.dismiss(loadingToast);
+      console.error("Error submitting form:", error);
+      toast.error("Network error. Please check your connection and try again.");
+    }
+  };
 
   const handleFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-
   return (
     <section className="relative min-h-[85vh] text-white px-6 lg:px-14 py-16 overflow-hidden bg-black">
-    <Toaster position="top-right" richColors />
+      <Toaster position="top-right" richColors />
+      
+      {/* Share Modal */}
+      <AnimatePresence>
+        {showShareModal && currentShareEvent && (
+          <ShareModal
+            event={currentShareEvent}
+            onClose={() => setShowShareModal(false)}
+            onCopyLink={handleCopyLink}
+          />
+        )}
+      </AnimatePresence>
+
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_50%,rgba(255,106,26,0.3)_0%,rgba(249,115,22,0.15)_30%,rgba(234,88,12,0.08)_50%,transparent_70%)] backdrop-blur-[80px]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_40%_at_50%_50%,rgba(255,106,26,0.15)_0%,rgba(249,115,22,0.08)_40%,transparent_60%)] backdrop-blur-[120px]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_50%,rgba(20,11,5,0.4)_0%,rgba(15,15,15,0.2)_50%,transparent_80%)] backdrop-blur-[60px]" />
       </div>
-
 
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-9">
@@ -181,16 +211,16 @@ const handleFormSubmit = async (e) => {
             </h1>
           </div>
 
-
           <div className="flex bg-black/70 rounded-full p-1 border border-white/10 backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.03)]">
             {["All", "Trivandrum", "Online"].map((item) => (
               <button
                 key={item}
                 onClick={() => setActiveFilter(item)}
-                className={`relative px-5.5 md:px-6.5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${activeFilter === item
-                  ? "text-[#0f0a09]"
-                  : "text-white/55 hover:text-white"
-                  }`}
+                className={`relative px-5.5 md:px-6.5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                  activeFilter === item
+                    ? "text-[#0f0a09]"
+                    : "text-white/55 hover:text-white"
+                }`}
               >
                 {activeFilter === item && (
                   <motion.div
@@ -209,7 +239,6 @@ const handleFormSubmit = async (e) => {
           </div>
         </div>
 
-
         <motion.div
           layout
           className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-5"
@@ -220,11 +249,11 @@ const handleFormSubmit = async (e) => {
               event={event}
               index={idx}
               onClick={() => setSelectedEvent(event)}
+              onShareClick={handleShareClick}
             />
           ))}
         </motion.div>
       </div>
-
 
       <AnimatePresence>
         {selectedEvent && !showForm && (
@@ -252,15 +281,13 @@ const handleFormSubmit = async (e) => {
   );
 }
 
-
-function EventCard({ event, onClick, index }) {
+function EventCard({ event, onClick, onShareClick, index }) {
   const heightMap = {
     sm: "h-[280px]",
     md: "h-[315px]",
     lg: "h-[350px]",
     xl: "h-[385px]",
   };
-
 
   const colMap = {
     1: "md:col-span-2 lg:col-span-2",
@@ -270,12 +297,15 @@ function EventCard({ event, onClick, index }) {
     5: "md:col-span-2 lg:col-span-6",
   };
 
-
   const statusColors = {
     Upcoming: "text-orange-400 border-orange-400/30 bg-orange-400/10",
     Ended: "text-white/40 border-white/10 bg-white/5",
   };
 
+  const handleShare = (e) => {
+    e.stopPropagation();
+    onShareClick(event);
+  };
 
   return (
     <motion.div
@@ -286,6 +316,17 @@ function EventCard({ event, onClick, index }) {
       onClick={onClick}
       className={`${colMap[event.id]} ${heightMap[event.size]} group relative cursor-pointer rounded-[32px] border border-white/10 bg-[#0f0f0f] overflow-hidden transition-all duration-700 hover:border-white/30 hover:shadow-[0_0_70px_-18px_rgba(255,255,255,0.1)] backdrop-blur-md`}
     >
+      {/* Share Button - Moved to top right */}
+      <motion.button
+        onClick={handleShare}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className="absolute top-5 right-5 z-40 flex items-center gap-1.5 px-3.5 py-2.5 rounded-full bg-orange-600/95 text-white text-xs font-bold uppercase tracking-wider border border-orange-500/50 hover:bg-orange-500 hover:shadow-orange-500/25 backdrop-blur-sm transition-all duration-300 pointer-events-auto shadow-lg"
+      >
+        <Share2 size={13} />
+        Share
+      </motion.button>
+
       <div className="relative z-20 h-full w-[65%] p-7 md:p-8 flex flex-col justify-between pointer-events-none">
         <div>
           <div className="flex items-center gap-2.5 mb-5">
@@ -299,7 +340,6 @@ function EventCard({ event, onClick, index }) {
 
           <h2 className="text-3xl md:text-4xl font-bold leading-[1.1] text-white group-hover:text-orange-600 transition-colors duration-500">
             {event.title} <br />
-            {/* UPDATED: Location name with icon and smaller font */}
             <span className="text-sm md:text-base text-white/40 group-hover:text-white transition-colors duration-500 flex items-center gap-1 mt-1">
               <MapPin size={14} className="text-orange-500" />
               {event.category}
@@ -311,21 +351,21 @@ function EventCard({ event, onClick, index }) {
           </p>
         </div>
 
-
-        <div className="flex items-center gap-5">
-          <div className="flex flex-col">
-            <span className="text-[10px] uppercase tracking-widest text-white/30 font-bold mb-1">Venue</span>
-            <span className="text-sm font-medium text-white/80">{event.location}</span>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-5">
+            <div className="flex flex-col">
+              <span className="text-[10px] uppercase tracking-widest text-white/30 font-bold mb-1">Venue</span>
+              <span className="text-sm font-medium text-white/80">{event.location}</span>
+            </div>
+            <motion.div
+              whileHover={{ scale: 1.08, rotate: -45 }}
+              className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center bg-white/5 text-white backdrop-blur-sm"
+            >
+              <ArrowDownRight size={18} />
+            </motion.div>
           </div>
-          <motion.div
-            whileHover={{ scale: 1.08, rotate: -45 }}
-            className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center bg-white/5 text-white backdrop-blur-sm"
-          >
-            <ArrowDownRight size={18} />
-          </motion.div>
         </div>
       </div>
-
 
       <div className="absolute top-0 right-0 w-[45%] h-full z-0 overflow-hidden">
         <img
@@ -337,12 +377,66 @@ function EventCard({ event, onClick, index }) {
         <div className="absolute top-0 left-0 w-[1px] h-full bg-gradient-to-b from-transparent via-white/20 to-transparent" />
       </div>
 
-
       <div className="absolute -bottom-18 -left-18 w-56 h-56 bg-orange-500/5 rounded-full blur-[90px] pointer-events-none" />
     </motion.div>
   );
 }
 
+function ShareModal({ event, onClose, onCopyLink }) {
+  const shareLink = generateShareLink(event);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+    >
+      <motion.div
+        initial={{ scale: 0.9, y: 20, opacity: 0 }}
+        animate={{ scale: 1, y: 0, opacity: 1 }}
+        exit={{ scale: 0.9, y: 20, opacity: 0 }}
+        className="relative w-full max-w-sm bg-gradient-to-b from-orange-500/10 via-orange-400/5 to-transparent backdrop-blur-2xl rounded-3xl border border-orange-500/30 shadow-2xl shadow-orange-500/20 max-h-[90vh] overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-transparent -z-10" />
+        
+        <button
+          onClick={onClose}
+          className="absolute top-6 right-6 p-2 rounded-2xl bg-white/20 hover:bg-white/30 backdrop-blur-sm transition-all z-50 group"
+        >
+          <X size={20} className="text-white group-hover:rotate-90 transition-transform" />
+        </button>
+
+        <div className="relative z-10 p-8 text-center text-white">
+          <div className="w-20 h-20 mx-auto mb-6 rounded-3xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+            <Share2 size={32} className="text-orange-400" />
+          </div>
+          
+          <h3 className="text-2xl font-black mb-4 bg-gradient-to-r from-white via-orange-100 to-white bg-clip-text text-transparent">
+            Share Event
+          </h3>
+          
+          <p className="text-white/80 text-sm mb-6 max-w-[280px] mx-auto leading-relaxed">
+            #{event.number} {event.title}
+          </p>
+
+          <motion.button
+            onClick={onCopyLink}
+            whileHover={{ scale: 1.02, x: 4 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full py-4 px-6 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold text-lg rounded-2xl shadow-xl shadow-orange-500/30 hover:shadow-2xl hover:from-orange-500 hover:to-orange-400 transition-all backdrop-blur-sm border border-orange-400/30"
+          >
+            📎 Copy Share Link
+          </motion.button>
+
+          <p className="text-xs text-white/60 mt-4 font-medium tracking-wider uppercase">
+            Share on WhatsApp, Telegram, Email
+          </p>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
 
 function EventModal({ event, onClose, onReserveClick }) {
   const isUpcoming = event.status === "Upcoming";
@@ -368,8 +462,9 @@ function EventModal({ event, onClose, onReserveClick }) {
         </button>
         <div className="p-8 md:p-10">
           <div className="flex items-center gap-3 mb-6">
-            <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${isUpcoming ? "bg-green-100 text-green-700" : "bg-slate-100 text-slate-600"
-              }`}>
+            <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
+              isUpcoming ? "bg-green-100 text-green-700" : "bg-slate-100 text-slate-600"
+            }`}>
               <div className={`w-1.5 h-1.5 rounded-full ${isUpcoming ? "bg-green-500 animate-pulse" : "bg-slate-400"}`} />
               {isUpcoming ? "Registration Open" : "Event Concluded"}
             </div>
@@ -445,7 +540,6 @@ function EventModal({ event, onClose, onReserveClick }) {
     </motion.div>
   );
 }
-
 
 function RegistrationForm({ event, formData, onSubmit, onChange, onClose }) {
   return (
