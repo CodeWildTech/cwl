@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Instagram, Linkedin, Youtube, MapPin, Mail, Download, X } from "lucide-react";
+import { Instagram, Linkedin, MessageCircle, MapPin, Mail, Download, X } from "lucide-react";
 import axios from "axios";
 import developerImg from "../assets/footer/developer.png";
 import { toast, Toaster } from 'sonner';
@@ -175,9 +175,16 @@ export default function ContactPage() {
             </div>
 
             <div className="flex gap-3">
-              <a href="#" className="w-12 h-12 bg-zinc-900 hover:bg-orange-500 p-3 rounded-xl flex items-center justify-center"><Instagram size={18} /></a>
-              <a href="#" className="w-12 h-12 bg-zinc-900 hover:bg-orange-500 p-3 rounded-xl flex items-center justify-center"><Linkedin size={18} /></a>
-              <a href="#" className="w-12 h-12 bg-zinc-900 hover:bg-orange-500 p-3 rounded-xl flex items-center justify-center"><Youtube size={18} /></a>
+              <a href="https://www.instagram.com/codewild.learninghub?igsh=ZDV2NHE2aDRnNWFo" className="w-12 h-12 bg-zinc-900 hover:bg-orange-500 p-3 rounded-xl flex items-center justify-center"><Instagram size={18} /></a>
+              <a href="https://www.linkedin.com/company/codewild-learning-hub/" className="w-12 h-12 bg-zinc-900 hover:bg-orange-500 p-3 rounded-xl flex items-center justify-center"><Linkedin size={18} /></a>
+              <a
+                href="https://wa.me/917356227477?text=Hello! Can I talk with your team."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 bg-zinc-900 hover:bg-orange-500 p-3 rounded-xl flex items-center justify-center"
+              >
+                <MessageCircle size={18} />
+              </a>
             </div>
 
           </div>
