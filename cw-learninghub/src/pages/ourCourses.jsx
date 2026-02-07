@@ -20,7 +20,7 @@ import {
   X, // ✅ Added X icon for close button
 } from 'lucide-react';
 import EnrollmentContainer from '../component/enrollmentFormContainer';
-import ProgramOverviewPage from './programOverview'; 
+import ProgramOverviewPage from './programOverview';
 import { coursesData } from '../data/courses';
 import { Helmet } from 'react-helmet-async';
 
@@ -52,11 +52,11 @@ export default function ProgramOverview() {
 
 
   const mentors = [
-  "https://images.unsplash.com/photo-1560250097-0b93528c311a",
-  "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2",
-  "https://images.unsplash.com/photo-1556157382-97eda2d62296",
-  "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1",
-];
+    "https://images.unsplash.com/photo-1560250097-0b93528c311a",
+    "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2",
+    "https://images.unsplash.com/photo-1556157382-97eda2d62296",
+    "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1",
+  ];
 
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export default function ProgramOverview() {
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    
+
     const interval = setInterval(checkTime, 1000);
     return () => {
       clearInterval(interval);
@@ -140,13 +140,41 @@ export default function ProgramOverview() {
   return (
     <>
 
-    <Helmet>
-        <title>Tech Courses </title>
+      <Helmet>
+        <title>Industry-Vetted Tech Courses | CodeWild LearningHub</title>
         <meta
           name="description"
           content="Explore beginner to advanced tech and non-tech courses with real-world projects and corporate mentor support."
         />
         <link rel="canonical" href="https://codewildlearn.com/courses" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Tech Courses & Mentorship | CodeWild LearningHub" />
+        <meta property="og:description" content="Master coding with corporate-led bootcamps and real-world projects." />
+        <meta property="og:url" content="https://codewildlearn.com/courses" />
+        <meta property="og:type" content="website" />
+
+        {/* JSON-LD Course Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "itemListElement": Object.values(coursesData).flat().map((course, index) => ({
+              "@type": "ListItem",
+              "position": index + 1,
+              "item": {
+                "@type": "Course",
+                "name": course.title,
+                "description": course.description,
+                "provider": {
+                  "@type": "Organization",
+                  "name": "CodeWild LearningHub",
+                  "sameAs": "https://codewildlearn.com"
+                }
+              }
+            }))
+          })}
+        </script>
       </Helmet>
       <section className="py-24 lg:py-28 bg-[#0A0504] relative overflow-hidden text-slate-200">
         {/* Background elements */}
@@ -271,11 +299,11 @@ export default function ProgramOverview() {
                         <div className="flex -space-x-2 mr-3">
                           {[1, 2, 3].map((i) => (
                             <div key={i} className="w-7 h-7 lg:w-8 lg:h-8 rounded-full border-2 border-[#1A1210] overflow-hidden bg-slate-800">
-                           <img
-  src={mentors[i % mentors.length]}
-  alt="mentor"
-  className="w-full h-full object-cover"
-/>
+                              <img
+                                src={mentors[i % mentors.length]}
+                                alt="mentor"
+                                className="w-full h-full object-cover"
+                              />
                             </div>
                           ))}
                         </div>
@@ -351,7 +379,7 @@ export default function ProgramOverview() {
           >
             <X size={20} strokeWidth={2.5} />
           </button>
-          
+
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[1000] flex items-center justify-center p-6">
             <div className="bg-white/5 backdrop-blur-xl border border-white/20 rounded-3xl max-w-md w-full shadow-2xl overflow-hidden">
               {/* Clean header - REMOVED close button from here */}
@@ -396,7 +424,7 @@ export default function ProgramOverview() {
                   className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold text-lg py-4 px-6 rounded-2xl transition-all duration-200 shadow-xl hover:shadow-2xl active:scale-[0.98] border border-green-500/30 flex items-center justify-center gap-3 group"
                 >
                   <svg className="w-6 h-6 group-hover:-translate-y-0.5 transition-transform duration-200" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-8.696-5.238 9.8 9.8 0 01-1.312-4.175 9.83 9.83 0 011.12-4.309 9.75 9.75 0 013.292-3.319 9.84 9.84 0 016.258-1.512 9.69 9.69 0 014.288 1.316 9.71 9.71 0 013.526 3.551 9.84 9.84 0 011.199 4.903c-.017.34-.11.677-.288.978a10.3 10.3 0 01-.883 1.222 10.62 1"/>
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-8.696-5.238 9.8 9.8 0 01-1.312-4.175 9.83 9.83 0 011.12-4.309 9.75 9.75 0 013.292-3.319 9.84 9.84 0 016.258-1.512 9.69 9.69 0 014.288 1.316 9.71 9.71 0 013.526 3.551 9.84 9.84 0 011.199 4.903c-.017.34-.11.677-.288.978a10.3 10.3 0 01-.883 1.222 10.62 1" />
                   </svg>
                   <span>Just Chat on WhatsApp</span>
                 </button>
@@ -405,7 +433,7 @@ export default function ProgramOverview() {
                 <div className="space-y-3 text-center">
                   <div className="flex items-center justify-center gap-2 text-sm text-slate-300">
                     <svg className="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" />
                     </svg>
                     24/7 Support Available
                   </div>

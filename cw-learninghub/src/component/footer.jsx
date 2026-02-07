@@ -4,6 +4,7 @@ import axios from "axios";
 import developerImg from "../assets/footer/developer.png";
 import { toast, Toaster } from 'sonner';
 import API from "../config/api.js";
+import { Helmet } from "react-helmet-async";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -17,10 +18,10 @@ export default function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const loadingToast = toast.loading('Sending your message...');
-    
+
     try {
       const response = await axios.post(`${API}/api/footer-contact/submit`, formData);
-      
+
       toast.dismiss(loadingToast);
       toast.success('Thank you for contacting us!', {
         description: 'We will get back to you shortly via email.',
@@ -61,13 +62,18 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
+      <Helmet>
+        <title>Contact Us | CodeWild LearningHub</title>
+        <meta name="description" content="Have questions about our coding courses? Get in touch with the CodeWild LearningHub team for career guidance and enrollment support." />
+        <link rel="canonical" href="https://codewildlearn.com/contact" />
+      </Helmet>
       <Toaster position="top-right" richColors closeButton expand duration={4500} />
 
       {/* HERO SECTION */}
       <section className="flex-1 relative bg-gradient-to-b from-[#1c0b00] via-[#120300] to-black">
         <div className="max-w-6xl mx-auto px-4 py-22 lg:px-0 min-h-[75vh] flex items-center">
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.1fr] gap-10 lg:gap-14 w-full">
-            
+
             {/* LEFT */}
             <div className="flex items-end lg:items-center gap-2">
               <div className="relative">
@@ -134,37 +140,37 @@ export default function ContactPage() {
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 lg:gap-8 w-full lg:w-auto">
 
               {/* EMAIL */}
-         {/* EMAIL - Updated to open Gmail directly */}
-<a
-  href="https://mail.google.com/mail/?view=cm&to=contact@codewildlearn.com"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="flex items-center gap-3 bg-zinc-900/50 rounded-xl p-2.5 border border-white/5 hover:border-orange-500/50 transition-all duration-200 flex-1"
->
-  <div className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center">
-    <Mail size={18} className="text-gray-300" />
-  </div>
-  <p className="text-sm sm:text-base font-semibold text-gray-100 truncate">
-    contact@codewildlearn.com
-  </p>
-</a>
+              {/* EMAIL - Updated to open Gmail directly */}
+              <a
+                href="https://mail.google.com/mail/?view=cm&to=contact@codewildlearn.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 bg-zinc-900/50 rounded-xl p-2.5 border border-white/5 hover:border-orange-500/50 transition-all duration-200 flex-1"
+              >
+                <div className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center">
+                  <Mail size={18} className="text-gray-300" />
+                </div>
+                <p className="text-sm sm:text-base font-semibold text-gray-100 truncate">
+                  contact@codewildlearn.com
+                </p>
+              </a>
 
 
               {/* PHONE */}
-            {/* PHONE - Updated to open dialer/contact */}
-<a
-  href="tel:+917356227477"
-  className="flex items-center gap-3 bg-zinc-900/50 rounded-xl p-2.5 border border-white/5 hover:border-orange-500/50 transition-all duration-200 flex-1"
->
-  <div className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center">
-    <svg className="w-4.5 h-4.5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-    </svg>
-  </div>
-  <p className="text-sm sm:text-base font-semibold text-gray-100">
-    +91 73562 27477
-  </p>
-</a>
+              {/* PHONE - Updated to open dialer/contact */}
+              <a
+                href="tel:+917356227477"
+                className="flex items-center gap-3 bg-zinc-900/50 rounded-xl p-2.5 border border-white/5 hover:border-orange-500/50 transition-all duration-200 flex-1"
+              >
+                <div className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center">
+                  <svg className="w-4.5 h-4.5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </div>
+                <p className="text-sm sm:text-base font-semibold text-gray-100">
+                  +91 73562 27477
+                </p>
+              </a>
 
             </div>
 

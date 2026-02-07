@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import toast, { Toaster } from 'react-hot-toast';
-importAPI from "../config/api.js";
+import API from "../config/api.js";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import {
   ArrowDownRight,
   Calendar,
@@ -133,11 +133,11 @@ export default function EventsSection() {
 
     const loadingToast = toast.loading("Submitting registration...");
 
-    try { 
+    try {
       const response = await fetch(`${API}/api/register-event/submit`, {
         method: "POST",
         headers: {
-         "Content-Type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           ...formData,
@@ -181,8 +181,41 @@ export default function EventsSection() {
 
   return (
     <section className="relative min-h-[85vh] text-white px-6 lg:px-14 py-16 overflow-hidden bg-black">
+      <Helmet>
+        <title>Upcoming Tech Events & Workshops | CodeWild LearningHub</title>
+        <meta name="description" content="Join our upcoming workshops on Digital Marketing, Web Development, and AI. Learn from industry experts and network with professionals." />
+        <link rel="canonical" href="https://codewildlearn.com/events" />
+
+        {/* JSON-LD Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "itemListElement": EVENTS_DATA.map((event, index) => ({
+              "@type": "ListItem",
+              "position": index + 1,
+              "item": {
+                "@type": "EducationEvent",
+                "name": event.title,
+                "description": event.desc,
+                "startDate": event.date,
+                "location": {
+                  "@type": "Place",
+                  "name": event.location,
+                  "address": event.category
+                },
+                "image": event.image,
+                "performer": {
+                  "@type": "Organization",
+                  "name": "CodeWild LearningHub"
+                }
+              }
+            }))
+          })}
+        </script>
+      </Helmet>
       <Toaster position="top-right" richColors />
-      
+
       {/* Share Modal */}
       <AnimatePresence>
         {showShareModal && currentShareEvent && (
@@ -216,11 +249,10 @@ export default function EventsSection() {
               <button
                 key={item}
                 onClick={() => setActiveFilter(item)}
-                className={`relative px-5.5 md:px-6.5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
-                  activeFilter === item
-                    ? "text-[#0f0a09]"
-                    : "text-white/55 hover:text-white"
-                }`}
+                className={`relative px-5.5 md:px-6.5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${activeFilter === item
+                  ? "text-[#0f0a09]"
+                  : "text-white/55 hover:text-white"
+                  }`}
               >
                 {activeFilter === item && (
                   <motion.div
@@ -399,7 +431,7 @@ function ShareModal({ event, onClose, onCopyLink }) {
         className="relative w-full max-w-sm bg-gradient-to-b from-orange-500/10 via-orange-400/5 to-transparent backdrop-blur-2xl rounded-3xl border border-orange-500/30 shadow-2xl shadow-orange-500/20 max-h-[90vh] overflow-hidden"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-transparent -z-10" />
-        
+
         <button
           onClick={onClose}
           className="absolute top-6 right-6 p-2 rounded-2xl bg-white/20 hover:bg-white/30 backdrop-blur-sm transition-all z-50 group"
@@ -411,11 +443,11 @@ function ShareModal({ event, onClose, onCopyLink }) {
           <div className="w-20 h-20 mx-auto mb-6 rounded-3xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
             <Share2 size={32} className="text-orange-400" />
           </div>
-          
+
           <h3 className="text-2xl font-black mb-4 bg-gradient-to-r from-white via-orange-100 to-white bg-clip-text text-transparent">
             Share Event
           </h3>
-          
+
           <p className="text-white/80 text-sm mb-6 max-w-[280px] mx-auto leading-relaxed">
             #{event.number} {event.title}
           </p>
@@ -462,9 +494,8 @@ function EventModal({ event, onClose, onReserveClick }) {
         </button>
         <div className="p-8 md:p-10">
           <div className="flex items-center gap-3 mb-6">
-            <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
-              isUpcoming ? "bg-green-100 text-green-700" : "bg-slate-100 text-slate-600"
-            }`}>
+            <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${isUpcoming ? "bg-green-100 text-green-700" : "bg-slate-100 text-slate-600"
+              }`}>
               <div className={`w-1.5 h-1.5 rounded-full ${isUpcoming ? "bg-green-500 animate-pulse" : "bg-slate-400"}`} />
               {isUpcoming ? "Registration Open" : "Event Concluded"}
             </div>
