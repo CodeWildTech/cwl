@@ -10,7 +10,7 @@ import Anandhu from "../assets/students/Anandhu.jpg";
 import Vandana from "../assets/students/vandana.jpg";
 import Hannah from "../assets/students/Hannah.jpeg";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence as FramerAnimatePresence } from "framer-motion";
 import { Zap, Cpu, Sparkles, Rocket, Star, Code } from 'lucide-react';
 import EnrollmentForm from '../component/enrollmentForm';
 
@@ -365,7 +365,7 @@ export default function TestimonialsSection() {
                           <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover" />
                         </div>
 
-                        <AnimatePresence>
+                        <FramerAnimatePresence>
                           {showCard && isCurrent && (
                             <motion.div
                               key={`card-${currentTestimonial}`}
@@ -395,7 +395,7 @@ export default function TestimonialsSection() {
                               />
                             </motion.div>
                           )}
-                        </AnimatePresence>
+                        </FramerAnimatePresence>
                       </div>
                     </div>
                   );

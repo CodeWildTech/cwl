@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import toast, { Toaster } from 'react-hot-toast';
 import API from "../config/api.js";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence as FramerAnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import {
   ArrowDownRight,
@@ -218,7 +218,7 @@ export default function EventsSection() {
       <Toaster position="top-right" richColors />
 
       {/* Share Modal */}
-      <AnimatePresence>
+      <FramerAnimatePresence>
         {showShareModal && currentShareEvent && (
           <ShareModal
             event={currentShareEvent}
@@ -226,7 +226,7 @@ export default function EventsSection() {
             onCopyLink={handleCopyLink}
           />
         )}
-      </AnimatePresence>
+      </FramerAnimatePresence>
 
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_50%,rgba(255,106,26,0.3)_0%,rgba(249,115,22,0.15)_30%,rgba(234,88,12,0.08)_50%,transparent_70%)] backdrop-blur-[80px]" />
@@ -288,7 +288,7 @@ export default function EventsSection() {
         </motion.div>
       </div>
 
-      <AnimatePresence>
+      <FramerAnimatePresence>
         {selectedEvent && !showForm && (
           <EventModal
             event={selectedEvent}
@@ -309,7 +309,7 @@ export default function EventsSection() {
             }}
           />
         )}
-      </AnimatePresence>
+      </FramerAnimatePresence>
     </section>
   );
 }
