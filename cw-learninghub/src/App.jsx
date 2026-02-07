@@ -12,7 +12,6 @@ import ContactPage from './component/footer'
 import RedesignedProgramPage from './pages/programOverview'
 
 function App() {
-  console.log("CODEWILD_DEBUG: App component initializing");
   return (
 
     <Router>
