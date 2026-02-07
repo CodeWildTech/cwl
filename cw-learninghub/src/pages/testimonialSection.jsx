@@ -12,7 +12,7 @@ import Hannah from "../assets/students/Hannah.jpeg";
 
 import { motion, AnimatePresence } from "framer-motion";
 import { Zap, Cpu, Sparkles, Rocket, Star, Code } from 'lucide-react';
-import EnrollmentForm from '../component/enrollmentForm'; 
+import EnrollmentForm from '../component/enrollmentForm';
 
 export default function TestimonialsSection() {
   const [isMobile, setIsMobile] = useState(false);
@@ -24,8 +24,8 @@ export default function TestimonialsSection() {
   const [isPaused, setIsPaused] = useState(false);
   const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
-  const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false); 
-  
+  const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false);
+
   const containerRef = useRef(null);
   const intervalRef = useRef(null);
   const mobileScrollRef = useRef(null);
@@ -162,17 +162,17 @@ export default function TestimonialsSection() {
       const nextIndex = (currentTestimonial + 1) % testimonials.length;
       setCurrentTestimonial(nextIndex);
       setShowCard(true);
-      
+
       if (isMobile && mobileScrollRef.current) {
         const scrollContainer = mobileScrollRef.current;
         const containerWidth = scrollContainer.offsetWidth;
         const spacerWidth = (containerWidth / 2) - 48;
-        const profileAndGapWidth = 24 * 4 + 32; 
+        const profileAndGapWidth = 24 * 4 + 32;
         const scrollPosition = spacerWidth + (profileAndGapWidth * nextIndex);
-        
+
         scrollContainer.scrollTo({
-         left: scrollPosition,
-         behavior: 'smooth'
+          left: scrollPosition,
+          behavior: 'smooth'
         });
       }
     }, 4000);
@@ -189,18 +189,18 @@ export default function TestimonialsSection() {
     setCurrentTestimonial(index);
     setShowCard(true);
     setIsPaused(true);
-    
+
     setTimeout(() => {
       setIsPaused(false);
     }, 6000);
-    
+
     if (isMobile && mobileScrollRef.current) {
       const scrollContainer = mobileScrollRef.current;
       const containerWidth = scrollContainer.offsetWidth;
       const spacerWidth = (containerWidth / 2) - 48;
       const profileAndGapWidth = 24 * 4 + 32;
       const scrollPosition = spacerWidth + (profileAndGapWidth * index);
-      
+
       scrollContainer.scrollTo({
         left: scrollPosition,
         behavior: 'smooth'
@@ -218,16 +218,16 @@ export default function TestimonialsSection() {
 
   const handleMobileScroll = () => {
     if (!isMobile || !mobileScrollRef.current) return;
-    
+
     const scrollContainer = mobileScrollRef.current;
     const containerWidth = scrollContainer.offsetWidth;
     const scrollPosition = scrollContainer.scrollLeft;
     const spacerWidth = (containerWidth / 2) - 48;
     const profileAndGapWidth = 24 * 4 + 32;
-    
+
     const activeIndex = Math.round((scrollPosition - spacerWidth) / profileAndGapWidth);
     const clampedIndex = Math.max(0, Math.min(activeIndex, testimonials.length - 1));
-    
+
     if (clampedIndex !== currentTestimonial && clampedIndex >= 0 && clampedIndex < testimonials.length) {
       setCurrentTestimonial(clampedIndex);
       setShowCard(true);
@@ -240,21 +240,21 @@ export default function TestimonialsSection() {
 
   const handleMouseDown = useCallback((e) => {
     if (isMobile) return;
-    
+
     e.preventDefault();
     setIsDragging(true);
     const rect = containerRef.current.getBoundingClientRect();
     const startX = e.clientX - rect.left;
     const startY = e.clientY - rect.top;
-    
+
     const handleMouseMove = (moveEvent) => {
       if (!isDragging) return;
       const newX = (moveEvent.clientX - rect.left) - startX;
       const newY = (moveEvent.clientY - rect.top) - startY;
-      
+
       const maxX = rect.width - 80;
       const maxY = rect.height - 80;
-      
+
       setDragPosition({
         x: Math.max(-20, Math.min(newX, maxX)),
         y: Math.max(-20, Math.min(newY, maxY))
@@ -265,7 +265,7 @@ export default function TestimonialsSection() {
       setIsDragging(false);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
-      
+
       setTimeout(() => {
         setDragPosition({ x: 0, y: 0 });
       }, 200);
@@ -309,13 +309,13 @@ export default function TestimonialsSection() {
     <div className="relative min-h-screen bg-gradient-to-br from-black via-[#120806] to-[#1a0903] overflow-hidden">
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <svg className="w-full h-full lg:block hidden" viewBox="0 0 2200 1000" preserveAspectRatio="none">
-         <path className="curve-1" d="M -600 320 C -450 280, -300 400, -100 260 S 200 420, 500 500 S 800 300, 1100 420 S 1500 650, 1800 420 S 2100 200, 2400 420" 
+          <path className="curve-1" d="M -600 320 C -450 280, -300 400, -100 260 S 200 420, 500 500 S 800 300, 1100 420 S 1500 650, 1800 420 S 2100 200, 2400 420"
             fill="none" stroke="#dc4109" strokeWidth="30" strokeLinecap="round" strokeLinejoin="round" opacity="0.9" style={{ filter: "url(#glow)" }} />
-         <defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+          <defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur" /><feMerge><feMergeNode in="coloredBlur" /><feMergeNode in="SourceGraphic" /></feMerge></filter></defs>
         </svg>
         <svg className="w-full h-full lg:hidden block" viewBox="0 0 400 600" preserveAspectRatio="none">
-         <path d="M 0 100 Q 100 80, 200 100 T 400 100 L 400 0 L 0 0 Z" fill="#dc4109" opacity="0.15" />
-         <path d="M 0 200 Q 100 180, 200 200 T 400 200" fill="none" stroke="#dc4109" strokeWidth="3" opacity="0.6" />
+          <path d="M 0 100 Q 100 80, 200 100 T 400 100 L 400 0 L 0 0 Z" fill="#dc4109" opacity="0.15" />
+          <path d="M 0 200 Q 100 180, 200 200 T 400 200" fill="none" stroke="#dc4109" strokeWidth="3" opacity="0.6" />
         </svg>
       </div>
 
@@ -323,9 +323,9 @@ export default function TestimonialsSection() {
         <div className="max-w-7xl mx-auto">
           <div className="space-y-12 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
             <div className="w-full lg:w-1/2 text-center lg:text-left space-y-6">
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }} 
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}
                 className="text-orange-500 font-bold tracking-[0.3em] uppercase text-sm">Student Testimonials</motion.p>
-              <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7, delay: 0.1 }} 
+              <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7, delay: 0.1 }}
                 className="text-4xl sm:text-5xl lg:text-8xl font-black text-white leading-none tracking-tighter">
                 Voices of <span className="text-orange-600">Success</span>
               </motion.h1>
@@ -348,9 +348,9 @@ export default function TestimonialsSection() {
                       animationDelay: `${index * 0.12}s`,
                     }}>
                       <div className="relative flex items-center justify-center">
-                        <div 
+                        <div
                           className={`${sizeClasses} rounded-full overflow-hidden shadow-2xl transition-all duration-300 ring-2 ring-white/20
-                            ${isCurrent 
+                            ${isCurrent
                               ? `ring-orange-500/50 ring-4 shadow-orange-500/30 scale-105 cursor-grab ${isDragging ? 'shadow-2xl shadow-orange-500/60 scale-110 cursor-grabbing' : ''}`
                               : 'hover:shadow-orange-500/50 hover:scale-110 hover:-rotate-3 cursor-pointer'
                             }`}
@@ -366,35 +366,35 @@ export default function TestimonialsSection() {
                         </div>
 
                         <AnimatePresence>
-                        {showCard && isCurrent && (
-                          <motion.div
-                            key={`card-${currentTestimonial}`}
-                            initial={{ opacity: 0, scale: 0.9, x: alignLeft ? 20 : -20 }}
-                            animate={{ opacity: 1, scale: 1, x: 0 }}
-                            exit={{ opacity: 0, scale: 0.9 }}
-                            transition={{ duration: 0.3 }}
-                            className={`absolute w-72 bg-white/95 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-white/20 z-50
+                          {showCard && isCurrent && (
+                            <motion.div
+                              key={`card-${currentTestimonial}`}
+                              initial={{ opacity: 0, scale: 0.9, x: alignLeft ? 20 : -20 }}
+                              animate={{ opacity: 1, scale: 1, x: 0 }}
+                              exit={{ opacity: 0, scale: 0.9 }}
+                              transition={{ duration: 0.3 }}
+                              className={`absolute w-72 bg-white/95 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-white/20 z-50
                               ${alignLeft ? "left-full ml-6" : "right-full mr-6"}`}
-                            onMouseEnter={handleCardMouseEnter}
-                            onMouseLeave={handleCardMouseLeave}
-                          >
-                            <div className="flex items-start gap-3 mb-4">
-                              <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full object-cover ring-2 ring-orange-500/30 flex-shrink-0" />
-                              <div className="min-w-0">
-                                <h3 className="font-bold text-orange-500 text-lg truncate">{testimonial.name}</h3>
-                                <p className="text-gray-500 text-sm">{testimonial.role}</p>
+                              onMouseEnter={handleCardMouseEnter}
+                              onMouseLeave={handleCardMouseLeave}
+                            >
+                              <div className="flex items-start gap-3 mb-4">
+                                <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full object-cover ring-2 ring-orange-500/30 flex-shrink-0" />
+                                <div className="min-w-0">
+                                  <h3 className="font-bold text-orange-500 text-lg truncate">{testimonial.name}</h3>
+                                  <p className="text-gray-500 text-sm">{testimonial.role}</p>
+                                </div>
                               </div>
-                            </div>
-                            <p className="text-gray-700 text-sm leading-relaxed line-clamp-5">{testimonial.message}</p>
-                            
-                            {/* Pointing Arrow Correction */}
-                            <div className={`absolute top-1/2 -translate-y-1/2 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent
-                              ${alignLeft 
-                                ? "-left-2 border-r-[10px] border-r-white/95" 
-                                : "-right-2 border-l-[10px] border-l-white/95"}`} 
-                            />
-                          </motion.div>
-                        )}
+                              <p className="text-gray-700 text-sm leading-relaxed line-clamp-5">{testimonial.message}</p>
+
+                              {/* Pointing Arrow Correction */}
+                              <div className={`absolute top-1/2 -translate-y-1/2 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent
+                              ${alignLeft
+                                  ? "-left-2 border-r-[10px] border-r-white/95"
+                                  : "-right-2 border-l-[10px] border-l-white/95"}`}
+                              />
+                            </motion.div>
+                          )}
                         </AnimatePresence>
                       </div>
                     </div>
@@ -406,12 +406,12 @@ export default function TestimonialsSection() {
             {isMobile && (
               <div className="w-full space-y-6">
                 <div className="relative overflow-hidden">
-                  <div 
+                  <div
                     ref={mobileScrollRef}
                     onScroll={handleMobileScroll}
                     className="flex gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide py-8 scroll-smooth"
-                    style={{ 
-                      scrollbarWidth: 'none', 
+                    style={{
+                      scrollbarWidth: 'none',
                       msOverflowStyle: 'none',
                     }}
                   >
@@ -419,8 +419,8 @@ export default function TestimonialsSection() {
                     {testimonials.map((testimonial, index) => {
                       const isCurrent = currentTestimonial === index;
                       return (
-                        <div 
-                          key={testimonial.id} 
+                        <div
+                          key={testimonial.id}
                           className="flex-shrink-0 snap-center"
                           onClick={() => handleProfileClick(index)}
                         >
@@ -432,9 +432,9 @@ export default function TestimonialsSection() {
                             transition={{ duration: 0.5 }}
                             className="relative"
                           >
-                            <div 
+                            <div
                               className={`w-24 h-24 rounded-full overflow-hidden shadow-2xl ring-2
-                                ${isCurrent 
+                                ${isCurrent
                                   ? 'ring-orange-500 ring-4 shadow-orange-500/60'
                                   : 'ring-white/20'
                                 }`}
@@ -497,9 +497,9 @@ export default function TestimonialsSection() {
                   </span>
                 );
               })}
-              <motion.button 
+              <motion.button
                 onClick={handleOpenEnrollment}
-                whileHover={{ scale: 1.08 }} 
+                whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.94 }}
                 className="relative px-8 lg:px-12 py-3 lg:py-4 rounded-full font-semibold tracking-wider text-white text-sm lg:text-base bg-black border border-orange-500/40 shadow-[0_0_40px_rgba(249,115,22,0.35)] overflow-hidden group"
               >
@@ -513,40 +513,40 @@ export default function TestimonialsSection() {
           </div>
         </div>
       </div>
-      
+
       <EnrollmentForm
         isOpen={isEnrollmentOpen}
         onClose={handleCloseEnrollment}
         formData={{}}
-        onInputChange={() => {}}
+        onInputChange={() => { }}
         progress={0}
         submitStatus=""
         errors={{}}
         isSubmitting={false}
-        onSubmit={() => {}}
+        onSubmit={() => { }}
       />
-      
+
       <div className="relative z-10 mt-12 lg:mt-16 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
-         <div className="mb-6 flex items-center justify-center gap-3">
+          <div className="mb-6 flex items-center justify-center gap-3">
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-orange-500/50" />
             <div className="text-xs font-semibold tracking-[0.25em] uppercase text-orange-400/60">Trusted Partners</div>
             <div className="h-px w-12 bg-gradient-to-l from-transparent to-orange-500/50" />
-         </div>
-         <div className="relative py-8">
-           <div className="pointer-events-none absolute left-0 top-0 h-full w-24 lg:w-32 z-10" />
-           <div className="pointer-events-none absolute right-0 top-0 h-full w-24 lg:w-32 z-10" />
-           <div className="logo-strip flex items-center gap-6 lg:gap-10">
-             {[...companyLogos, ...companyLogos, ...companyLogos].map((logo, idx) => (
-               <div key={logo.name + idx} className="group relative flex h-16 w-28 lg:h-20 lg:w-36 items-center justify-center flex-shrink-0">
-                 <img src={logo.src} alt={logo.name} className="max-h-11 lg:max-h-20 w-auto object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
-               </div>
-             ))}
-           </div>
-         </div>
+          </div>
+          <div className="relative py-8">
+            <div className="pointer-events-none absolute left-0 top-0 h-full w-24 lg:w-32 z-10" />
+            <div className="pointer-events-none absolute right-0 top-0 h-full w-24 lg:w-32 z-10" />
+            <div className="logo-strip flex items-center gap-6 lg:gap-10">
+              {[...companyLogos, ...companyLogos, ...companyLogos].map((logo, idx) => (
+                <div key={logo.name + idx} className="group relative flex h-16 w-28 lg:h-20 lg:w-36 items-center justify-center flex-shrink-0">
+                  <img src={logo.src} alt={logo.name} className="max-h-11 lg:max-h-20 w-auto object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-       
+
       <style jsx>{`
         @keyframes float {
          0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }

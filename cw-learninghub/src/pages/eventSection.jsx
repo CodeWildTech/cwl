@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import toast, { Toaster } from 'react-hot-toast';
 import API from "../config/api.js";
 
-import { Helmet } from "react-helmet-async";
 import { motion, AnimatePresence } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import {
   ArrowDownRight,
   Calendar,
