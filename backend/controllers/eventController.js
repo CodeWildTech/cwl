@@ -1,4 +1,5 @@
 import pool from "../config/db.js";
+import sendEmail from "../utils/email.js";
 
 export const submitEventForm = async (req, res) => {
   try {
@@ -11,8 +12,24 @@ export const submitEventForm = async (req, res) => {
     await pool.query(
       `INSERT INTO event_registrations (name, email, phone, current_status)
        VALUES ($1, $2, $3, $4)`,
-      [name, email,phone, current_status]
+      [name, email, phone, current_status]
     );
+
+    // ✅ Send Confirmation Email to User
+    await sendEmail({ email, name });
+
+    // ✅ Send Notification Email to Admin
+    await sendEmail({
+      isAdmin: true,
+      subject: `🎉 New Event Registration: ${name}`,
+      html: `
+        <h3>New Event Registration</h3>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Status:</strong> ${current_status}</p>
+      `
+    });
 
     res.status(200).json({
       success: true,

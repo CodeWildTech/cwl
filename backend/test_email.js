@@ -8,7 +8,7 @@ console.log("Testing Email configuration...");
 console.log("User:", process.env.EMAIL_USER ? "Present" : "Missing");
 console.log("Pass:", process.env.EMAIL_PASS ? "Present" : "Missing");
 
-const transporter = nodemailer.createTransporter({
+const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
         user: process.env.EMAIL_USER,

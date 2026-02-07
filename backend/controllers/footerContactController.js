@@ -1,4 +1,5 @@
 import pool from "../config/db.js";
+import sendEmail from "../utils/email.js";
 
 export const submitFooterContact = async (req, res) => {
   try {
@@ -13,6 +14,22 @@ export const submitFooterContact = async (req, res) => {
        VALUES ($1, $2, $3, $4)`,
       [name, phone, email, message]
     );
+
+    // ✅ Send Confirmation Email to User
+    await sendEmail({ email, name });
+
+    // ✅ Send Notification Email to Admin
+    await sendEmail({
+      isAdmin: true,
+      subject: `📢 New Footer Contact: ${name}`,
+      html: `
+        <h3>New Contact Form Submission</h3>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong> ${message}</p>
+      `
+    });
 
     res.status(200).json({
       success: true,
