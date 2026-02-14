@@ -1,4 +1,4 @@
-import pool from "../config/db.js";
+import { supabase } from "../config/supabase.js";
 import sendEmail from "../utils/email.js";
 
 export const submitFooterContact = async (req, res) => {
@@ -9,11 +9,14 @@ export const submitFooterContact = async (req, res) => {
       return res.status(400).json({ error: "All fields are required" });
     }
 
-    await pool.query(
-      `INSERT INTO footer_contacts (name, phone, email, message)
-       VALUES ($1, $2, $3, $4)`,
-      [name, phone, email, message]
-    );
+    const { error: dbError } = await supabase
+      .from('footer_contacts')
+      .insert([
+        { name, phone, email, message }
+      ]);
+
+    if (dbError) throw dbError;
+
 
     // ✅ Send Confirmation Email to User
     await sendEmail({ email, name });

@@ -19,7 +19,7 @@ app.use("/api/forms", formRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/footer-contact", footerContactRoutes);
 app.use("/api/register-event", eventRoutes);
-
+console.log("SUPABASE_URL:", process.env.SUPABASE_URL)
 
 
 // Start server

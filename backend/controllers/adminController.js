@@ -1,8 +1,16 @@
-import pool from "../config/db.js";
+import { supabase } from "../config/supabase.js";
 
 export const getEnquiries = async (req, res) => {
-  const result = await pool.query(
-    "SELECT * FROM enquiries ORDER BY created_at DESC"
-  );
-  res.json(result.rows);
+  try {
+    const { data, error } = await supabase
+      .from('enquiries')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    res.json(data);
+  } catch (err) {
+    console.error("Error fetching enquiries:", err);
+    res.status(500).json({ error: "Server error" });
+  }
 };

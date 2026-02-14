@@ -1,4 +1,4 @@
-import pool from "../config/db.js";
+import { supabase } from "../config/supabase.js";
 import sendEmail from "../utils/email.js";
 
 /* =========================
@@ -25,24 +25,24 @@ export const submitForm = async (req, res) => {
       });
     }
 
-    // DB insert
-    await pool.query(
-      `
-        INSERT INTO enquiries
-        (name, email, phone, dob, location, qualification, course, message)
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
-      `,
-      [
-        name,
-        email,
-        phone,
-        dob,
-        location,
-        qualification,
-        course,
-        message,
-      ]
-    );
+    // DB insert using Supabase
+    const { error: dbError } = await supabase
+      .from('enquiries')
+      .insert([
+        {
+          name,
+          email,
+          phone,
+          dob,
+          location,
+          qualification,
+          course,
+          message
+        }
+      ]);
+
+    if (dbError) throw dbError;
+
 
     // 📩 Enquiry mail
     try {
