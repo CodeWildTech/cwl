@@ -19,6 +19,9 @@ app.use("/api/forms", formRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/footer-contact", footerContactRoutes);
 app.use("/api/register-event", eventRoutes);
+
+// Health check for Render
+app.get("/health", (req, res) => res.json({ status: "ok" }));
 console.log("SUPABASE_URL:", process.env.SUPABASE_URL)
 
 

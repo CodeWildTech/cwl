@@ -84,8 +84,11 @@ const EnrollmentContainer = ({ isOpen, onClose }) => {
     setSubmitStatus("");
 
     try {
+      const baseUrl = API || "http://localhost:8000";
+      console.log("Submitting form to:", `${baseUrl}/api/forms/submit`);
+
       const response = await fetch(
-        `${API}/api/forms/submit`,
+        `${baseUrl}/api/forms/submit`,
         {
           method: "POST",
           headers: {
@@ -95,8 +98,11 @@ const EnrollmentContainer = ({ isOpen, onClose }) => {
         }
       );
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error("Submission failed");
+        console.error("Submission failed server-side:", data);
+        throw new Error(data.error || "Submission failed");
       }
 
       setSubmitStatus("success");

@@ -26,7 +26,8 @@ export const submitForm = async (req, res) => {
     }
 
     // DB insert using Supabase
-    const { error: dbError } = await supabase
+    console.log("Inserting into Supabase 'enquiries' table...");
+    const { data: dbData, error: dbError } = await supabase
       .from('enquiries')
       .insert([
         {
@@ -39,9 +40,15 @@ export const submitForm = async (req, res) => {
           course,
           message
         }
-      ]);
+      ])
+      .select();
 
-    if (dbError) throw dbError;
+    if (dbError) {
+      console.error("❌ Supabase Insertion Error:", dbError);
+      throw dbError;
+    }
+
+    console.log("✅ Supabase Insertion Success:", dbData);
 
 
     // 📩 Enquiry mail
