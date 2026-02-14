@@ -1,23 +1,18 @@
-import nodemailer from "nodemailer";
+import { Resend } from 'resend';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const sendEmail = async ({ email, name, subject, html, isAdmin = false }) => {
   try {
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true, // Use SSL
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-      connectionTimeout: 30000, // 30 seconds
-      greetingTimeout: 30000,
-      socketTimeout: 30000,
-    });
+    const fromEmail = 'onboarding@resend.dev'; // Resend default for unverified domains
+    const toEmail = isAdmin ? process.env.EMAIL_USER : email;
 
-    const mailOptions = {
-      from: `"CodeWild Team" <${process.env.EMAIL_USER}>`,
-      to: isAdmin ? process.env.EMAIL_USER : email,
+    const { data, error } = await resend.emails.send({
+      from: `CodeWild <${fromEmail}>`,
+      to: toEmail,
       subject: subject || "✅ Registration Successful – CodeWild",
       html: html || `
         <div style="font-family: Arial, Helvetica, sans-serif; background:#f5f5f5; padding:30px;">
@@ -39,10 +34,15 @@ const sendEmail = async ({ email, name, subject, html, isAdmin = false }) => {
           </div>
         </div>
       `,
-    };
+    });
 
-    await transporter.sendMail(mailOptions);
-    console.log(`✅ ${isAdmin ? 'Admin' : 'User'} Email sent successfully to:`, isAdmin ? process.env.EMAIL_USER : email);
+    if (error) {
+      console.error("❌ Resend API Error:", error);
+      throw error;
+    }
+
+    console.log(`✅ ${isAdmin ? 'Admin' : 'User'} Email sent successfully via Resend to:`, toEmail);
+    return data;
   } catch (error) {
     console.error("❌ Email sending failed:", error.message);
     throw error;
