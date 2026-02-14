@@ -8,7 +8,20 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const sendEmail = async ({ email, name, subject, html, isAdmin = false }) => {
   try {
     const fromEmail = 'onboarding@resend.dev'; // Resend default for unverified domains
-    const toEmail = isAdmin ? process.env.EMAIL_USER : email;
+
+    // 💡 Sandbox Workaround: 
+    // Resend free tier ONLY allows sending to the verified owner email.
+    // We redirect all user emails to the admin during sandbox testing.
+    let toEmail = isAdmin ? process.env.EMAIL_USER : email;
+
+    // We'll assume any non-admin email is a "user" and might fail in sandbox
+    // You can remove this check once you verify your domain on Resend.
+    const isSandbox = true; // Set to false after verifying domain
+    if (isSandbox && !isAdmin && toEmail !== process.env.EMAIL_USER) {
+      console.log(`ℹ️ Sandbox Mode: Redirecting email for ${email} to ${process.env.EMAIL_USER}`);
+      toEmail = process.env.EMAIL_USER;
+      subject = `[SANDBOX REDIRECT for ${email}] ${subject}`;
+    }
 
     const { data, error } = await resend.emails.send({
       from: `CodeWild <${fromEmail}>`,
@@ -41,7 +54,7 @@ const sendEmail = async ({ email, name, subject, html, isAdmin = false }) => {
       throw error;
     }
 
-    console.log(`✅ ${isAdmin ? 'Admin' : 'User'} Email sent successfully via Resend to:`, toEmail);
+    console.log(`✅ ${isAdmin ? 'Admin' : 'User (Redirected)'} Email sent successfully via Resend to:`, toEmail);
     return data;
   } catch (error) {
     console.error("❌ Email sending failed:", error.message);
