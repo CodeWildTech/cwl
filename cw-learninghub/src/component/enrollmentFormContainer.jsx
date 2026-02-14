@@ -84,34 +84,32 @@ const EnrollmentContainer = ({ isOpen, onClose }) => {
     setSubmitStatus("");
 
     try {
-      const baseUrl = API || "http://localhost:8000";
-      console.log("Submitting form to:", `${baseUrl}/api/forms/submit`);
+      if (!API) {
+        throw new Error("VITE_API_BASE_URL is not defined");
+      }
 
-      const response = await fetch(
-        `${baseUrl}/api/forms/submit`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${API}/api/forms/submit`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-      const data = await response.json();
+      let data = {};
+      try {
+        data = await response.json();
+      } catch { }
 
       if (!response.ok) {
-        console.error("Submission failed server-side:", data);
         throw new Error(data.error || "Submission failed");
       }
 
       setSubmitStatus("success");
 
-      // Close modal after success (optional, based on previous behavior)
       setTimeout(() => {
         onClose();
         setSubmitStatus("");
-        // Reset form
         setFormData({
           name: "",
           email: "",
@@ -128,12 +126,14 @@ const EnrollmentContainer = ({ isOpen, onClose }) => {
     } catch (error) {
       console.error("Submission Error:", error);
       setSubmitStatus("error");
-      setErrors(prev => ({ ...prev, general: "Something went wrong. Try again." }));
+      setErrors(prev => ({
+        ...prev,
+        general: "Something went wrong. Try again.",
+      }));
     } finally {
       setIsSubmitting(false);
     }
   };
-
   return (
     <EnrollmentForm
       isOpen={isOpen}
