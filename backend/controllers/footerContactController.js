@@ -19,20 +19,28 @@ export const submitFooterContact = async (req, res) => {
 
 
     // ✅ Send Confirmation Email to User
-    await sendEmail({ email, name });
+    try {
+      await sendEmail({ email, name });
+    } catch (emailErr) {
+      console.error("❌ User Confirmation Email failed:", emailErr.message);
+    }
 
     // ✅ Send Notification Email to Admin
-    await sendEmail({
-      isAdmin: true,
-      subject: `📢 New Footer Contact: ${name}`,
-      html: `
-        <h3>New Contact Form Submission</h3>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong> ${message}</p>
-      `
-    });
+    try {
+      await sendEmail({
+        isAdmin: true,
+        subject: `📢 New Footer Contact: ${name}`,
+        html: `
+          <h3>New Contact Form Submission</h3>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Phone:</strong> ${phone}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Message:</strong> ${message}</p>
+        `
+      });
+    } catch (adminEmailErr) {
+      console.error("❌ Admin Notification Email failed:", adminEmailErr.message);
+    }
 
     res.status(200).json({
       success: true,

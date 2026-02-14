@@ -135,7 +135,8 @@ export default function EventsSection() {
     const loadingToast = toast.loading("Submitting registration...");
 
     try {
-      const response = await fetch(`${API}/api/register-event/submit`, {
+      const baseUrl = API || "http://localhost:8000";
+      const response = await fetch(`${baseUrl}/api/register-event/submit`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

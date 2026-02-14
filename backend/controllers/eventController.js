@@ -19,20 +19,28 @@ export const submitEventForm = async (req, res) => {
 
 
     // ✅ Send Confirmation Email to User
-    await sendEmail({ email, name });
+    try {
+      await sendEmail({ email, name });
+    } catch (emailErr) {
+      console.error("❌ User Event Confirmation Email failed:", emailErr.message);
+    }
 
     // ✅ Send Notification Email to Admin
-    await sendEmail({
-      isAdmin: true,
-      subject: `🎉 New Event Registration: ${name}`,
-      html: `
-        <h3>New Event Registration</h3>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Status:</strong> ${current_status}</p>
-      `
-    });
+    try {
+      await sendEmail({
+        isAdmin: true,
+        subject: `🎉 New Event Registration: ${name}`,
+        html: `
+          <h3>New Event Registration</h3>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${phone}</p>
+          <p><strong>Status:</strong> ${current_status}</p>
+        `
+      });
+    } catch (adminEmailErr) {
+      console.error("❌ Admin Event Notification Email failed:", adminEmailErr.message);
+    }
 
     res.status(200).json({
       success: true,

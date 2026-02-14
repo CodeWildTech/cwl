@@ -20,7 +20,8 @@ export default function ContactPage() {
     const loadingToast = toast.loading('Sending your message...');
 
     try {
-      const response = await axios.post(`${API}/api/footer-contact/submit`, formData);
+      const baseUrl = API || "http://localhost:8000";
+      const response = await axios.post(`${baseUrl}/api/footer-contact/submit`, formData);
 
       toast.dismiss(loadingToast);
       toast.success('Thank you for contacting us!', {
