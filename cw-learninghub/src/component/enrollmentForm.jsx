@@ -5,7 +5,7 @@ const EnrollmentForm = ({
   isOpen,
   onClose,
   formData = {},
-  onInputChange = () => {},
+  onInputChange = () => { },
   progress = 0,
   submitStatus = '',
   errors = {},
@@ -15,56 +15,56 @@ const EnrollmentForm = ({
   // 🔧 INPUT VALIDATION HANDLERS
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    
+
     // Phone number - only digits allowed (10 digits max)
     if (name === 'phone') {
       const phoneValue = value.replace(/[^0-9]/g, '').slice(0, 10);
       onInputChange({ target: { name, value: phoneValue } });
       return;
     }
-    
+
     // Name - only letters, spaces, and common characters
     if (name === 'name') {
       const nameValue = value.replace(/[^a-zA-Z\s.'\-]/g, '').slice(0, 50);
       onInputChange({ target: { name, value: nameValue } });
       return;
     }
-    
+
     // Email - basic email pattern
     if (name === 'email') {
       const emailValue = value.slice(0, 100);
       onInputChange({ target: { name, value: emailValue } });
       return;
     }
-    
+
     // Location - alphanumeric + common characters
     if (name === 'location') {
       const locationValue = value.replace(/[^a-zA-Z0-9\s.,\-]/g, '').slice(0, 100);
       onInputChange({ target: { name, value: locationValue } });
       return;
     }
-    
+
     // Qualification - alphanumeric + common characters
     if (name === 'qualification') {
       const qualValue = value.replace(/[^a-zA-Z0-9\s(),.\-]/g, '').slice(0, 100);
       onInputChange({ target: { name, value: qualValue } });
       return;
     }
-    
+
     // Doubts - alphanumeric + common characters
     if (name === 'doubts') {
       const doubtsValue = value.replace(/[^a-zA-Z0-9\s.,!?;:\-'"]/g, '').slice(0, 500);
       onInputChange({ target: { name, value: doubtsValue } });
       return;
     }
-    
+
     onInputChange(e);
   };
 
   return (
     <div
       className={`
-        fixed inset-0 z-[100] flex items-center justify-center p-4
+        fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4
         transition-all duration-300
         ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}
       `}
@@ -79,7 +79,7 @@ const EnrollmentForm = ({
       {/* 🔧 MODAL — z-10 ENSURES ABOVE BACKDROP */}
       <div
         className={`
-          relative z-10 w-full max-w-2xl max-h-[90vh]
+          relative z-10 w-full max-w-2xl max-h-[95vh] sm:max-h-[90vh]
           overflow-y-auto hide-scrollbar
           bg-gradient-to-br from-orange-50/95 via-white/95 to-orange-50/95
           rounded-3xl shadow-2xl
@@ -97,8 +97,8 @@ const EnrollmentForm = ({
         <button
           onClick={onClose}
           className="
-            absolute top-6 right-6 z-20
-            w-10 h-10 rounded-full
+            absolute top-4 right-4 sm:top-6 sm:right-6 z-20
+            w-8 h-8 sm:w-10 sm:h-10 rounded-full
             bg-orange-500/10 hover:bg-orange-500/20
             border border-orange-300/30
             flex items-center justify-center
@@ -106,7 +106,7 @@ const EnrollmentForm = ({
             hover:rotate-90 group
           "
         >
-          <X className="w-5 h-5 text-orange-600 group-hover:text-orange-700" />
+          <X className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600 group-hover:text-orange-700" />
         </button>
 
 
@@ -132,42 +132,42 @@ const EnrollmentForm = ({
 
           {/* form */}
           <div className="flex-1">
-            <form onSubmit={onSubmit} className="relative p-8 md:p-12 pt-8">
+            <form onSubmit={onSubmit} className="relative p-5 sm:p-8 md:p-12 pt-6 sm:pt-8">
               {/* submit status */}
               {submitStatus === 'success' && (
-                <div className="mb-6 p-4 rounded-2xl bg-green-100/80 border-2 border-green-300/50 text-green-800 text-sm font-medium">
+                <div className="mb-4 sm:mb-6 p-4 rounded-2xl bg-green-100/80 border-2 border-green-300/50 text-green-800 text-sm font-medium">
                   🎉 Enrollment successful! We will contact you soon.
                 </div>
               )}
               {submitStatus === 'error' && errors.general && (
-                <div className="mb-6 p-4 rounded-2xl bg-red-100/80 border-2 border-red-300/50 text-red-800 text-sm font-medium">
+                <div className="mb-4 sm:mb-6 p-4 rounded-2xl bg-red-100/80 border-2 border-red-300/50 text-red-800 text-sm font-medium">
                   {errors.general}
                 </div>
               )}
 
 
               {/* header */}
-              <div className="mb-8">
-                <h2 className="text-2xl md:text-3xl font-bold text-neutral-800 mb-2">
+              <div className="mb-6 sm:mb-8">
+                <h2 className="text-xl md:text-3xl font-bold text-neutral-800 mb-1 sm:mb-2">
                   <span className="text-orange-500">CW</span> LearningHub
                 </h2>
-                <h3 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-3">
+                <h3 className="text-2xl md:text-4xl font-bold text-neutral-900 mb-1 sm:mb-3">
                   Shape <span className="text-orange-500">Your Future</span>
                 </h3>
-                <h3 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
+                <h3 className="text-2xl md:text-4xl font-bold text-neutral-900 mb-2 sm:mb-4">
                   With Technology
                 </h3>
-                <p className="text-neutral-600 text-sm md:text-base">
+                <p className="text-neutral-600 text-xs sm:text-base">
                   Fill the form to unlock training, mentorship, and real-time project experience.
                 </p>
               </div>
 
 
               {/* ALL YOUR ORIGINAL FORM FIELDS — NOW WITH VALIDATION */}
-              <div className="space-y-5">
+              <div className="space-y-4 sm:space-y-5">
                 {/* Name */}
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-neutral-700">
+                <div className="space-y-1 sm:space-y-2">
+                  <label className="block text-xs sm:text-sm font-medium text-neutral-700">
                     Name <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -176,18 +176,18 @@ const EnrollmentForm = ({
                     value={formData.name ?? ''}
                     onChange={handleInputChange}
                     className={`
-                      w-full px-4 py-3 rounded-xl
+                      w-full px-4 py-2.5 sm:py-3 rounded-xl
                       bg-white/80 border-2 ${errors.name ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
-                      } focus:outline-none transition-all duration-300 text-neutral-800
+                      } focus:outline-none transition-all duration-300 text-neutral-800 text-sm sm:text-base
                     `}
                   />
-                  {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
+                  {errors.name && <p className="text-[10px] sm:text-xs text-red-500 mt-0.5 sm:mt-1">{errors.name}</p>}
                 </div>
 
 
                 {/* Email */}
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-neutral-700">
+                <div className="space-y-1 sm:space-y-2">
+                  <label className="block text-xs sm:text-sm font-medium text-neutral-700">
                     Email <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -196,22 +196,22 @@ const EnrollmentForm = ({
                     value={formData.email ?? ''}
                     onChange={handleInputChange}
                     className={`
-                      w-full px-4 py-3 rounded-xl
+                      w-full px-4 py-2.5 sm:py-3 rounded-xl
                       bg-white/80 border-2 ${errors.email ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
-                      } focus:outline-none transition-all duration-300 text-neutral-800
+                      } focus:outline-none transition-all duration-300 text-neutral-800 text-sm sm:text-base
                     `}
                   />
-                  {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
+                  {errors.email && <p className="text-[10px] sm:text-xs text-red-500 mt-0.5 sm:mt-1">{errors.email}</p>}
                 </div>
 
 
                 {/* Phone */}
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-neutral-700">
+                <div className="space-y-1 sm:space-y-2">
+                  <label className="block text-xs sm:text-sm font-medium text-neutral-700">
                     Phone Number <span className="text-red-500">*</span>
                   </label>
                   <div className="flex gap-2">
-                    <div className="w-20 px-3 py-3 rounded-xl bg-white/80 border-2 border-orange-300/50 flex items-center justify-center text-neutral-600 font-medium">
+                    <div className="w-16 sm:w-20 px-3 py-2.5 sm:py-3 rounded-xl bg-white/80 border-2 border-orange-300/50 flex items-center justify-center text-neutral-600 font-medium text-sm sm:text-base">
                       +91
                     </div>
                     <input
@@ -223,20 +223,20 @@ const EnrollmentForm = ({
                       pattern="[0-9]{10}"
                       inputMode="numeric"
                       className={`
-                        flex-1 px-4 py-3 rounded-xl
+                        flex-1 px-4 py-2.5 sm:py-3 rounded-xl
                         bg-white/80 border-2 ${errors.phone ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
-                        } focus:outline-none transition-all duration-300 text-neutral-800
+                        } focus:outline-none transition-all duration-300 text-neutral-800 text-sm sm:text-base
                       `}
                     />
                   </div>
-                  {errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone}</p>}
+                  {errors.phone && <p className="text-[10px] sm:text-xs text-red-500 mt-0.5 sm:mt-1">{errors.phone}</p>}
                 </div>
 
 
                 {/* DOB + Location */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="block text-sm font-medium text-neutral-700">
+                  <div className="space-y-1 sm:space-y-2">
+                    <label className="block text-xs sm:text-sm font-medium text-neutral-700">
                       Date of Birth <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -246,17 +246,17 @@ const EnrollmentForm = ({
                       onChange={handleInputChange}
                       max={new Date().toISOString().split('T')[0]}
                       className={`
-                        w-full px-4 py-3 rounded-xl
+                        w-full px-4 py-2.5 sm:py-3 rounded-xl
                         bg-white/80 border-2 ${errors.dob ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
-                        } focus:outline-none transition-all duration-300 text-neutral-800
+                        } focus:outline-none transition-all duration-300 text-neutral-800 text-sm sm:text-base
                       `}
                     />
-                    {errors.dob && <p className="text-xs text-red-500 mt-1">{errors.dob}</p>}
+                    {errors.dob && <p className="text-[10px] sm:text-xs text-red-500 mt-0.5 sm:mt-1">{errors.dob}</p>}
                   </div>
 
 
-                  <div className="space-y-2">
-                    <label className="block text-sm font-medium text-neutral-700">
+                  <div className="space-y-1 sm:space-y-2">
+                    <label className="block text-xs sm:text-sm font-medium text-neutral-700">
                       Location <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -265,19 +265,19 @@ const EnrollmentForm = ({
                       value={formData.location ?? ''}
                       onChange={handleInputChange}
                       className={`
-                        w-full px-4 py-3 rounded-xl
+                        w-full px-4 py-2.5 sm:py-3 rounded-xl
                         bg-white/80 border-2 ${errors.location ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
-                        } focus:outline-none transition-all duration-300 text-neutral-800
+                        } focus:outline-none transition-all duration-300 text-neutral-800 text-sm sm:text-base
                       `}
                     />
-                    {errors.location && <p className="text-xs text-red-500 mt-1">{errors.location}</p>}
+                    {errors.location && <p className="text-[10px] sm:text-xs text-red-500 mt-0.5 sm:mt-1">{errors.location}</p>}
                   </div>
                 </div>
 
 
                 {/* Qualification */}
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-neutral-700">
+                <div className="space-y-1 sm:space-y-2">
+                  <label className="block text-xs sm:text-sm font-medium text-neutral-700">
                     Educational Qualification <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -286,18 +286,18 @@ const EnrollmentForm = ({
                     value={formData.qualification ?? ''}
                     onChange={handleInputChange}
                     className={`
-                      w-full px-4 py-3 rounded-xl
+                      w-full px-4 py-2.5 sm:py-3 rounded-xl
                       bg-white/80 border-2 ${errors.qualification ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
-                      } focus:outline-none transition-all duration-300 text-neutral-800
+                      } focus:outline-none transition-all duration-300 text-neutral-800 text-sm sm:text-base
                     `}
                   />
-                  {errors.qualification && <p className="text-xs text-red-500 mt-1">{errors.qualification}</p>}
+                  {errors.qualification && <p className="text-[10px] sm:text-xs text-red-500 mt-0.5 sm:mt-1">{errors.qualification}</p>}
                 </div>
 
 
                 {/* Course */}
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-neutral-700">
+                <div className="space-y-1 sm:space-y-2">
+                  <label className="block text-xs sm:text-sm font-medium text-neutral-700">
                     Course Interested <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
@@ -306,9 +306,9 @@ const EnrollmentForm = ({
                       value={formData.course ?? ''}
                       onChange={handleInputChange}
                       className={`
-                        w-full px-4 py-3 rounded-xl
+                        w-full px-4 py-2.5 sm:py-3 rounded-xl
                         bg-white/80 border-2 ${errors.course ? 'border-red-400 bg-red-50/50' : 'border-orange-300/50 focus:border-orange-500'
-                        } focus:outline-none transition-all duration-300 text-neutral-800 appearance-none cursor-pointer
+                        } focus:outline-none transition-all duration-300 text-neutral-800 appearance-none cursor-pointer text-sm sm:text-base
                       `}
                     >
                       <option value="">Select a course</option>
@@ -331,38 +331,38 @@ const EnrollmentForm = ({
                     </select>
                     <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400 pointer-events-none" />
                   </div>
-                  {errors.course && <p className="text-xs text-red-500 mt-1">{errors.course}</p>}
+                  {errors.course && <p className="text-[10px] sm:text-xs text-red-500 mt-0.5 sm:mt-1">{errors.course}</p>}
                 </div>
 
 
                 {/* Doubts */}
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-neutral-700">
+                <div className="space-y-1 sm:space-y-2">
+                  <label className="block text-xs sm:text-sm font-medium text-neutral-700">
                     Do you have any doubts?
                   </label>
                   <textarea
                     name="doubts"
                     value={formData.doubts ?? ''}
                     onChange={handleInputChange}
-                    rows={3}
+                    rows={2}
                     className="
-                      w-full px-4 py-3 rounded-xl
+                      w-full px-4 py-2.5 sm:py-3 rounded-xl
                       bg-white/80 border-2 border-orange-300/50
                       focus:border-orange-500 focus:outline-none
-                      transition-all duration-300 text-neutral-800 resize-none
+                      transition-all duration-300 text-neutral-800 text-sm sm:text-base resize-none
                     "
                   />
                 </div>
 
 
                 {/* Submit - NOW CONNECTED TO BACKEND */}
-                <div className="pt-4">
+                <div className="pt-2 sm:pt-4">
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     className={`
                       w-full md:w-auto md:mx-auto md:block
-                      px-12 py-4 rounded-full text-base font-bold text-white
+                      px-8 py-3 sm:px-12 sm:py-4 rounded-full text-sm sm:text-base font-bold text-white
                       shadow-[0_12px_30px_rgba(255,90,31,0.6)]
                       transition-all duration-300
                       hover:shadow-[0_18px_40px_rgba(255,90,31,0.8)]

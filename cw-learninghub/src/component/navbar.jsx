@@ -11,9 +11,12 @@ import {
   Phone,
 } from 'lucide-react';
 
-const Logo = () => (
-  <div className="w-20 h-20 rounded-full flex items-center ">
-    <img src={mainLogo} alt="" />
+const Logo = ({ onClick, isMobile = false }) => (
+  <div
+    onClick={onClick}
+    className={`${isMobile ? 'w-12 h-12' : 'w-20 h-20'} rounded-full flex items-center cursor-pointer hover:scale-105 transition-transform duration-300`}
+  >
+    <img src={mainLogo} alt="Logo" />
   </div>
 );
 
@@ -90,14 +93,12 @@ export default function Navbar() {
             {!isMobile ? (
               // Desktop/Laptop: Logo OUTSIDE navbar (fixed spacing)
               <div className="absolute -left-32 top-1/2 -translate-y-1/2 z-10">
-                <Logo />
+                <Logo onClick={() => scrollToSection('hero')} />
               </div>
             ) : (
               // Mobile: Logo LEFT SIDE inside navbar
               <div className="flex items-center flex-shrink-0">
-                <div className="w-12 h-12 rounded-full flex items-center ">
-                  <img src={mainLogo} alt="" />
-                </div>
+                <Logo isMobile={true} onClick={() => scrollToSection('hero')} />
               </div>
             )}
 
