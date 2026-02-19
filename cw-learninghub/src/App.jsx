@@ -10,6 +10,9 @@ import EventsSection from './pages/eventSection'
 import TestimonialsSection from './pages/testimonialSection'
 import ContactPage from './component/footer'
 import RedesignedProgramPage from './pages/programOverview'
+import Competition from './pages/CompetitionPage'
+import WebinarPage from './pages/WebinarPage'
+
 
 function App() {
   return (
@@ -38,6 +41,9 @@ function App() {
           <Route path="/events" element={<div id="events"><EventsSection /></div>} />
           <Route path="/testimonials" element={<div id="testimonials"><TestimonialsSection /></div>} />
           <Route path="/contact" element={<div id="contact"><ContactPage /></div>} />
+          <Route path="/competitions" element={<Competition />} />
+          <Route path="/webinars" element={<WebinarPage />} />
+
 
           <Route path="/courses/:category/:slug" element={<RedesignedProgramPage />} />
 

@@ -3,10 +3,15 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Star, Code2, Cpu } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import logoIm from '../assets/Logo/cwlogo.png';
+import EnrollmentContainer from '../component/enrollmentFormContainer';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
   const containerRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false);
+  const [activeOption, setActiveOption] = useState('Competition');
+  const navigate = useNavigate();
 
   // Screen size check
   useEffect(() => {
@@ -96,11 +101,53 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
-                className="mt-10 hidden lg:block"
+                className="mt-10 hidden lg:flex flex-col gap-6"
               >
-                <button className="px-10 py-4 bg-orange-600 text-sm font-bold text-white rounded-full hover:bg-white hover:text-black transition-all duration-300 shadow-lg shadow-orange-500/20">
-                  Join Our Hub
-                </button>
+                {/* Toggle Switch */}
+                <div className="flex items-center gap-4 bg-zinc-900/50 p-1 rounded-full border border-white/10 w-fit">
+                  {['Webinar', 'Competition'].map((option) => (
+                    <button
+                      key={option}
+                      onClick={() => setActiveOption(option)}
+                      className={`relative px-6 py-2 text-xs font-bold uppercase tracking-widest transition-colors duration-300 z-10 ${activeOption === option ? 'text-white' : 'text-white/40 hover:text-white/70'
+                        }`}
+                    >
+                      {activeOption === option && (
+                        <motion.div
+                          layoutId="active-pill"
+                          className="absolute inset-0 bg-orange-600 rounded-full -z-10"
+                          transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                        />
+                      )}
+                      {option}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={() => setIsEnrollmentOpen(true)}
+                    className="px-10 py-4 bg-orange-600 text-sm font-bold text-white rounded-full hover:bg-white hover:text-black transition-all duration-300 shadow-lg shadow-orange-500/20"
+                  >
+                    Join Our Hub
+                  </button>
+                  {activeOption === 'Competition' && (
+                    <button
+                      onClick={() => navigate('/competitions')}
+                      className="px-8 py-4 bg-transparent border-2 border-orange-600 text-sm font-bold text-orange-600 rounded-full hover:bg-orange-600 hover:text-white transition-all duration-300 shadow-lg"
+                    >
+                      Register for Competition
+                    </button>
+                  )}
+                  {activeOption === 'Webinar' && (
+                    <button
+                      onClick={() => navigate('/webinars')}
+                      className="px-8 py-4 bg-transparent border-2 border-orange-600 text-sm font-bold text-orange-600 rounded-full hover:bg-orange-600 hover:text-white transition-all duration-300 shadow-lg"
+                    >
+                      Register for Webinar
+                    </button>
+                  )}
+                </div>
               </motion.div>
             </div>
 
@@ -209,6 +256,12 @@ const HeroSection = () => {
         .stroke-text { -webkit-text-stroke: 1.5px rgba(255,255,255,0.2); }
         @media (min-width: 1024px) { .stroke-text { -webkit-text-stroke: 2px rgba(255,255,255,0.25); } }
       `}</style>
+
+      {/* Enrollment Form Modal */}
+      <EnrollmentContainer
+        isOpen={isEnrollmentOpen}
+        onClose={() => setIsEnrollmentOpen(false)}
+      />
     </div>
   );
 };
