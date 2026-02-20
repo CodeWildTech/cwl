@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import EnrollmentContainer from './enrollmentFormContainer';
 import { motion } from 'framer-motion';
 import mainLogo from '../assets/Logo/cwlogo.png';
@@ -29,12 +30,26 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   const scrollToSection = (sectionId) => {
+    if (location.pathname !== '/') {
+      navigate('/');
+      // Optional: Wait for navigation and then scroll
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+      return;
+    }
+
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({
