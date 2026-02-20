@@ -11,6 +11,7 @@ const CompetitionPage = () => {
     const navigate = useNavigate();
     const [activeTrack, setActiveTrack] = useState('design');
     const [openSection, setOpenSection] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -87,20 +88,31 @@ const CompetitionPage = () => {
                                 <span className="text-zinc-500">Through</span> Reality
                             </motion.h1>
 
-                            <p className="text-zinc-400 text-lg max-w-xl leading-relaxed">
+                            <p className="text-zinc-400 text-lg max-w-xl leading-relaxed mb-8">
                                 The ultimate battleground for creators. Whether you craft pixels or write logic,
                                 showcase your prowess in our dual-track tech competition.
                             </p>
+
+                            {/* MOBILE ONLY: Register Button */}
+                            <motion.button
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.2 }}
+                                onClick={() => setIsModalOpen(true)}
+                                className="lg:hidden w-full py-4 rounded-xl bg-orange-600 text-white font-bold uppercase tracking-widest shadow-lg shadow-orange-500/20 active:scale-95 transition-all"
+                            >
+                                Register Now
+                            </motion.button>
                         </header>
 
                         {/* Track Selector */}
                         <div className="space-y-8">
-                            <div className="flex p-1 bg-zinc-900/50 border border-white/5 rounded-2xl w-fit">
+                            <div className="grid grid-cols-2 lg:flex p-1 bg-zinc-900/50 border border-white/5 rounded-2xl w-full lg:w-fit">
                                 {Object.keys(trackInfo).map((t) => (
                                     <button
                                         key={t}
                                         onClick={() => setActiveTrack(t)}
-                                        className={`relative px-8 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${activeTrack === t ? 'text-black' : 'text-zinc-500 hover:text-zinc-300'
+                                        className={`relative px-8 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all w-full lg:w-auto ${activeTrack === t ? 'text-black' : 'text-zinc-500 hover:text-zinc-300'
                                             }`}
                                     >
                                         {activeTrack === t && (
@@ -148,8 +160,8 @@ const CompetitionPage = () => {
                         </div>
                     </div>
 
-                    {/* RIGHT COLUMN: The Form */}
-                    <div className="lg:col-span-5">
+                    {/* RIGHT COLUMN: The Form (Desktop Only) */}
+                    <div className="hidden lg:block lg:col-span-5">
                         <div className="sticky top-32">
                             <div className="relative group">
                                 {/* Glow Effect Behind Card */}
@@ -176,6 +188,35 @@ const CompetitionPage = () => {
 
                 </div>
             </div>
+
+            {/* Mobile Modal */}
+            <AnimatePresence>
+                {isModalOpen && (
+                    <>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setIsModalOpen(false)}
+                            className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm lg:hidden"
+                        />
+                        <motion.div
+                            initial={{ opacity: 0, y: 100 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 100 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 500 }}
+                            className="fixed inset-x-0 bottom-0 z-50 p-6 bg-[#0a0a0a] border-t border-white/10 rounded-t-[2rem] max-h-[85vh] overflow-y-auto lg:hidden"
+                        >
+                            <div className="w-12 h-1 bg-white/20 rounded-full mx-auto mb-8" />
+                            <div className="mb-6">
+                                <h3 className="text-xl font-bold">Register Now</h3>
+                                <p className="text-zinc-500 text-sm">Join the {activeTrack} track</p>
+                            </div>
+                            <CompetitionForm isPageMode={true} track={activeTrack} />
+                        </motion.div>
+                    </>
+                )}
+            </AnimatePresence>
         </div>
     );
 };

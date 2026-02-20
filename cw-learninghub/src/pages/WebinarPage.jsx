@@ -10,6 +10,7 @@ import CompetitionForm from '../component/CompetitionForm';
 const WebinarPage = () => {
     const navigate = useNavigate();
     const [activeStage, setActiveStage] = useState('research');
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -104,20 +105,31 @@ const WebinarPage = () => {
                                 <span className="text-zinc-500">Masterclass</span>
                             </motion.h1>
 
-                            <p className="text-zinc-400 text-lg max-w-xl leading-relaxed">
+                            <p className="text-zinc-400 text-lg max-w-xl leading-relaxed mb-8">
                                 A comprehensive journey from research and discovery to designing premium interfaces,
                                 developing scalable logic, and deploying to the world.
                             </p>
+
+                            {/* MOBILE ONLY: Enroll Button */}
+                            <motion.button
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.2 }}
+                                onClick={() => setIsModalOpen(true)}
+                                className="lg:hidden w-full py-4 rounded-xl bg-orange-600 text-white font-bold uppercase tracking-widest shadow-lg shadow-orange-500/20 active:scale-95 transition-all"
+                            >
+                                Enroll Now
+                            </motion.button>
                         </header>
 
                         {/* Stage Selector */}
                         <div className="space-y-8">
-                            <div className="flex flex-wrap gap-2 p-1 bg-zinc-900/50 border border-white/5 rounded-2xl w-fit">
+                            <div className="grid grid-cols-2 lg:flex lg:flex-wrap gap-2 p-1 bg-zinc-900/50 border border-white/5 rounded-2xl w-full lg:w-fit">
                                 {Object.keys(stagesInfo).map((s) => (
                                     <button
                                         key={s}
                                         onClick={() => setActiveStage(s)}
-                                        className={`relative px-6 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all ${activeStage === s ? 'text-black' : 'text-zinc-500 hover:text-zinc-300'
+                                        className={`relative px-6 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all w-full lg:w-auto ${activeStage === s ? 'text-black' : 'text-zinc-500 hover:text-zinc-300'
                                             }`}
                                     >
                                         {activeStage === s && (
@@ -165,8 +177,8 @@ const WebinarPage = () => {
                         </div>
                     </div>
 
-                    {/* RIGHT COLUMN: The Form */}
-                    <div className="lg:col-span-5">
+                    {/* RIGHT COLUMN: The Form (Desktop Only) */}
+                    <div className="hidden lg:block lg:col-span-5">
                         <div className="sticky top-32">
                             <div className="relative group">
                                 <div className={`absolute -inset-0.5 bg-gradient-to-b ${current.accent} rounded-[2.5rem] opacity-10 group-hover:opacity-20 transition-opacity blur-xl`} />
@@ -192,6 +204,35 @@ const WebinarPage = () => {
 
                 </div>
             </div>
+
+            {/* Mobile Modal */}
+            <AnimatePresence>
+                {isModalOpen && (
+                    <>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setIsModalOpen(false)}
+                            className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm lg:hidden"
+                        />
+                        <motion.div
+                            initial={{ opacity: 0, y: 100 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 100 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 500 }}
+                            className="fixed inset-x-0 bottom-0 z-50 p-6 bg-[#0a0a0a] border-t border-white/10 rounded-t-[2rem] max-h-[85vh] overflow-y-auto lg:hidden"
+                        >
+                            <div className="w-12 h-1 bg-white/20 rounded-full mx-auto mb-8" />
+                            <div className="mb-6">
+                                <h3 className="text-xl font-bold">Secure Your Spot</h3>
+                                <p className="text-zinc-500 text-sm">Join the Masterclass</p>
+                            </div>
+                            <CompetitionForm isPageMode={true} track="Masterclass" />
+                        </motion.div>
+                    </>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
