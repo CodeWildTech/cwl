@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useDragControls } from 'framer-motion';
 import {
     ChevronLeft, Palette, Code2, Rocket,
     Sparkles, Search, Layout, Server, Globe, X
@@ -11,8 +11,18 @@ const WebinarPage = () => {
     const navigate = useNavigate();
     const [activeStage, setActiveStage] = useState('research');
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const dragControls = useDragControls();
 
     useEffect(() => { window.scrollTo(0, 0); }, []);
+
+    useEffect(() => {
+        if (isModalOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => { document.body.style.overflow = 'unset'; };
+    }, [isModalOpen]);
 
     const stagesInfo = {
         research: {
@@ -222,6 +232,8 @@ const WebinarPage = () => {
                             exit={{ opacity: 0, y: 100 }}
                             transition={{ type: "spring", damping: 25, stiffness: 500 }}
                             drag="y"
+                            dragControls={dragControls}
+                            dragListener={false}
                             dragConstraints={{ top: 0, bottom: 0 }}
                             dragElastic={0.2}
                             onDragEnd={(e, info) => {
@@ -231,8 +243,11 @@ const WebinarPage = () => {
                             }}
                             className="fixed inset-x-0 bottom-0 z-50 p-6 bg-[#0a0a0a] border-t border-white/10 rounded-t-[2rem] max-h-[90vh] overflow-y-auto lg:hidden"
                         >
-                            {/* Drag Indicator */}
-                            <div className="w-12 h-1 bg-white/20 rounded-full mx-auto mb-4" />
+                            {/* Drag Indicator / Handle */}
+                            <div
+                                onPointerDown={(e) => dragControls.start(e)}
+                                className="w-12 h-1 bg-white/20 rounded-full mx-auto mb-4 cursor-grab active:cursor-grabbing"
+                            />
 
                             <div className="flex justify-between items-start mb-6">
                                 <div>

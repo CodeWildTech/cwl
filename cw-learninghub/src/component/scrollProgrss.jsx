@@ -4,11 +4,28 @@ import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 const ScrollProgress = () => {
   const { scrollYProgress } = useScroll();
   const [percent, setPercent] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
 
   // Percentage update panna
   useEffect(() => {
     return scrollYProgress.onChange((v) => setPercent(Math.round(v * 100)));
   }, [scrollYProgress]);
+
+  // Hide when modal is open (body overflow hidden)
+  useEffect(() => {
+    const checkOverflow = () => {
+      setIsVisible(document.body.style.overflow !== 'hidden');
+    };
+
+    // Initial check
+    checkOverflow();
+
+    // Observe body for style changes
+    const observer = new MutationObserver(checkOverflow);
+    observer.observe(document.body, { attributes: true, attributeFilter: ['style'] });
+
+    return () => observer.disconnect();
+  }, []);
 
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -16,15 +33,17 @@ const ScrollProgress = () => {
     restDelta: 0.001,
   });
 
+  if (!isVisible) return null;
+
   return (
     <>
-    
+
       {/* --- BOTTOM RIGHT WAVY CIRCLE --- */}
       <div className="fixed bottom-7 right-3 z-[100] flex items-center justify-center">
         <div className="relative group">
           {/* Glow Effect */}
           <div className="absolute inset-0  blur-xl opacity-10 group-hover:opacity-40 transition-opacity rounded-full"></div>
-          
+
           <svg width="70" height="180" viewBox="0 0 100 100" className="transform -rotate-90">
             {/* Background Circle */}
             <circle
@@ -36,12 +55,12 @@ const ScrollProgress = () => {
               fill="transparent"
               className="opacity-80"
             />
-            
+
             {/* Wavy Animated Path */}
             <motion.path
               d="M 50,10 
                  A 40,40 0 1,1 49.9,10 
-                 Z" 
+                 Z"
               fill="transparent"
               stroke="#ec6b08" // Orange
               strokeWidth="6"
