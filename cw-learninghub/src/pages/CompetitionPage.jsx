@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useDragControls } from 'framer-motion';
 import {
     Trophy, ChevronLeft, Palette, Code2, Rocket,
-    ShieldCheck, Info, Users, ChevronDown, Sparkles
+    ShieldCheck, Info, Users, ChevronDown, Sparkles, X
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import CompetitionForm from '../component/CompetitionForm';
@@ -12,8 +12,18 @@ const CompetitionPage = () => {
     const [activeTrack, setActiveTrack] = useState('design');
     const [openSection, setOpenSection] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const dragControls = useDragControls();
 
     useEffect(() => { window.scrollTo(0, 0); }, []);
+
+    useEffect(() => {
+        if (isModalOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => { document.body.style.overflow = 'unset'; };
+    }, [isModalOpen]);
 
     const trackInfo = {
         design: {
@@ -205,12 +215,35 @@ const CompetitionPage = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 100 }}
                             transition={{ type: "spring", damping: 25, stiffness: 500 }}
-                            className="fixed inset-x-0 bottom-0 z-50 p-6 bg-[#0a0a0a] border-t border-white/10 rounded-t-[2rem] max-h-[85vh] overflow-y-auto lg:hidden"
+                            drag="y"
+                            dragControls={dragControls}
+                            dragListener={false}
+                            dragConstraints={{ top: 0, bottom: 0 }}
+                            dragElastic={0.2}
+                            onDragEnd={(e, info) => {
+                                if (info.offset.y > 150) {
+                                    setIsModalOpen(false);
+                                }
+                            }}
+                            className="fixed inset-x-0 bottom-0 z-50 p-6 bg-[#0a0a0a] border-t border-white/10 rounded-t-[2rem] max-h-[90vh] overflow-y-auto lg:hidden"
                         >
-                            <div className="w-12 h-1 bg-white/20 rounded-full mx-auto mb-8" />
-                            <div className="mb-6">
-                                <h3 className="text-xl font-bold">Register Now</h3>
-                                <p className="text-zinc-500 text-sm">Join the {activeTrack} track</p>
+                            {/* Drag Indicator / Handle */}
+                            <div
+                                onPointerDown={(e) => dragControls.start(e)}
+                                className="w-12 h-1 bg-white/20 rounded-full mx-auto mb-4 cursor-grab active:cursor-grabbing"
+                            />
+
+                            <div className="flex justify-between items-start mb-6">
+                                <div>
+                                    <h3 className="text-xl font-bold">Register Now</h3>
+                                    <p className="text-zinc-500 text-sm">Join the {activeTrack} track</p>
+                                </div>
+                                <button
+                                    onClick={() => setIsModalOpen(false)}
+                                    className="p-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+                                >
+                                    <X size={20} className="text-zinc-400" />
+                                </button>
                             </div>
                             <CompetitionForm isPageMode={true} track={activeTrack} />
                         </motion.div>

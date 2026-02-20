@@ -72,7 +72,7 @@ const CompetitionForm = ({ isPageMode, track }) => {
                     onClick={() => setSubmitted(false)}
                     className="mt-8 text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors"
                 >
-                    Register another team
+                    Register another form
                 </button>
             </motion.div>
         );
