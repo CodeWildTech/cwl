@@ -22,12 +22,49 @@
   <!-- Preconnect to external image assets -->
   <link rel="preconnect" href="https://images.pexels.com" crossorigin>
 
-  <!-- Preload main CSS to avoid render blocking -->
-  <!-- ⚠️ NOTE: The hash (index-Cs8lZKxl.css) will change after every build. Update this if you rebuild. -->
-  <link rel="preload" href="/assets/index-Cs8lZKxl.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript>
-    <link rel="stylesheet" href="/assets/index-Cs8lZKxl.css">
-  </noscript>
+  <!-- Critical CSS Inlined for instant Hero rendering -->
+  <style>
+    @keyframes fadeUpSlow {
+      0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+      }
+
+      60% {
+        opacity: 1;
+        transform: translateY(-4px) scale(1.02);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes arrowPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.08);
+      }
+    }
+
+    .animate-fadeUpSlow {
+      animation: fadeUpSlow 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    }
+
+    .animate-arrowPulse {
+      animation: arrowPulse 1.5s ease-in-out infinite;
+    }
+
+    .bg-radial-at-b {
+      background: radial-gradient(circle at bottom, rgba(248, 113, 22, 0.35), transparent 65%);
+    }
+  </style>
 </head>
 
 <body>
