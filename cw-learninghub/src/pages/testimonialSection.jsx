@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import Aslin from "../assets/students/Aslin.jpeg";
-import Jofna from "../assets/students/jofna.jpeg";
-import Jose from "../assets/students/jose.jpeg";
-import Stephin from "../assets/students/stephin.jpeg";
-import Ashik from "../assets/students/ashik.jpeg";
-import Nikhitha from "../assets/students/nikkitha.jpg";
-import Sandra from "../assets/students/sandra.jpg";
-import Anandhu from "../assets/students/Anandhu.jpg";
-import Vandana from "../assets/students/vandana.jpg";
-import Hannah from "../assets/students/Hannah.jpeg";
+import Aslin from "../assets/students/Aslin.webp";
+import Jofna from "../assets/students/jofna.webp";
+import Jose from "../assets/students/jose.webp";
+import Stephin from "../assets/students/stephin.webp";
+import Ashik from "../assets/students/ashik.webp";
+import Nikhitha from "../assets/students/nikkitha.webp";
+import Sandra from "../assets/students/sandra.webp";
+import Anandhu from "../assets/students/Anandhu.webp";
+import Vandana from "../assets/students/vandana.webp";
+import Hannah from "../assets/students/Hannah.webp";
 
 import { motion, AnimatePresence as FramerAnimatePresence } from "framer-motion";
 import { Zap, Cpu, Sparkles, Rocket, Star, Code } from 'lucide-react';
@@ -284,17 +284,17 @@ export default function TestimonialsSection() {
   };
 
   const companyLogos = [
-    { name: "Cognizant", src: "/logos/cognizant.png" },
+    { name: "Cognizant", src: "/logos/cognizant.webp" },
     { name: "Fresh Works", src: "/logos/freshworks.png" },
-    { name: "Hexaware", src: "/logos/Hexaware.png" },
-    { name: "Hcl", src: "/logos/hcl.png" },
+    { name: "Hexaware", src: "/logos/hexaware.webp" },
+    { name: "Hcl", src: "/logos/hcl.webp" },
     { name: "mindtree", src: "/logos/mindtree.png" },
     { name: "NttData", src: "/logos/nttdata (2).png" },
     { name: "Tcs", src: "/logos/Tata.png" },
-    { name: "capgemini-logo", src: "/logos/capgemini-logo.png" },
-    { name: "L & T", src: "/logos/lt.png" },
-    { name: "Myntra", src: "/logos/myntra.png" },
-    { name: "Zoho", src: "/logos/zoho.png" },
+    { name: "capgemini-logo", src: "/logos/capgemini-logo.webp" },
+    { name: "L & T", src: "/logos/lt.webp" },
+    { name: "Myntra", src: "/logos/myntra.webp" },
+    { name: "Zoho", src: "/logos/zoho.webp" },
     { name: "Amazon", src: "/logos/amazon.png" },
   ];
 

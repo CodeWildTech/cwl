@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Instagram, Linkedin, MapPin, Mail, Download, X } from "lucide-react";
 import axios from "axios";
-import developerImg from "../assets/footer/developer.png";
+import developerImg from "../assets/footer/developer.webp";
 import { toast, Toaster } from 'sonner';
 import API from "../config/api.js";
 import { Helmet } from "react-helmet-async";

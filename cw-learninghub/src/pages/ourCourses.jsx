@@ -25,12 +25,12 @@ import { coursesData } from '../data/courses';
 import { Helmet } from 'react-helmet-async';
 
 // Import local mentor images
-import Angelin from '../assets/mentors/Angelin.jpg';
-import James from '../assets/mentors/James.jpg';
-import Marcus from '../assets/mentors/Marcus.jpg';
-import Sarah from '../assets/mentors/Sarah.jpg';
-import Stark from '../assets/mentors/Stark.jpg';
-import Steve from '../assets/mentors/Steve.jpg';
+import Angelin from '../assets/mentors/Angelin.webp';
+import James from '../assets/mentors/James.webp';
+import Marcus from '../assets/mentors/Marcus.webp';
+import Sarah from '../assets/mentors/Sarah.webp';
+import Stark from '../assets/mentors/Stark.webp';
+import Steve from '../assets/mentors/Steve.webp';
 
 const WhatsAppIcon = ({ size = 24, className = "" }) => (
   <svg

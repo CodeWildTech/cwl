@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Star, Code2, Cpu } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
-import logoIm from '../assets/Logo/cwlogo.png';
+import logoIm from '../assets/Logo/cwlogo.webp';
 import EnrollmentContainer from '../component/enrollmentFormContainer';
 import { useNavigate } from 'react-router-dom';
 

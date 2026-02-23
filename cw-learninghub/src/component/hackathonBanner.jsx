@@ -1,12 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import heroImage from "../assets/hackathon.png";
+import heroImage from "../assets/hackathon.webp";
 
 export default function HackathonPoster() {
   return (
     <div className="relative w-full min-h-screen bg-[#0a0a0a] flex flex-col items-center justify-center overflow-hidden py-10 px-4 md:py-20 md:px-6">
-      
+
       {/* BACKGROUND STRIP */}
       <div
         className="absolute w-[150%] h-[260px] bg-[#FF5714] z-0"
@@ -15,7 +15,7 @@ export default function HackathonPoster() {
 
       {/* MAIN CONTENT */}
       <div className="relative z-10 w-full max-w-7xl flex flex-col items-center md:flex-row md:items-center md:justify-between">
-        
+
         {/* LEFT SECTION */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -71,10 +71,10 @@ export default function HackathonPoster() {
 
       {/* SCROLL PERKS (Desktop Only) */}
       <div className="absolute inset-0 z-30 pointer-events-none max-w-6xl mx-auto hidden md:block">
-        <ScrollPerk text="Cash Prizes"              x="20%" y="22%" delay={0.2} flipped={false} />
+        <ScrollPerk text="Cash Prizes" x="20%" y="22%" delay={0.2} flipped={false} />
         <ScrollPerk text="Internship Opportunities" x="32%" y="19%" delay={0.4} flipped={false} />
-        <ScrollPerk text="Swags & Goodies"          x="52%" y="18%" delay={0.6} flipped={true} />
-        <ScrollPerk text="Certificates"             x="68%" y="17%" delay={0.8} flipped={true} />
+        <ScrollPerk text="Swags & Goodies" x="52%" y="18%" delay={0.6} flipped={true} />
+        <ScrollPerk text="Certificates" x="68%" y="17%" delay={0.8} flipped={true} />
       </div>
     </div>
   );

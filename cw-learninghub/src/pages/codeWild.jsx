@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Code, Users, BookOpen, X } from 'lucide-react';
-import sarah from '../assets/mentors/Sarah.jpg';
-import steve from '../assets/mentors/Steve.jpg';
-import james from '../assets/mentors/James.jpg';
-import marcus from '../assets/mentors/Marcus.jpg';
-import stark from '../assets/mentors/Stark.jpg';
-import angelin from '../assets/mentors/Angelin.jpg';
-import studentImg from '../assets/students/stud.jpg';
+import sarah from '../assets/mentors/Sarah.webp';
+import steve from '../assets/mentors/Steve.webp';
+import james from '../assets/mentors/James.webp';
+import marcus from '../assets/mentors/Marcus.webp';
+import stark from '../assets/mentors/Stark.webp';
+import angelin from '../assets/mentors/Angelin.webp';
+import studentImg from '../assets/students/stud.webp';
 
 const CodeWildLanding = () => {
   const [activeRow, setActiveRow] = useState(null);
@@ -75,12 +75,11 @@ const CodeWildLanding = () => {
           relative flex items-center justify-center text-center
           px-2 sm:px-6 py-4 sm:py-8 min-h-[90px] sm:min-h-[110px]
           transition-all duration-300 cursor-pointer overflow-hidden
-          ${
-            isActive
-              ? isCenter
-                ? 'text-white scale-[1.02]'
-                : 'text-orange-100'
-              : isCenter
+          ${isActive
+            ? isCenter
+              ? 'text-white scale-[1.02]'
+              : 'text-orange-100'
+            : isCenter
               ? 'text-[#3b2a20]'
               : 'text-gray-500'
           }
@@ -90,10 +89,9 @@ const CodeWildLanding = () => {
           className={`
             absolute inset-0 transition-all duration-300 ease-in-out
             ${isActive ? 'opacity-100' : 'opacity-0'}
-            ${
-              isCenter
-                ? 'bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 shadow-lg'
-                : 'bg-[#22120a]'
+            ${isCenter
+              ? 'bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 shadow-lg'
+              : 'bg-[#22120a]'
             }
           `}
         />
@@ -171,8 +169,8 @@ const CodeWildLanding = () => {
 
         {/* Stay Aware Button */}
         <div className="flex justify-center sm:justify-end mb-16 pb-10 animate-reveal delay-3">
-          <button 
-            onClick={() => setIsModalOpen(true)} 
+          <button
+            onClick={() => setIsModalOpen(true)}
             className="group bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-3"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -189,7 +187,7 @@ const CodeWildLanding = () => {
             <h1 className="text-4xl sm:text-6xl font-black text-white">Code Wild Work</h1>
           </div>
           <svg className="w-8 h-8 sm:w-12 sm:h-12 text-orange-500 mt-4 sm:mt-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+            <path d="M7 17L17 7M17 7H7M17 7V17" />
           </svg>
         </div>
 
@@ -246,13 +244,13 @@ const CodeWildLanding = () => {
 
           <div className="relative w-screen overflow-visible flex items-center justify-center">
             <div className="absolute inset-0 w-full h-full z-0">
-                <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black via-black/50 to-transparent z-10" />
-                <img
-                    src="/pattern.png"
-                    alt="Background pattern"
-                    className="w-full h-full object-cover opacity-60"
-                />
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black via-black/50 to-transparent z-10" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black via-black/50 to-transparent z-10" />
+              <img
+                src="/pattern.webp"
+                alt="Background pattern"
+                className="w-full h-full object-cover opacity-60"
+              />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black via-black/50 to-transparent z-10" />
             </div>
 
             <div className="relative max-w-2xl w-full mx-auto px-4 z-20 animate-reveal delay-2">
@@ -264,7 +262,7 @@ const CodeWildLanding = () => {
 
               <div className="relative bg-[#ff4500] px-6 py-10 md:px-12 md:py-16 rounded-[2rem] md:rounded-[3rem] shadow-[0_30px_60px_rgba(255,69,0,0.4)] border border-white/10">
                 <h2 className="text-white text-xl md:text-4xl font-bold leading-tight text-center max-w-lg mx-auto">
-We provide direct mentorship from experienced industry experts                </h2>
+                  We provide direct mentorship from experienced industry experts                </h2>
               </div>
             </div>
           </div>

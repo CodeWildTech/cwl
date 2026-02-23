@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import EnrollmentContainer from './enrollmentFormContainer';
 import { motion } from 'framer-motion';
-import mainLogo from '../assets/Logo/cwlogo.png';
+import mainLogo from '../assets/Logo/cwlogo.webp';
 
 import {
   Home,
