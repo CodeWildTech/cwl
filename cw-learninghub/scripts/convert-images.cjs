@@ -16,12 +16,18 @@ function convertImages(dir) {
     if (file.match(/\.(jpg|jpeg|png)$/)) {
       const output = fullPath.replace(/\.(jpg|jpeg|png)/, ".webp");
 
-      sharp(fullPath)
-        .resize({ width: 800 })
+      let resizeWidth = 800;
+      if (fullPath.includes("mentors") || fullPath.includes("students")) {
+        resizeWidth = 300;
+      } else if (fullPath.includes("Logo")) {
+        resizeWidth = 200;
+      }
 
+      sharp(fullPath)
+        .resize({ width: resizeWidth })
         .webp({ quality: 80 })
         .toFile(output)
-        .then(() => console.log("Converted:", output))
+        .then(() => console.log(`Converted (${resizeWidth}px):`, output))
         .catch(err => console.error(err));
     }
   });

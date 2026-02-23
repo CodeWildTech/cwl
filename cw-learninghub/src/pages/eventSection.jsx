@@ -26,7 +26,7 @@ const EVENTS_DATA = [
     location: "CWT Office",
     desc: "Master SEO and Meta Ads.",
     image:
-      "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=400",
   },
   {
     id: 2,
@@ -39,7 +39,7 @@ const EVENTS_DATA = [
     location: "Online",
     desc: "Live session on growth hacking.",
     image:
-      "https://images.pexels.com/photos/7567434/pexels-photo-7567434.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/7567434/pexels-photo-7567434.jpeg?auto=compress&cs=tinysrgb&w=400",
   },
   {
     id: 3,
@@ -52,7 +52,7 @@ const EVENTS_DATA = [
     location: "CWT Office",
     desc: "Advanced content strategy workshop.",
     image:
-      "https://images.pexels.com/photos/6476584/pexels-photo-6476584.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/6476584/pexels-photo-6476584.jpeg?auto=compress&cs=tinysrgb&w=400",
   },
   {
     id: 4,
@@ -65,7 +65,7 @@ const EVENTS_DATA = [
     location: "Online",
     desc: "Introduction to Email Automations.",
     image:
-      "https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=400",
   },
   {
     id: 5,
@@ -78,7 +78,7 @@ const EVENTS_DATA = [
     location: "Google Meet",
     desc: "UI/UX for Marketers.",
     image:
-      "https://images.pexels.com/photos/6476586/pexels-photo-6476586.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/6476586/pexels-photo-6476586.jpeg?auto=compress&cs=tinysrgb&w=400",
   },
 ];
 
