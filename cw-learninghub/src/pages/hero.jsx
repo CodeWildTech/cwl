@@ -57,7 +57,7 @@ const HeroSection = () => {
         <meta property="og:title" content="CodeWild LearningHub | Learn Tech the Smart Way" />
         <meta property="og:description" content="Corporate mentorship and real-world projects to help you become job-ready in tech." />
         <meta property="og:url" content="https://codewildlearn.com/" />
-        <meta property="og:image" content="https://codewildlearn.com/team.png" />
+        <meta property="og:image" content="https://codewildlearn.com/teama.webp" />
         <meta property="og:type" content="website" />
       </Helmet>
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center">
@@ -167,7 +167,7 @@ const HeroSection = () => {
                 <div className="w-full h-full rounded-[2.5rem] p-[2px] bg-gradient-to-b from-white/20 to-transparent shadow-2xl relative overflow-visible">
                   <div className="w-full h-full rounded-[2.4rem] overflow-hidden bg-zinc-900 relative">
                     <img
-                      src="/team.png"
+                      src="/teama.webp"
                       alt="Team"
                       className="w-full h-full object-cover"
                     />
